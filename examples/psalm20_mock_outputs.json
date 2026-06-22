@@ -1,0 +1,225 @@
+{
+  "source_agent": {
+    "source_text": "Psalm 20 source text: May the LORD answer you in the day of trouble; may the name of the God of Jacob protect you. Some trust in chariots and some in horses, but we trust in the name of the LORD our God. LORD, save the king! May he answer us when we call."
+  },
+  "translator": {
+    "working_rendering": "May the LORD answer you in the day of trouble. May He send help from the sanctuary and support from Zion. Some trust in chariots and some in horses, but we remember the name of the LORD our God."
+  },
+  "chapter_design_mapper": {
+    "chapter_start": "The people pray that the LORD answer the king in the day of trouble.",
+    "chapter_end": "The people cry for the LORD to save the king and answer when they call.",
+    "emotional_movement": "Anxious petition becomes confident trust in the LORD's saving name.",
+    "divine_action": "The LORD protects, sends sanctuary help, remembers offerings, saves His anointed, and answers from heaven.",
+    "physical_vocabulary": [
+      "trouble",
+      "name",
+      "sanctuary",
+      "Zion",
+      "offerings",
+      "banners",
+      "chariots",
+      "horses",
+      "right hand",
+      "king"
+    ],
+    "central_theological_claim": "The LORD's name, not military strength, is the true refuge of His anointed and His people.",
+    "christward_fulfillment": "The greater Anointed King enters the day of trouble, is answered in resurrection, and saves all who call on His name.",
+    "reader_felt_experience": "A fearful worshiper moves from visible threat to shared confidence in the saving name of the LORD.",
+    "chapter_design_summary": "Prayer for the king becomes communal trust that the LORD saves His anointed and answers His people."
+  },
+  "canonist": {
+    "pathway": "The LORD's anointed king, Zion help, the saving name, and confidence beyond chariots and horses."
+  },
+  "theological_risk_agent": {
+    "risks": [
+      {
+        "risk_id": "R1",
+        "risk_description": "Turn trust in the LORD's name into vague optimism.",
+        "why_it_matters": "The psalm grounds confidence in the covenant name and saving action of the LORD.",
+        "avoidance_rule": "Keep trust anchored in the LORD's name and His answer to His anointed.",
+        "evaluator_check": "Verify that confidence is not generic positivity."
+      },
+      {
+        "risk_id": "R2",
+        "risk_description": "Detach Christ from the anointed-king logic.",
+        "why_it_matters": "The psalm's Christward path runs through the LORD saving His anointed.",
+        "avoidance_rule": "Frame fulfillment through the greater Anointed King who is answered and saves.",
+        "evaluator_check": "Verify king, anointed, name, and save appear in Christology."
+      }
+    ]
+  },
+  "historian_linguist": {
+    "notes": "A royal liturgy of intercession before battle, contrasting covenant trust with military assets."
+  },
+  "commentary_agent": {
+    "notes": "The community prays for the king, then confesses that the LORD's name is stronger than visible instruments of war."
+  },
+  "art_director": {
+    "register": "royal liturgical",
+    "pace": "petition gathering into confidence",
+    "sentence_music": "firm and processional",
+    "image_density": "moderate",
+    "emotional_color": "troubled courage",
+    "opening_mode": "threshold phrase",
+    "poem_tone": "battle-prayer hymn",
+    "ending_resonance": "answered cry",
+    "avoid": [
+      "generic victory language",
+      "militaristic triumphalism"
+    ]
+  },
+  "creative_divergence_agent": {
+    "threshold_phrase_candidates": [
+      "Trouble teaches the true name.",
+      "Banners rise before victory.",
+      "Trust stands when chariots fall.",
+      "The answer begins in prayer.",
+      "The King is heard in trouble."
+    ],
+    "introduction_opening_candidates": [
+      "Psalm 20 begins before the outcome is visible.",
+      "The people stand with their king in trouble.",
+      "Before chariots move, prayer rises."
+    ],
+    "governing_image_candidates": [
+      "banners lifted in the LORD's name",
+      "chariots sinking into dust",
+      "help sent from Zion"
+    ],
+    "christology_framing_candidates": [
+      "the greater Anointed King answered in resurrection",
+      "the saving name given to His people"
+    ],
+    "poem_arc_candidates": [
+      "trouble to answer",
+      "chariots to name"
+    ],
+    "title_candidates": [
+      "When Chariots Fall",
+      "The Naked Trust",
+      "Banners Before Victory"
+    ],
+    "epigraph_candidates": [
+      "Trouble teaches the true name.",
+      "Trust stands when chariots fall.",
+      "The answer begins in prayer."
+    ]
+  },
+  "director": {
+    "chapter_burden": "God's people learn to trust the LORD's name when visible strength cannot save.",
+    "opening_movement": "prayer in trouble",
+    "closing_movement": "the LORD answers the king and people",
+    "central_thought": "Prayer in trouble becomes trust that the LORD answers.",
+    "emotional_charge": "steadfast courage",
+    "transcendent_force": "the LORD's saving name",
+    "selected_threshold_phrase": "Trouble teaches the true name.",
+    "threshold_phrase_rationale": "The psalm begins with trouble and moves toward explicit trust in the name of the LORD over chariots and horses.",
+    "governing_image": "banners lifted in the LORD's name",
+    "image_lexicon": [
+      "name",
+      "banners",
+      "Zion",
+      "chariots",
+      "king"
+    ],
+    "image_head_terms": [
+      "banners"
+    ],
+    "anchor_terms": [
+      "anointed",
+      "king",
+      "name",
+      "save"
+    ],
+    "chapter_specific_terms": [
+      "trouble",
+      "sanctuary",
+      "Zion",
+      "chariots",
+      "horses"
+    ],
+    "christology_required_echoes": [
+      "anointed",
+      "king",
+      "name",
+      "save"
+    ],
+    "christology_pathway": "The greater Anointed King is answered through resurrection and saves all who call on His name.",
+    "application_target": "Pray before relying on visible strength, and name what you are tempted to trust more than the LORD.",
+    "theological_terminus": "trust in the saving name of the LORD",
+    "negative_constraints": [
+      "do not glorify battle",
+      "do not reduce the psalm to self-confidence"
+    ],
+    "poem_plan": "four common-meter stanzas moving from trouble to sanctuary help, chariots falling, and Christ the King",
+    "semantic_proof_chain": [
+      "trouble",
+      "prayer",
+      "name",
+      "banners",
+      "chariots",
+      "anointed",
+      "answer"
+    ]
+  },
+  "composer": {
+    "title": "The Naked Trust",
+    "epigraph": "Trouble teaches the true name.",
+    "focus_bible_verses": "Psalm 20:1-2, 5-7, 9",
+    "introduction": "Trouble teaches the true name.\n\nPsalm 20 does not wait until the battlefield is quiet before it prays. The people speak blessing over the king while the day of trouble still stands before them. They ask for help from the sanctuary, strength from Zion, and joy enough to lift banners before victory can be seen.",
+    "reflection": "The psalm names the temptation clearly: chariots and horses look solid. They can be counted, polished, arranged, and admired. But the people of God remember a stronger name. Their confidence is not that danger is small, but that the LORD answers from heaven and saves His anointed by His mighty hand.",
+    "christ_fulfillment": "Jesus Christ is the greater Anointed King who entered the deepest day of trouble. He did not trust chariots, horses, or visible power, but gave Himself into the Father's hands. In resurrection, the Father answered Him; now His name is given as the name by which we are saved.",
+    "application": "Name the chariot you are tempted to trust. It may be control, money, reputation, planning, or another visible strength. Bring the trouble to God before you polish the chariot. Pray with the church, lift your banner in the LORD's name, and wait for the King who answers.",
+    "prayer": "Father, answer us in the day of trouble. Guard us by Your name. Send help from Your sanctuary. Teach us not to trust our chariots. Make us stand when lesser strengths fall. Save us through Jesus Christ our Lord. Amen.",
+    "next_in_sequence": "Psalm 21 - Rejoicing in the strength and salvation of the LORD."
+  },
+  "voice_keeper": {
+    "approved": true
+  },
+  "poet": {
+    "poem": "The day of trouble shakes the ground,\nAnd cuts the breathless air;\nWe look toward the holy hill,\nTo find our rescue there.\n\nThe heavy chariots take the field,\nThe horses stamp the dust;\nWe drop the iron from our hands,\nAnd place a naked trust.\n\nThey bow and fall beneath the weight,\nThe broken axles bend;\nBut we will rise and stand upright,\nAnd watch the terror end.\n\nThe King was crushed upon the tree,\nTo bring the iron down;\nThe Spirit holds us as we stand,\nBeneath His heavy crown.\n\nThe iron breaks beneath the weight, but we will stand in Him."
+  },
+  "beauty_pass_agent": {
+    "lingering_lines": [
+      "Trouble teaches the true name.",
+      "Bring the trouble to God before you polish the chariot."
+    ],
+    "strongest_turn": "The visible chariot is named and relativized before the saving name.",
+    "weakest_artistic_moment": "",
+    "mechanical_residue": [],
+    "beauty_score": 9,
+    "required_beauty_revisions": []
+  },
+  "evaluator": {
+    "textual_fidelity": 9,
+    "theological_accuracy": 9,
+    "christology_from_chapter_logic": 9,
+    "chapter_design_fidelity": 9,
+    "emotional_charged_phrase": 9,
+    "introduction_strength": 9,
+    "ancient_image_discipline": 9,
+    "register": 9,
+    "read_aloud_quality": 9,
+    "application_concreteness": 9,
+    "prayer": 9,
+    "poem_form": 9,
+    "poetic_vitality": 9,
+    "artful_design": 9,
+    "artifact_integrity": 9,
+    "fault_target": "none",
+    "notes": "Psalm 20 mock integration passes."
+  },
+  "contradiction_editor": {
+    "verdict": "Pass",
+    "major_conflicts": [],
+    "minor_conflicts": [],
+    "theological_risks": [],
+    "literary_risks": [],
+    "harness_risks": [],
+    "required_revisions": [],
+    "notes": "No conflicts."
+  },
+  "editorial_smoother": {
+    "prose": {}
+  }
+}

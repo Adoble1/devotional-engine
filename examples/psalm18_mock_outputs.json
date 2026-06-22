@@ -1,0 +1,205 @@
+{
+  "source_agent": {
+    "source_text": "Psalm 18 source text: I love you, O LORD, my strength."
+  },
+  "translator": {
+    "working_rendering": "I love You, LORD, my strength."
+  },
+  "chapter_design_mapper": {
+    "chapter_start": "I love You, LORD, my strength. Rescued love.",
+    "chapter_end": "Praise among the nations; steadfast love to David and his seed forever.",
+    "emotional_movement": "Rescued love becomes royal praise.",
+    "divine_action": "The LORD hears, bows the heavens, comes down, and draws His anointed from many waters.",
+    "physical_vocabulary": [
+      "rock",
+      "fortress",
+      "cords",
+      "flood",
+      "heavens",
+      "thunder",
+      "arrows",
+      "broad place",
+      "lamp",
+      "shield",
+      "nations"
+    ],
+    "central_theological_claim": "The LORD does not merely send rescue. He comes as rescue.",
+    "christward_fulfillment": "The greater Anointed One enters death, is raised, and brings praise among the nations.",
+    "reader_felt_experience": "A rescued worshiper moves from fear to praise.",
+    "chapter_design_summary": "Rescued love becomes royal and worldwide praise."
+  },
+  "canonist": {
+    "pathway": "David's anointed seed and praise among nations."
+  },
+  "theological_risk_agent": {
+    "risks": [
+      {
+        "risk_id": "R1",
+        "risk_description": "Detach Christology from the psalm.",
+        "why_it_matters": "Fulfillment must arise from chapter logic.",
+        "avoidance_rule": "Follow the anointed-king pathway.",
+        "evaluator_check": "Verify anointed seed and nations."
+      }
+    ]
+  },
+  "historian_linguist": {
+    "notes": "Royal thanksgiving psalm."
+  },
+  "commentary_agent": {
+    "notes": "Grounded mock commentary."
+  },
+  "art_director": {
+    "register": "sacred literary",
+    "pace": "gathering storm",
+    "sentence_music": "measured",
+    "image_density": "moderate",
+    "emotional_color": "rescued wonder",
+    "opening_mode": "threshold phrase",
+    "poem_tone": "hymnic",
+    "ending_resonance": "worldwide praise",
+    "avoid": [
+      "generic diagnosis"
+    ]
+  },
+  "creative_divergence_agent": {
+    "threshold_phrase_candidates": [
+      "Love speaks before thunder.",
+      "Heaven bowed to rescue.",
+      "The gift is God.",
+      "The rock came near.",
+      "Praise crosses every border."
+    ],
+    "introduction_opening_candidates": [
+      "Love first.",
+      "The storm comes later.",
+      "David begins with love."
+    ],
+    "governing_image_candidates": [
+      "bowed heavens",
+      "broad place",
+      "living rock"
+    ],
+    "christology_framing_candidates": [
+      "greater Anointed",
+      "raised king"
+    ],
+    "poem_arc_candidates": [
+      "cry to rescue",
+      "love to nations"
+    ],
+    "title_candidates": [
+      "Love Before Thunder",
+      "When Heaven Bows",
+      "Drawn from Deep Waters"
+    ],
+    "epigraph_candidates": [
+      "Love speaks before thunder.",
+      "Heaven bowed to rescue.",
+      "The gift is God."
+    ]
+  },
+  "director": {
+    "chapter_burden": "The rescuing LORD comes near.",
+    "opening_movement": "rescued love",
+    "closing_movement": "love becomes royal praise",
+    "central_thought": "rescued love becomes royal praise",
+    "emotional_charge": "wonder",
+    "transcendent_force": "the LORD comes",
+    "selected_threshold_phrase": "Love speaks before thunder.",
+    "threshold_phrase_rationale": "David's love names the relationship before the cosmic rescue unfolds.",
+    "governing_image": "bowed heavens",
+    "image_lexicon": [
+      "heavens",
+      "waters",
+      "rock"
+    ],
+    "image_head_terms": [
+      "heavens"
+    ],
+    "anchor_terms": [
+      "anointed",
+      "nations"
+    ],
+    "chapter_specific_terms": [
+      "rock",
+      "thunder"
+    ],
+    "christology_required_echoes": [
+      "anointed",
+      "nations"
+    ],
+    "christology_pathway": "David's greater anointed seed",
+    "application_target": "call on God in distress",
+    "theological_terminus": "steadfast covenant love",
+    "negative_constraints": [
+      "generic opening"
+    ],
+    "poem_plan": "four common-meter stanzas",
+    "semantic_proof_chain": [
+      "love",
+      "cry",
+      "descent",
+      "rescue",
+      "praise"
+    ]
+  },
+  "composer": {
+    "title": "Love Before Thunder",
+    "epigraph": "Love speaks before thunder.",
+    "focus_bible_verses": "Psalm 18:1-3, 16-19, 49-50",
+    "introduction": "Love speaks before thunder.\n\nDavid does not begin Psalm 18 with the shaking earth, the smoking heavens, or the arrows of God. He begins with a sentence as intimate as breath: \u201cI love You, LORD, my strength.\u201d The storm comes later. First comes the love of a rescued man.",
+    "reflection": "The LORD hears from His temple, bows the heavens, and draws David from deep waters. Rescue is not an abstract gift sent from afar; the living God comes near and sets His servant in a broad place.",
+    "christ_fulfillment": "Jesus is the greater Anointed One who enters the deep waters of death, is raised by the Father, and carries the song of God's steadfast love among the nations.",
+    "application": "Name the distress honestly, then call upon the LORD. Receive His nearness as the heart of rescue, and let gratitude widen into praise before others.",
+    "prayer": "Father, hear our cry. Be our rock and fortress. Draw us from deep waters. Set our feet in a broad place. Make our rescued love become praise among the nations. Through Jesus Christ our Lord. Amen.",
+    "next_in_sequence": "Psalm 19 \u2014 The heavens declare the glory of God."
+  },
+  "voice_keeper": {
+    "approved": true
+  },
+  "poet": {
+    "poem": "The Lord has heard my cry today\nHe drew me from deep sea\nHe bowed the heavens down to save\nAnd set his love on me\n\nThe cords of death wrapped my feet\nHe heard my cry at sea\nHe drew me out from waters deep\nAnd set his love on me\n\nThe Lord became my living rock\nMy shield in fear and sea\nHe brought me into spacious grace\nAnd set his love on me\n\nNow praise will rise among the lands\nHis mercy runs to me\nHis king now sings the faithful name\nAnd set his love on me"
+  },
+  "beauty_pass_agent": {
+    "lingering_lines": [
+      "Love speaks before thunder."
+    ],
+    "strongest_turn": "Rescue becomes praise.",
+    "weakest_artistic_moment": "",
+    "mechanical_residue": [],
+    "beauty_score": 9,
+    "required_beauty_revisions": []
+  },
+  "evaluator": {
+    "textual_fidelity": 9,
+    "theological_accuracy": 9,
+    "christology_from_chapter_logic": 9,
+    "chapter_design_fidelity": 9,
+    "emotional_charged_phrase": 9,
+    "introduction_strength": 9,
+    "ancient_image_discipline": 9,
+    "register": 9,
+    "read_aloud_quality": 9,
+    "application_concreteness": 9,
+    "prayer": 9,
+    "poem_form": 9,
+    "poetic_vitality": 9,
+    "artful_design": 9,
+    "artifact_integrity": 9,
+    "fault_target": "none",
+    "notes": "Mock pass."
+  },
+  "contradiction_editor": {
+    "verdict": "Pass",
+    "major_conflicts": [],
+    "minor_conflicts": [],
+    "theological_risks": [],
+    "literary_risks": [],
+    "harness_risks": [],
+    "required_revisions": [],
+    "notes": "No conflicts."
+  },
+  "editorial_smoother": {
+    "prose": {}
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "source_agent": {
+    "source_text": "Psalm 24 source text: A psalm of David. The earth and all that fills it belong to the LORD, the inhabited world and those who dwell in it. He founded it upon the seas and established it upon the rivers. Who may ascend the mountain of the LORD, and who may stand in His holy place? The one with clean hands and a pure heart, who has not lifted his life toward falsehood and has not sworn deceitfully. He will receive blessing from the LORD and righteousness from the God who saves him. Such is the generation of those who seek Him, who seek Your face, God of Jacob. Lift up your heads, gates; rise, ancient doors, so the King of glory may enter. Who is this King of glory? The LORD, strong and mighty, the LORD, mighty in battle. Lift up your heads, gates; rise, ancient doors, so the King of glory may enter. Who is He, this King of glory? The LORD of armies—He is the King of glory.",
+    "chapter_verse_count": 10
+  },
+  "translator": {
+    "working_rendering": "The earth belongs to the LORD, with everything that fills it—the world and all who live in it. He founded it over the seas and fixed it over the rivers. Who may climb the LORD's mountain? Who may stand in His holy place? One whose hands are clean and whose heart is pure, who has not given his life to falsehood or sworn with deceit. He receives blessing from the LORD and vindication from the God who saves him. This is the generation seeking Him, seeking Your face, God of Jacob. Gates, lift your heads. Ancient doors, rise, so the King of glory may come in. Who is this King of glory? The LORD, strong and mighty, the LORD, mighty in battle. Gates, lift your heads. Ancient doors, rise, so the King of glory may come in. Who is He, this King of glory? The LORD of armies; He is the King of glory."
+  },
+  "chapter_design_mapper": {
+    "chapter_start": "The whole earth is named as the LORD's possession because He founded it.",
+    "chapter_end": "Ancient gates rise before the LORD of armies, the King of glory.",
+    "emotional_movement": "Creation-wide ownership narrows to personal holiness, then widens into the royal entrance of glory.",
+    "divine_action": "The LORD founds the world, saves and vindicates the seeker, and enters as the strong King of glory.",
+    "physical_vocabulary": ["earth", "seas", "rivers", "mountain", "hands", "heart", "face", "gates", "doors", "heads", "battle"],
+    "central_theological_claim": "The Creator-King owns the world, requires undivided worship, and opens His holy presence through the victorious King of glory.",
+    "christward_fulfillment": "Jesus Christ is the pure and victorious King who rises, ascends, and enters the true holy place for His people.",
+    "reader_felt_experience": "A worshiper standing before closed gates discovers that holiness is not decorative and that the rightful King Himself makes entrance possible.",
+    "chapter_design_summary": "The psalm moves from the LORD's claim over the earth to the worshiper's fitness for the hill and finally to the gates lifting before the King."
+  },
+  "canonist": {
+    "pathway": "The Gospels reveal Jesus as the rightful King; Acts 1 presents His ascension; Hebrews 9 describes Christ entering the greater holy place; Revelation 19 names Him the conquering King."
+  },
+  "theological_risk_agent": {
+    "risks": [
+      {
+        "risk_id": "R1",
+        "risk_description": "Turn clean hands and a pure heart into self-earned access to God.",
+        "why_it_matters": "The psalm joins real holiness to blessing and vindication from the God who saves.",
+        "avoidance_rule": "Honor the demand for integrity while locating final access and righteousness in the saving King.",
+        "evaluator_check": "Verify that application calls for holiness without teaching self-salvation."
+      },
+      {
+        "risk_id": "R2",
+        "risk_description": "Treat the gates as vague emotional openness detached from the LORD's royal entrance.",
+        "why_it_matters": "The repeated summons identifies a specific King: the LORD, strong in battle.",
+        "avoidance_rule": "Keep the gate imagery royal, public, and grounded in the chapter's liturgical movement.",
+        "evaluator_check": "Verify that the King of glory remains the subject of the opening gates."
+      }
+    ]
+  },
+  "historian_linguist": {
+    "notes": "The chapter uses procession-like call and response. The command for gates to lift their heads personifies monumental doors before a royal entrance."
+  },
+  "commentary_agent": {
+    "notes": "The three movements belong together: the Creator owns the earth, worship requires integrity, and the victorious LORD enters as King of glory."
+  },
+  "art_director": {
+    "register": "processional gravity with clear moral pressure",
+    "pace": "broad opening, narrowed ascent, then repeated royal summons",
+    "sentence_music": "firm declaratives giving way to question and antiphonal answer",
+    "image_density": "stone, water, hands, face, gate, and lifted head",
+    "emotional_color": "reverent exposure turning to public triumph",
+    "opening_mode": "threshold phrase",
+    "poem_tone": "architectural free lyric with processional force",
+    "ending_resonance": "the doors standing open beneath the weight of glory",
+    "avoid": ["self-salvation", "generic open-your-heart language", "triumphal noise without holiness"]
+  },
+  "creative_divergence_agent": {
+    "threshold_phrase_candidates": [
+      "The gates remember their King.",
+      "Glory approaches on clean feet.",
+      "The hill asks for truth.",
+      "Ancient doors lift their heads.",
+      "The whole earth has an Owner."
+    ],
+    "introduction_opening_candidates": [
+      "The psalm begins wider than any sanctuary.",
+      "Before anyone climbs the hill, the earth is named as belonging to the LORD.",
+      "The gates do not open for human ambition."
+    ],
+    "governing_image_candidates": ["ancient gates lifting their heads", "clean hands on the holy hill", "the founded earth beneath the entering King"],
+    "christology_framing_candidates": ["Christ ascending as the pure King of glory", "Christ entering the true holy place after His victory"],
+    "poem_arc_candidates": ["sea to hill to gate", "owned earth to examined hands to royal entrance"],
+    "title_candidates": ["The Gates Remember", "When Glory Enters", "The Hill and the King"],
+    "epigraph_candidates": ["The gates remember their King.", "The hill asks for truth.", "Ancient doors lift their heads."]
+  },
+  "director": {
+    "chapter_burden": "The Creator owns all things, exposes false worship, and enters as the victorious King who grants access to His holy presence.",
+    "opening_movement": "the Creator owns the founded earth",
+    "closing_movement": "the King enters through lifted gates",
+    "central_thought": "The Creator who owns the founded earth is the King who enters through lifted gates and brings true worshipers into His holy presence.",
+    "emotional_charge": "reverent exposure before an approaching King",
+    "transcendent_force": "the LORD of armies whose glory makes ancient doors rise",
+    "selected_threshold_phrase": "The gates remember their King.",
+    "threshold_phrase_rationale": "The personified gates respond as if old stone recognizes the rightful sovereign for whom it was made.",
+    "governing_image": "ancient gates lifting their heads",
+    "image_lexicon": ["earth", "sea", "river", "hill", "hands", "heart", "face", "gate", "door", "head", "glory"],
+    "image_head_terms": ["gate"],
+    "anchor_terms": ["Creator", "King", "glory", "holy", "Christ"],
+    "chapter_specific_terms": ["clean hands", "pure heart", "holy place", "ancient doors", "King of glory", "LORD of armies"],
+    "christology_required_echoes": ["King", "glory", "holy", "Christ"],
+    "christology_pathway": "Jesus Christ fulfills the clean-handed worshiper and victorious King: crucified without deceit, raised in victory, and ascended into the true holy place for His people.",
+    "application_target": "Reject divided worship, receive cleansing and access through Christ, and bring ordinary work under the Creator-King's ownership.",
+    "theological_terminus": "the holy and victorious King bringing His people into God's presence",
+    "negative_constraints": ["do not teach moral self-entry", "do not turn gates into generic feelings", "do not detach glory from holiness"],
+    "poem_plan": "free lyric moving from founded waters to bare hands on the hill and ending with old hinges bearing the entrance of glory",
+    "semantic_proof_chain": ["earth", "founded", "mountain", "clean hands", "pure heart", "seek", "gates", "King of glory", "LORD of armies"]
+  },
+  "composer": {
+    "title": "The Gates Remember",
+    "epigraph": "The gates remember their King.",
+    "focus_bible_verses": "Psalm 24:3-5, 7-8 — Who may climb the LORD's mountain? Who may stand in His holy place? One whose hands are clean and whose heart is pure, who has not given his life to falsehood or sworn with deceit. He receives blessing from the LORD and vindication from the God who saves him. Gates, lift your heads. Ancient doors, rise, so the King of glory may come in. Who is this King of glory? The LORD, strong and mighty, the LORD, mighty in battle.",
+    "introduction": "The gates remember their King.\n\nThe psalm begins wider than any sanctuary. Earth, sea, river, city, and every breathing inhabitant already belong to the LORD. Only then does the road narrow toward the mountain. The question at its foot is not whether we admire holiness, but whether truth has reached our hands, our speech, and the hidden allegiance of the heart.",
+    "reflection": "The climb strips worship of costume. Clean hands concern what we have done; a pure heart concerns what we have loved. Falsehood cannot be carried up the hill as private luggage. Yet the seeker does not manufacture a verdict. Blessing comes from the LORD, and vindication comes from the God who saves. The bare stone of the ascent teaches both integrity and dependence.",
+    "christ_fulfillment": "Jesus Christ alone comes with wholly clean hands and an undivided heart. He spoke no deceit, bore our uncleanness at the cross, rose in victory, and entered the true holy place as the King of glory. His holiness does not excuse our falsehood; it cleanses us from it and teaches us to seek the Father's face. In Christ, the gates open not to human achievement but to the victorious King who brings His people with Him.",
+    "application": "Let the Creator's ownership reach the rooms we usually lock: money, speech, appetite, ambition, and the stories we tell about ourselves. Bring deceit into the light before trying to polish the hands. Ask where your life has been lifted toward an empty thing. Then follow the King uphill with nothing concealed, trusting the God who saves to make worship truthful.",
+    "prayer": "Father, the earth and all its fullness are Yours, including the parts of our lives we guard as private ground. Expose the falsehood in our hands, speech, and divided hearts. Thank You for Jesus Christ, the holy King who bore our uncleanness and entered Your presence for us. Cleanse us so that our work and worship agree. Teach us to seek Your face without disguise and to welcome the rule of the King of glory. We ask this through Christ our victorious Lord. Amen.",
+    "next_in_sequence": "Psalm 25 - A taught heart waiting on the LORD's paths."
+  },
+  "voice_keeper": {"approved": true},
+  "poet": {
+    "poem": "Sea under the founded earth,\nriver shouldering stone—\nwho climbs the hill\nwhen every hidden room is known?\n\nHands open to the mountain wind.\nNo false oath in the mouth.\nThe seeker waits for blessing\nfrom the God who saves.\n\nGates, lift your weathered heads.\nDoors, loosen the bronze.\nWho comes along the wall?\nThe LORD, strong for battle.\n\nAgain the cry moves through the stone:\nLift, gates. Rise, ancient doors.\nThe wall gives back the answer:\nthe King Himself draws near.\n\nHinge answers hinge.\nThe high lintels wake.\nThe LORD of armies enters,\nand the whole house opens."
+  },
+  "beauty_pass_agent": {
+    "lingering_lines": ["The gates remember their King.", "Again the cry moves through the stone:", "and the whole house opens."],
+    "strongest_turn": "The biblical question becomes a processional answer, and the repeated gate summons returns with greater architectural force.",
+    "weakest_artistic_moment": "",
+    "mechanical_residue": [],
+    "beauty_score": 9,
+    "required_beauty_revisions": []
+  },
+  "evaluator": {
+    "textual_fidelity": 9,
+    "theological_accuracy": 9,
+    "christology_from_chapter_logic": 9,
+    "chapter_design_fidelity": 9,
+    "emotional_charged_phrase": 9,
+    "introduction_strength": 9,
+    "ancient_image_discipline": 9,
+    "register": 9,
+    "read_aloud_quality": 9,
+    "application_concreteness": 9,
+    "prayer": 9,
+    "poem_form": 9,
+    "poetic_vitality": 9,
+    "artful_design": 9,
+    "artifact_integrity": 9,
+    "fault_target": "none",
+    "notes": "Psalm 24 mock integration preserves creation ownership, moral integrity, saving vindication, and the royal gate procession."
+  },
+  "contradiction_editor": {
+    "verdict": "Pass",
+    "major_conflicts": [],
+    "minor_conflicts": [],
+    "theological_risks": [],
+    "literary_risks": [],
+    "harness_risks": [],
+    "required_revisions": [],
+    "notes": "No conflicts."
+  },
+  "editorial_smoother": {"prose": {}}
+}

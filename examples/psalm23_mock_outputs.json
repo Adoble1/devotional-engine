@@ -1,0 +1,239 @@
+{
+  "source_agent": {
+    "source_text": "Psalm 23 source text: The LORD is my shepherd; I shall not lack. He makes me lie down in green pastures. He leads me beside quiet waters. He restores my soul. He guides me in paths of righteousness for His name's sake. Even when I walk through the valley of death-shadow, I will fear no evil, for You are with me; Your rod and Your staff, they comfort me. You set a table before me in the presence of my enemies. You anoint my head with oil; my cup overflows. Surely goodness and covenant mercy shall pursue me all the days of my life, and I shall dwell in the house of the LORD for length of days."
+  },
+  "translator": {
+    "working_rendering": "The LORD is my shepherd; I will not lack. He gives me rest in green pastures and leads me beside quiet waters. He brings back my life and guides me in right paths for His name. Even through the valley of death-shadow, I fear no evil because You are with me. Your rod and staff comfort me. You prepare a table before me in front of my enemies. You anoint my head with oil; my cup overflows. Goodness and faithful mercy pursue me, and I dwell in the LORD's house for length of days."
+  },
+  "chapter_design_mapper": {
+    "chapter_start": "The LORD is named as shepherd, and lack loses its throne.",
+    "chapter_end": "The pursued life comes home to the house of the LORD.",
+    "emotional_movement": "Need becomes rest, danger becomes nearness, and pursuit becomes home.",
+    "divine_action": "The LORD shepherds, makes rest, leads, restores, guides, comforts, prepares, anoints, pursues, and receives.",
+    "physical_vocabulary": [
+      "shepherd",
+      "pastures",
+      "waters",
+      "paths",
+      "valley",
+      "rod",
+      "staff",
+      "table",
+      "oil",
+      "cup",
+      "house"
+    ],
+    "central_theological_claim": "The LORD does not merely point toward safety; He accompanies His people until mercy brings them home.",
+    "christward_fulfillment": "Jesus is the good Shepherd who enters death's valley, prepares His table, pours out the Spirit, and brings His people into the Father's house.",
+    "reader_felt_experience": "A fearful traveler learns that being accompanied by the Shepherd is deeper than having the shadows removed.",
+    "chapter_design_summary": "The Shepherd's nearness turns the whole road, from pasture to valley to table to house, into mercy."
+  },
+  "canonist": {
+    "pathway": "John 10 names Jesus as the good Shepherd who lays down His life for the sheep; Luke 22 sets the covenant table; John 14 promises the Father's house; Hebrews 13 calls Christ the great Shepherd of the sheep."
+  },
+  "theological_risk_agent": {
+    "risks": [
+      {
+        "risk_id": "R1",
+        "risk_description": "Make the psalm promise a life without valley, enemies, or death-shadow.",
+        "why_it_matters": "The psalm's comfort depends on the LORD's presence inside danger, not on danger's absence.",
+        "avoidance_rule": "Keep valley and enemies present while emphasizing the Shepherd's nearness.",
+        "evaluator_check": "Verify that the devotional does not erase suffering."
+      },
+      {
+        "risk_id": "R2",
+        "risk_description": "Treat the table and cup as generic abundance detached from covenant fellowship.",
+        "why_it_matters": "The Shepherd is also host; the table is personal communion and public vindication.",
+        "avoidance_rule": "Connect table, cup, and house to covenant welcome and Christ's fellowship.",
+        "evaluator_check": "Verify table and house are not reduced to prosperity imagery."
+      }
+    ]
+  },
+  "historian_linguist": {
+    "notes": "The poem moves from third-person confidence to second-person address in the valley, where danger makes the Shepherd's nearness more direct."
+  },
+  "commentary_agent": {
+    "notes": "The sequence of shepherd, path, valley, table, cup, and house presents a whole life enclosed by the LORD's active care."
+  },
+  "art_director": {
+    "register": "quiet pastoral confidence with grave undertone",
+    "pace": "unhurried but not sentimental",
+    "sentence_music": "plain clauses gathering resonance",
+    "image_density": "concrete and restrained",
+    "emotional_color": "restful courage under shadow",
+    "opening_mode": "threshold phrase",
+    "poem_tone": "free lyric of accompanied passage",
+    "ending_resonance": "mercy pursuing the traveler home",
+    "avoid": [
+      "pastoral greeting-card softness",
+      "prosperity reading of table and cup",
+      "erasing the valley"
+    ]
+  },
+  "creative_divergence_agent": {
+    "threshold_phrase_candidates": [
+      "Mercy learns the road.",
+      "The Shepherd enters the shadow.",
+      "The valley is not empty.",
+      "Goodness follows with footsteps.",
+      "The road ends at home."
+    ],
+    "introduction_opening_candidates": [
+      "The psalm does not begin with the sheep but with the Shepherd.",
+      "The first mercy in the psalm is not pasture but possession.",
+      "David's confidence is not that the road is harmless."
+    ],
+    "governing_image_candidates": [
+      "the Shepherd on the road",
+      "mercy with footsteps",
+      "the table in enemy country"
+    ],
+    "christology_framing_candidates": [
+      "Christ the good Shepherd entering death-shadow for the sheep",
+      "Christ the host whose table is prepared in the presence of enemies"
+    ],
+    "poem_arc_candidates": [
+      "pasture to valley to table to house",
+      "lack to accompanied shadow to home"
+    ],
+    "title_candidates": [
+      "Mercy Learns the Road",
+      "The Shepherd in the Shadow",
+      "The Road Ends at Home"
+    ],
+    "epigraph_candidates": [
+      "Mercy learns the road.",
+      "The valley is not empty.",
+      "The road ends at home."
+    ]
+  },
+  "director": {
+    "chapter_burden": "The Shepherd's nearness is sufficient for the whole journey: pasture, valley, enemies, table, and home.",
+    "opening_movement": "the Shepherd ends lack",
+    "closing_movement": "mercy follows the road home",
+    "central_thought": "The Shepherd ends lack and follows the road with mercy until His people come home.",
+    "emotional_charge": "quiet courage in the presence of real shadow",
+    "transcendent_force": "the LORD whose personal presence comforts and pursues",
+    "selected_threshold_phrase": "Mercy learns the road.",
+    "threshold_phrase_rationale": "Goodness and covenant mercy do not wait at the end; they pursue the traveler through every part of the road.",
+    "governing_image": "mercy with footsteps",
+    "image_lexicon": [
+      "shepherd",
+      "pasture",
+      "water",
+      "path",
+      "valley",
+      "rod",
+      "staff",
+      "table",
+      "cup",
+      "house"
+    ],
+    "image_head_terms": [
+      "road"
+    ],
+    "anchor_terms": [
+      "Shepherd",
+      "Christ",
+      "death",
+      "table",
+      "house"
+    ],
+    "chapter_specific_terms": [
+      "green pastures",
+      "quiet waters",
+      "death-shadow",
+      "rod",
+      "staff",
+      "cup"
+    ],
+    "christology_required_echoes": [
+      "Shepherd",
+      "Christ",
+      "death",
+      "table",
+      "house"
+    ],
+    "christology_pathway": "Christ is the good Shepherd who lays down His life, enters death's valley ahead of the sheep, feeds them at His table, pours out the Spirit, and brings them into the Father's house.",
+    "application_target": "Receive the Shepherd's nearness as the answer to fear, practice trust in the valley, and see mercy as active pursuit rather than distant sentiment.",
+    "theological_terminus": "the Shepherd's accompanying mercy bringing His people home",
+    "negative_constraints": [
+      "do not make the psalm a promise of ease",
+      "do not flatten the table into prosperity",
+      "do not sentimentalize shepherd imagery"
+    ],
+    "poem_plan": "free lyric moving from pasture's hush through death-shadow to the enemy-country table and the house at the end of the road",
+    "semantic_proof_chain": [
+      "shepherd",
+      "lack",
+      "rest",
+      "valley",
+      "with me",
+      "table",
+      "cup",
+      "mercy",
+      "house"
+    ]
+  },
+  "composer": {
+    "title": "Mercy Learns the Road",
+    "epigraph": "Mercy learns the road.",
+    "focus_bible_verses": "Psalm 23:1-6 — The LORD is my shepherd; I will not lack. He lets me lie down in green pastures; He leads me beside waters of rest. He brings my life back; He guides me in right paths for the sake of His name. Even when I walk through the valley of death-shadow, I fear no evil, because You are with me; Your rod and Your staff, they comfort me. You arrange a table before me in front of my enemies. You refresh my head with oil; my cup is more than full. Surely goodness and faithful mercy will pursue me all the days of my life, and I will dwell in the house of the LORD for length of days.",
+    "introduction": "Mercy learns the road.\n\nThe psalm does not begin with the sheep's strength, mood, or ability to read the weather. It begins with the Shepherd. That is why lack loses its authority before the first pasture appears. The one who belongs to the LORD may still walk through shadow, but he does not walk as an orphan of the road.",
+    "reflection": "The psalm is quieter than panic but not softer than reality. The grass is real, and so is the valley. The water is restful, and so are the enemies near enough to watch the table being set. David's confidence is not that the path avoids danger. His confidence is that the LORD changes address in the darkest place: He is no longer only the Shepherd spoken about; He is the One spoken to. You are with me.",
+    "christ_fulfillment": "Jesus Christ is the Shepherd who did not remain on the safe ridge calling instructions into the valley. He entered death's shadow for the sheep, laid down His life, rose as the great Shepherd, and now feeds His people at His table. In Christ, the rod and staff are not bare symbols of control; they are the care of the crucified and risen Shepherd. He brings us toward the Father's house, and no enemy can overturn the welcome He has prepared.",
+    "application": "When fear makes the future feel like a country with no road, do not demand that the Shepherd explain every turn before you follow. Keep to the verbs the psalm gives you: He leads, He restores, He is with, He prepares, He pursues. The valley may still have its name, but it no longer owns your name. Mercy has taken up your trail.",
+    "prayer": "Father, teach us to trust the Shepherd more than we trust our reading of the road. We confess that we often call Your care absent whenever shadows lengthen. Thank You for Jesus Christ, who entered death for us and rose to bring us home. Make us quiet enough to receive green pasture, brave enough to walk the valley, and humble enough to sit at the table You prepare. Let goodness and faithful mercy pursue our frightened hearts until praise becomes our dwelling. We ask this through Christ our Shepherd and Lord. Amen.",
+    "next_in_sequence": "Psalm 24 - The King of glory entering His holy hill."
+  },
+  "voice_keeper": {
+    "approved": true
+  },
+  "poet": {
+    "poem": "Green slopes receive the flock.\nStill water keeps the sky.\nA torn place in the soul\nis gathered back to breath.\n\nThe track bends down.\nLight thins between the stones.\nHooves draw close;\nthe staff taps once nearby.\n\nThere the voice turns.\nNo longer only He,\nbut You—\nrod against thorn,\nstaff against rock,\nshadow inside the shadow.\n\nIn enemy country,\nbread waits on the table.\nOil darkens the lifted head.\nThe cup cannot hold its brim.\n\nAll day, behind us,\ntwo faithful footfalls:\ngoodness,\nmercy.\n\nAt dusk,\nthe house keeps its lamp lit,\nand the road\nfinds its door."
+  },
+  "beauty_pass_agent": {
+    "lingering_lines": [
+      "Mercy learns the road.",
+      "shadow inside the shadow.",
+      "the road finds its door."
+    ],
+    "strongest_turn": "The poem turns from third-person confidence to direct address through concrete valley sounds and the staff nearby.",
+    "weakest_artistic_moment": "",
+    "mechanical_residue": [],
+    "beauty_score": 9,
+    "required_beauty_revisions": []
+  },
+  "evaluator": {
+    "textual_fidelity": 9,
+    "theological_accuracy": 9,
+    "christology_from_chapter_logic": 9,
+    "chapter_design_fidelity": 9,
+    "emotional_charged_phrase": 9,
+    "introduction_strength": 9,
+    "ancient_image_discipline": 9,
+    "register": 9,
+    "read_aloud_quality": 9,
+    "application_concreteness": 9,
+    "prayer": 9,
+    "poem_form": 9,
+    "poetic_vitality": 9,
+    "artful_design": 9,
+    "artifact_integrity": 9,
+    "fault_target": "none",
+    "notes": "Psalm 23 mock integration preserves valley, table, and home without prosperity flattening."
+  },
+  "contradiction_editor": {
+    "verdict": "Pass",
+    "major_conflicts": [],
+    "minor_conflicts": [],
+    "theological_risks": [],
+    "literary_risks": [],
+    "harness_risks": [],
+    "required_revisions": [],
+    "notes": "No conflicts."
+  },
+  "editorial_smoother": {
+    "prose": {}
+  }
+}

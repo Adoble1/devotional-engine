@@ -1,0 +1,230 @@
+{
+  "source_agent": {
+    "source_text": "Psalm 21 source text: O LORD, in your strength the king rejoices, and in your salvation how greatly he exults. You have given him his heart's desire and have not withheld the request of his lips. You meet him with rich blessings; you set a crown of fine gold upon his head. He asked life of you; you gave it to him, length of days forever and ever. For the king trusts in the LORD, and through the steadfast love of the Most High he shall not be moved. Be exalted, O LORD, in your strength! We will sing and praise your power."
+  },
+  "translator": {
+    "working_rendering": "LORD, the king rejoices in Your strength, and in Your salvation he greatly exults. You placed a crown of fine gold on his head. He asked life from You, and You gave him length of days forever. Through the steadfast love of the Most High he will not be shaken."
+  },
+  "chapter_design_mapper": {
+    "chapter_start": "The king rejoices in the LORD's strength and salvation.",
+    "chapter_end": "The people call the LORD to be exalted in His strength and promise to sing His power.",
+    "emotional_movement": "Answered petition becomes crowned joy, secure trust, judgment against enemies, and public praise.",
+    "divine_action": "The LORD gives desire, blessing, crown, life, glory, joy, security, judgment, and strength.",
+    "physical_vocabulary": [
+      "strength",
+      "salvation",
+      "lips",
+      "crown",
+      "gold",
+      "head",
+      "life",
+      "days",
+      "hand",
+      "fire",
+      "bow"
+    ],
+    "central_theological_claim": "Royal joy is not self-made triumph but the LORD's answered gift secured by steadfast love.",
+    "christward_fulfillment": "The greater King receives life beyond death, is crowned with glory, judges evil, and leads His people into praise.",
+    "reader_felt_experience": "A worshiper moves from relief after answered prayer to awe that blessing rests on the LORD's steadfast love.",
+    "chapter_design_summary": "The king's joy in salvation becomes public praise for the LORD's strength."
+  },
+  "canonist": {
+    "pathway": "Answered royal prayer, crown, life forever, steadfast love, judgment, and exalted praise converge in the Messiah."
+  },
+  "theological_risk_agent": {
+    "risks": [
+      {
+        "risk_id": "R1",
+        "risk_description": "Make the king's joy sound like self-congratulation.",
+        "why_it_matters": "The psalm repeatedly grounds royal joy in what the LORD gives.",
+        "avoidance_rule": "Keep the LORD as the active giver of strength, salvation, crown, and life.",
+        "evaluator_check": "Verify that joy is received, not self-produced."
+      },
+      {
+        "risk_id": "R2",
+        "risk_description": "Soften judgment language into vague personal success.",
+        "why_it_matters": "The psalm includes the LORD's opposition to enemies and evil.",
+        "avoidance_rule": "Treat judgment soberly as God's righteous defeat of evil, not personal revenge.",
+        "evaluator_check": "Verify judgment is neither omitted nor made vindictive."
+      }
+    ]
+  },
+  "historian_linguist": {
+    "notes": "A royal thanksgiving psalm answering the intercession of Psalm 20, celebrating the LORD's gifts to the king and ending in congregational praise."
+  },
+  "commentary_agent": {
+    "notes": "Psalm 21 answers Psalm 20: the king who was prayed for now rejoices because the LORD has acted, crowned, sustained, and secured him."
+  },
+  "art_director": {
+    "register": "royal doxological",
+    "pace": "answered joy widening into praise",
+    "sentence_music": "lifted and weight-bearing",
+    "image_density": "moderate",
+    "emotional_color": "golden relief",
+    "opening_mode": "threshold phrase",
+    "poem_tone": "lyric thanksgiving with a crown image",
+    "ending_resonance": "exalted strength",
+    "avoid": [
+      "prosperity gospel",
+      "revenge fantasy",
+      "generic success language"
+    ]
+  },
+  "creative_divergence_agent": {
+    "threshold_phrase_candidates": [
+      "The crown is mercy.",
+      "Joy stands after rescue.",
+      "Gold cannot explain joy.",
+      "Answered prayer wears weight.",
+      "The King receives life."
+    ],
+    "introduction_opening_candidates": [
+      "Psalm 21 begins after the answer has arrived.",
+      "The prayed-for king now sings.",
+      "The crown does not explain the joy."
+    ],
+    "governing_image_candidates": [
+      "a crown heavy with mercy",
+      "gold unable to bear the whole gift",
+      "a song rising from answered prayer"
+    ],
+    "christology_framing_candidates": [
+      "the risen King crowned after death",
+      "the greater Son receiving indestructible life"
+    ],
+    "poem_arc_candidates": [
+      "prayer to crown to praise",
+      "gold to life to exaltation"
+    ],
+    "title_candidates": [
+      "The Crown Is Mercy",
+      "Gold Cannot Explain Joy",
+      "After the Answer"
+    ],
+    "epigraph_candidates": [
+      "The crown is mercy.",
+      "Joy stands after rescue.",
+      "The King receives life."
+    ]
+  },
+  "director": {
+    "chapter_burden": "The king's joy is the LORD's answered mercy, not the king's own achievement.",
+    "opening_movement": "answered joy",
+    "closing_movement": "steadfast love becomes exalted praise",
+    "central_thought": "Answered joy rests in steadfast love and becomes exalted praise.",
+    "emotional_charge": "grateful wonder",
+    "transcendent_force": "the LORD's strength and steadfast love",
+    "selected_threshold_phrase": "The crown is mercy.",
+    "threshold_phrase_rationale": "The psalm places gold, blessing, and royal glory under the deeper gift of the LORD's steadfast love.",
+    "governing_image": "a crown heavy with mercy",
+    "image_lexicon": [
+      "crown",
+      "gold",
+      "head",
+      "life",
+      "song"
+    ],
+    "image_head_terms": [
+      "crown"
+    ],
+    "anchor_terms": [
+      "king",
+      "crown",
+      "life",
+      "strength",
+      "steadfast love"
+    ],
+    "chapter_specific_terms": [
+      "heart's desire",
+      "fine gold",
+      "length of days",
+      "Most High",
+      "sing"
+    ],
+    "christology_required_echoes": [
+      "king",
+      "crown",
+      "life",
+      "strength",
+      "steadfast love"
+    ],
+    "christology_pathway": "The risen King receives life forever, is crowned with glory, and secures His people in steadfast love.",
+    "application_target": "Receive answered prayer as mercy, hold blessing with humility, and turn relief into praise.",
+    "theological_terminus": "exalted praise for the LORD's strength",
+    "negative_constraints": [
+      "do not make blessing a reward for spiritual performance",
+      "do not treat enemies as personal grudges"
+    ],
+    "poem_plan": "open lyric with crown, gold, life, judgment, and final praise",
+    "semantic_proof_chain": [
+      "answered prayer",
+      "joy",
+      "crown",
+      "life",
+      "steadfast love",
+      "judgment",
+      "praise"
+    ]
+  },
+  "composer": {
+    "title": "The Crown Is Mercy",
+    "epigraph": "The crown is mercy.",
+    "focus_bible_verses": "Psalm 21:1-7, 13",
+    "introduction": "The crown is mercy.\n\nPsalm 21 begins where Psalm 20 was longing to arrive. The people had prayed for the king in the day of trouble; now the king rejoices in the LORD's strength. The answer has come, but the psalm does not let us mistake the gift for the giver. Gold rests on the king's head, but mercy is the weight beneath it.",
+    "reflection": "The LORD has not merely helped from a distance. He has met the king with blessing, granted desire, placed the crown, given life, and secured him through steadfast love. The king's joy is therefore not pride wearing religious language. It is gratitude with a crown on its head. Even the psalm's judgment language belongs here: evil cannot finally share the throne with the LORD's saving purpose.",
+    "christ_fulfillment": "Jesus Christ is the greater King whose prayer passed through death and was answered with resurrection life. He wore the crown of thorns before receiving the crown of glory. In His strength, He judges evil without cruelty and saves His people in steadfast love. His life is forever, and His praise becomes the song of the church.",
+    "application": "When God answers, do not hurry past gratitude into possession. Hold the crown as mercy. Name the blessing, thank the Giver, and ask whether relief has become praise. Let every answered prayer become less about your importance and more about the LORD's strength.",
+    "prayer": "Father, teach us to receive blessing as mercy. Keep our joy from becoming pride. Crown our relief with gratitude. Strengthen us in steadfast love. Defeat what would turn our hearts from You. Make our answered prayers become praise through Jesus Christ our Lord. Amen.",
+    "next_in_sequence": "Psalm 22 - The forsaken cry that becomes worldwide praise."
+  },
+  "voice_keeper": {
+    "approved": true
+  },
+  "poet": {
+    "poem": "Gold is not heavy enough\nfor what has happened here.\n\nThe king lifts his face,\nbut the light is borrowed.\nThe crown sits bright on his head,\nyet mercy bears the weight.\n\nHe asked for life.\nThe answer came wider than breath,\nlonger than the room of his body,\nolder than the fear that named him mortal.\n\nEnemies gather their heat,\nbut the throne is not revenge.\nFire belongs to the Holy One;\njudgment is the clearing of the song.\n\nBefore the crown,\nthere was a thorn.\nBefore the glory,\nthere was a tree.\nBefore forever,\nthere was a grave split open by strength.\n\nSo let the king rejoice,\nand let the people answer.\nNot because gold has saved us,\nbut because mercy has learned our name.\n\nBe exalted, LORD, in Your strength.\nWe will sing until the crown becomes praise."
+  },
+  "beauty_pass_agent": {
+    "lingering_lines": [
+      "The crown is mercy.",
+      "Gold is not heavy enough for what has happened here.",
+      "We will sing until the crown becomes praise."
+    ],
+    "strongest_turn": "The poem turns from gold to mercy and from throne to resurrection.",
+    "weakest_artistic_moment": "",
+    "mechanical_residue": [],
+    "beauty_score": 9,
+    "required_beauty_revisions": []
+  },
+  "evaluator": {
+    "textual_fidelity": 9,
+    "theological_accuracy": 9,
+    "christology_from_chapter_logic": 9,
+    "chapter_design_fidelity": 9,
+    "emotional_charged_phrase": 9,
+    "introduction_strength": 9,
+    "ancient_image_discipline": 9,
+    "register": 9,
+    "read_aloud_quality": 9,
+    "application_concreteness": 9,
+    "prayer": 9,
+    "poem_form": 9,
+    "poetic_vitality": 9,
+    "artful_design": 9,
+    "artifact_integrity": 9,
+    "fault_target": "none",
+    "notes": "Psalm 21 mock integration passes."
+  },
+  "contradiction_editor": {
+    "verdict": "Pass",
+    "major_conflicts": [],
+    "minor_conflicts": [],
+    "theological_risks": [],
+    "literary_risks": [],
+    "harness_risks": [],
+    "required_revisions": [],
+    "notes": "No conflicts."
+  },
+  "editorial_smoother": {
+    "prose": {}
+  }
+}

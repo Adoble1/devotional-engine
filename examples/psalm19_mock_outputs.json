@@ -1,0 +1,223 @@
+{
+  "source_agent": {
+    "source_text": "Psalm 19 source text: The heavens declare the glory of God; the law of the LORD is perfect, reviving the soul."
+  },
+  "translator": {
+    "working_rendering": "The heavens recount the glory of God, and the work of His hands the expanse declares."
+  },
+  "chapter_design_mapper": {
+    "chapter_start": "The heavens declare God's glory without audible words.",
+    "chapter_end": "The servant asks that the words of his mouth and meditation of his heart be acceptable.",
+    "emotional_movement": "Wonder before creation becomes delight in Torah, confession of hidden sin, and surrendered speech.",
+    "divine_action": "God reveals His glory through creation, restores the soul through His instruction, and cleanses His servant.",
+    "physical_vocabulary": [
+      "heavens",
+      "expanse",
+      "sun",
+      "tent",
+      "course",
+      "honey",
+      "gold",
+      "mouth",
+      "heart",
+      "rock"
+    ],
+    "central_theological_claim": "The God whose glory fills the heavens also addresses, searches, and restores His servant.",
+    "christward_fulfillment": "The eternal Word enters the created world as its true light, fulfills God's instruction, bears hidden sin, and makes His people acceptable.",
+    "reader_felt_experience": "A worshiper moves from cosmic awe to personal exposure, cleansing, and consecrated speech.",
+    "chapter_design_summary": "Wordless heavens and written instruction lead the servant toward confessed sin and acceptable words."
+  },
+  "canonist": {
+    "pathway": "Creation's witness, the life-giving word, cleansing from sin, and the LORD as rock and redeemer."
+  },
+  "theological_risk_agent": {
+    "risks": [
+      {
+        "risk_id": "R1",
+        "risk_description": "Treat creation and Torah as unrelated halves.",
+        "why_it_matters": "The psalm presents one revealing God who addresses the whole person.",
+        "avoidance_rule": "Preserve the movement from universal glory to personal response.",
+        "evaluator_check": "Verify that creation, instruction, confession, and accepted speech form one arc."
+      },
+      {
+        "risk_id": "R2",
+        "risk_description": "Reduce the law to moral effort.",
+        "why_it_matters": "The psalm describes God's instruction as restoring, rejoicing, and enlightening.",
+        "avoidance_rule": "Present the word first as God's life-giving gift.",
+        "evaluator_check": "Verify that application depends on divine cleansing and redemption."
+      }
+    ]
+  },
+  "historian_linguist": {
+    "notes": "The psalm moves from the ordered witness of the heavens to the ordered gift of divine instruction and finally to the worshiper's own words."
+  },
+  "commentary_agent": {
+    "notes": "The sun's comprehensive course anticipates the searching reach of God's instruction; the closing prayer turns revelation into response."
+  },
+  "art_director": {
+    "register": "luminous sacred literary",
+    "pace": "wide wonder narrowing toward prayer",
+    "sentence_music": "clear and measured",
+    "image_density": "moderate",
+    "emotional_color": "radiance becoming reverence",
+    "opening_mode": "threshold phrase",
+    "poem_tone": "hymnic and searching",
+    "ending_resonance": "accepted words before the Redeemer",
+    "avoid": [
+      "generic nature spirituality",
+      "law as sterile rulekeeping"
+    ]
+  },
+  "creative_divergence_agent": {
+    "threshold_phrase_candidates": [
+      "Creation speaks without a sound.",
+      "Glory travels without a voice.",
+      "The sky becomes a witness.",
+      "Light searches the listening heart.",
+      "The heavens lead us inward."
+    ],
+    "introduction_opening_candidates": [
+      "Before David speaks, the heavens are already speaking.",
+      "Psalm 19 begins with a language no ear can hear.",
+      "Day pours its testimony into day."
+    ],
+    "governing_image_candidates": [
+      "the sun crossing the heavens",
+      "honey bright on the tongue",
+      "words laid before the rock"
+    ],
+    "christology_framing_candidates": [
+      "the eternal Word beneath the sun",
+      "the true light who bears hidden sin"
+    ],
+    "poem_arc_candidates": [
+      "heavens to heart",
+      "light to cleansing"
+    ],
+    "title_candidates": [
+      "The Speech of Heaven",
+      "When Glory Searches Us",
+      "Words Before the Rock"
+    ],
+    "epigraph_candidates": [
+      "Creation speaks without a sound.",
+      "Glory travels without a voice.",
+      "The heavens lead us inward."
+    ]
+  },
+  "director": {
+    "chapter_burden": "The revealing God fills the world with glory and searches the worshiper's heart.",
+    "opening_movement": "creation declares glory",
+    "closing_movement": "the servant seeks accepted words",
+    "central_thought": "Creation's glory leads the servant toward accepted words.",
+    "emotional_charge": "luminous exposure",
+    "transcendent_force": "God's revelation reaches everywhere",
+    "selected_threshold_phrase": "Creation speaks without a sound.",
+    "threshold_phrase_rationale": "The phrase gathers the paradox of verses 1-4 and opens the psalm's movement from cosmic testimony to personal speech.",
+    "governing_image": "the sun crossing the heavens",
+    "image_lexicon": [
+      "heavens",
+      "sun",
+      "course",
+      "honey",
+      "rock"
+    ],
+    "image_head_terms": [
+      "sun"
+    ],
+    "anchor_terms": [
+      "word",
+      "light",
+      "sin",
+      "redeemer"
+    ],
+    "chapter_specific_terms": [
+      "heavens",
+      "instruction",
+      "hidden faults",
+      "acceptable"
+    ],
+    "christology_required_echoes": [
+      "word",
+      "light",
+      "sin",
+      "redeemer"
+    ],
+    "christology_pathway": "The eternal Word is the true light who fulfills God's instruction, bears sin, and redeems His people.",
+    "application_target": "Receive God's revealing word, confess hidden sin, and offer daily speech to Him.",
+    "theological_terminus": "the LORD our rock and redeemer",
+    "negative_constraints": [
+      "do not detach creation from Torah",
+      "do not present obedience apart from grace"
+    ],
+    "poem_plan": "four common-meter stanzas moving from heavens to word, confession, and Christ",
+    "semantic_proof_chain": [
+      "glory",
+      "creation",
+      "instruction",
+      "hidden sin",
+      "accepted words",
+      "redeemer"
+    ]
+  },
+  "composer": {
+    "title": "The Speech of Heaven",
+    "epigraph": "Creation speaks without a sound.",
+    "focus_bible_verses": "Psalm 19:1-4, 7-8, 12-14",
+    "introduction": "Creation speaks without a sound.\n\nBefore David offers a single prayer, he listens. Day pours testimony into day, night entrusts knowledge to night, and the heavens make God's glory known without a human voice. Their witness is silent, but it is not vague: the world is the work of His hands.",
+    "reflection": "The psalm then turns from the heavens above to the word placed before us. God's instruction restores the soul, rejoices the heart, and gives light to the eyes. Like the sun crossing the whole sky, the word reaches places we would leave shadowed. David therefore asks the question revelation awakens: Who can discern his hidden errors?",
+    "christ_fulfillment": "Jesus Christ is the eternal Word through whom the heavens were made and the true light who entered beneath their course. He fulfilled God's instruction without fault, bore our sin in His body, and rose as our living Redeemer. In Him, the God who searches us also cleanses us and makes our lives acceptable.",
+    "application": "Stand beneath the psalm's double witness today. Notice one created gift that declares God's glory, receive one command as life-giving wisdom, and name one hidden fault without excuse. Then place the words you are about to speak before the LORD your rock and redeemer.",
+    "prayer": "Our Father, open our eyes to Your glory. Restore our souls by Your word. Reveal the faults we cannot see. Keep us from proud sin. Let our words and meditations be acceptable before You. Cleanse us through Jesus Christ our Lord. Amen.",
+    "next_in_sequence": "Psalm 20 - Trusting the name of the LORD in the day of trouble."
+  },
+  "voice_keeper": {
+    "approved": true
+  },
+  "poet": {
+    "poem": "The heavens tell the glory bright\nTheir voice goes through the night\nThe sun runs joyful on its way\nAnd floods the world with light\n\nYour law can heal the weary soul\nYour word is clean and right\nYour precepts wake the heart to joy\nAnd make our pathways bright\n\nWho sees the errors hidden deep\nOr knows each secret stain\nForgive the faults I cannot see\nAnd cleanse my heart again\n\nThe living Word has made his home\nHe came to be our light\nHe bears our sin and speaks us clean\nAnd leads us into light"
+  },
+  "beauty_pass_agent": {
+    "lingering_lines": [
+      "Creation speaks without a sound.",
+      "Before David offers a single prayer, he listens."
+    ],
+    "strongest_turn": "The witness of the heavens becomes the searching light of the word.",
+    "weakest_artistic_moment": "",
+    "mechanical_residue": [],
+    "beauty_score": 9,
+    "required_beauty_revisions": []
+  },
+  "evaluator": {
+    "textual_fidelity": 9,
+    "theological_accuracy": 9,
+    "christology_from_chapter_logic": 9,
+    "chapter_design_fidelity": 9,
+    "emotional_charged_phrase": 9,
+    "introduction_strength": 9,
+    "ancient_image_discipline": 9,
+    "register": 9,
+    "read_aloud_quality": 9,
+    "application_concreteness": 9,
+    "prayer": 9,
+    "poem_form": 9,
+    "poetic_vitality": 9,
+    "artful_design": 9,
+    "artifact_integrity": 9,
+    "fault_target": "none",
+    "notes": "Psalm 19 mock integration passes."
+  },
+  "contradiction_editor": {
+    "verdict": "Pass",
+    "major_conflicts": [],
+    "minor_conflicts": [],
+    "theological_risks": [],
+    "literary_risks": [],
+    "harness_risks": [],
+    "required_revisions": [],
+    "notes": "No conflicts."
+  },
+  "editorial_smoother": {
+    "prose": {}
+  }
+}

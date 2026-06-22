@@ -1,0 +1,238 @@
+{
+  "source_agent": {
+    "source_text": "Psalm 22 source text: My God, my God, why have you forsaken me? Why are you so far from saving me, from the words of my groaning? Many bulls encompass me; strong bulls of Bashan surround me. Dogs encompass me; a company of evildoers encircles me; they have pierced my hands and feet. They divide my garments among them, and for my clothing they cast lots. I will tell of your name to my brothers; in the midst of the congregation I will praise you. All the ends of the earth shall remember and turn to the LORD."
+  },
+  "translator": {
+    "working_rendering": "My God, my God, why have You forsaken me? Many bulls surround me; strong bulls of Bashan encircle me. Dogs surround me; they pierced my hands and feet. They divide my garments and cast lots for my clothing. I will declare Your name to my brothers; all the ends of the earth will remember and return to the LORD."
+  },
+  "chapter_design_mapper": {
+    "chapter_start": "The sufferer cries out under the terror of forsakenness.",
+    "chapter_end": "The afflicted one vows praise that expands to the congregation and the ends of the earth.",
+    "emotional_movement": "Abandonment and encirclement become answered praise among brothers and nations.",
+    "divine_action": "The LORD seems silent, yet preserves the sufferer, hears the afflicted, and turns the cry into worldwide worship.",
+    "physical_vocabulary": [
+      "forsaken",
+      "groaning",
+      "worm",
+      "dust",
+      "bulls",
+      "dogs",
+      "lion",
+      "bones",
+      "hands",
+      "feet",
+      "garments",
+      "congregation"
+    ],
+    "central_theological_claim": "The forsaken cry becomes the seed of public praise because the LORD does not finally despise the afflicted.",
+    "christward_fulfillment": "Jesus takes the psalm's forsaken cry onto His own lips, is physically crucified, fulfills the garment-lot prophecy, and rises to lead His brothers and the nations in praise.",
+    "reader_felt_experience": "A sufferer moves from suffocating abandonment to the first breath of praise after deliverance.",
+    "chapter_design_summary": "The circle of beasts gives way to the circle of worship."
+  },
+  "canonist": {
+    "pathway": "Matthew 27:46 gives Christ's direct cry from Psalm 22; John 19:24 echoes the divided garments and casting lots; Hebrews 2:12 receives the congregation praise."
+  },
+  "theological_risk_agent": {
+    "risks": [
+      {
+        "risk_id": "R1",
+        "risk_description": "Treat the animal imagery as literal physical attackers at the crucifixion.",
+        "why_it_matters": "The psalm's bulls, dogs, and lions are poetic-spiritual images, while Roman crucifixion has its own physical facts.",
+        "avoidance_rule": "Separate physical crucifixion from metaphorical encirclement and spiritual assault.",
+        "evaluator_check": "Reject any claim that bulls gored Christ or dogs physically tore His flesh."
+      },
+      {
+        "risk_id": "R2",
+        "risk_description": "Stop the psalm at abandonment and miss the worldwide praise.",
+        "why_it_matters": "Psalm 22 moves from forsaken cry to congregation and nations.",
+        "avoidance_rule": "Carry the artifact through the turn to praise.",
+        "evaluator_check": "Verify brothers, congregation, or nations appear in the fulfillment."
+      }
+    ]
+  },
+  "historian_linguist": {
+    "notes": "Psalm 22 is an individual lament whose images of bodily distress and encircling enemies become central to the Passion narratives."
+  },
+  "commentary_agent": {
+    "notes": "The psalm turns at divine hearing; the sufferer's testimony expands from personal deliverance to congregational and global praise."
+  },
+  "art_director": {
+    "register": "sacred lament moving to doxology",
+    "pace": "claustrophobic pressure opening into proclamation",
+    "sentence_music": "short breath under pressure, widening near the end",
+    "image_density": "high but disciplined",
+    "emotional_color": "forsaken terror becoming hard-won praise",
+    "opening_mode": "threshold phrase",
+    "poem_tone": "dark lyric with final release",
+    "ending_resonance": "the circle of beasts becoming a congregation",
+    "avoid": [
+      "historical metaphor collision",
+      "sentimentalizing abandonment",
+      "ending before praise"
+    ]
+  },
+  "creative_divergence_agent": {
+    "threshold_phrase_candidates": [
+      "The beasts do not get the last word.",
+      "The forsaken cry becomes praise.",
+      "The circle opens into song.",
+      "Silence is not the final answer.",
+      "The torn cry gathers nations."
+    ],
+    "introduction_opening_candidates": [
+      "Psalm 22 begins with the most terrible question a believer can ask.",
+      "The first sound of Psalm 22 is not explanation but abandonment.",
+      "David writes from inside the circle."
+    ],
+    "governing_image_candidates": [
+      "the circle of beasts",
+      "the silent cup",
+      "the congregation born from the cry"
+    ],
+    "christology_framing_candidates": [
+      "Christ taking the exact forsaken cry onto His lips",
+      "the crucified King turning abandonment into worldwide praise"
+    ],
+    "poem_arc_candidates": [
+      "beasts to brothers",
+      "forsaken cry to nations"
+    ],
+    "title_candidates": [
+      "The Circle Opens",
+      "The Beasts Do Not Get the Last Word",
+      "The Forsaken Cry"
+    ],
+    "epigraph_candidates": [
+      "The beasts do not get the last word.",
+      "The circle opens into song.",
+      "Silence is not the final answer."
+    ]
+  },
+  "director": {
+    "chapter_burden": "The sufferer's absolute abandonment is carried by Christ into death and opened into congregational and worldwide praise.",
+    "opening_movement": "forsaken cry inside the circle of beasts",
+    "closing_movement": "the nations gather into praise",
+    "central_thought": "The forsaken cry inside the beasts becomes praise among the nations.",
+    "emotional_charge": "suffocating terror with a hard-won release",
+    "transcendent_force": "the LORD who hears the afflicted",
+    "selected_threshold_phrase": "The circle opens into song.",
+    "threshold_phrase_rationale": "The psalm's encircling beasts and enemies do not remain closed; the delivered sufferer declares God's name to brothers and nations.",
+    "governing_image": "the circle of beasts",
+    "image_lexicon": [
+      "forsaken",
+      "bulls",
+      "dogs",
+      "lion",
+      "dust",
+      "garments",
+      "brothers",
+      "nations"
+    ],
+    "image_head_terms": [
+      "beasts"
+    ],
+    "anchor_terms": [
+      "forsaken",
+      "Christ",
+      "cross",
+      "garments",
+      "brothers",
+      "nations"
+    ],
+    "chapter_specific_terms": [
+      "Bashan",
+      "dogs",
+      "pierced",
+      "cast lots",
+      "congregation"
+    ],
+    "christology_required_echoes": [
+      "forsaken",
+      "Christ",
+      "cross",
+      "garments",
+      "brothers",
+      "nations"
+    ],
+    "christology_pathway": "Christ speaks Psalm 22 from the cross, fulfills the pierced-hands and garment-lot details, bears true abandonment, and rises to declare God's name to His brothers and the nations.",
+    "application_target": "Bring apparent divine silence to Christ, distinguish feeling forsaken from being abandoned in Him, and let deliverance move toward public praise.",
+    "theological_terminus": "the forsaken cry becoming worldwide praise",
+    "negative_constraints": [
+      "do not say literal animals physically attacked Christ",
+      "do not make Christ's forsakenness merely emotional",
+      "do not omit the final turn to praise"
+    ],
+    "poem_plan": "open lyric moving from brass silence and beasts to crucifixion, broken teeth, and the congregation's song",
+    "semantic_proof_chain": [
+      "forsaken",
+      "beasts",
+      "pierced",
+      "garments",
+      "heard",
+      "brothers",
+      "nations",
+      "praise"
+    ]
+  },
+  "composer": {
+    "title": "The Circle Opens",
+    "epigraph": "The circle opens into song.",
+    "focus_bible_verses": "Psalm 22:1, 12-18, 22, 27 — My God, my God, why have You forsaken me? Why are You far from saving me, far from the words of my groaning? Many bulls surround me; strong ones of Bashan encircle me. They open their mouths against me like a tearing and roaring lion. I am poured out like water, and all my bones are pulled apart. My heart has become like wax; it melts inside me. My strength is dried like broken clay, and my tongue clings to my jaws; You lay me in the dust of death. Dogs surround me; a company of evildoers closes around me. They have pierced my hands and my feet. I can count all my bones. They stare and look upon me. They divide my garments among them, and over my clothing they cast lots. I will tell Your name to my brothers; in the middle of the congregation I will praise You. All the ends of the earth will remember and return to the LORD.",
+    "introduction": "The circle opens into song.\n\nThe psalm begins with the most terrible question a believer can ask: “My God, my God, why have You forsaken me?” David is not describing mild discouragement. He is writing from inside a tightening circle, where bulls, dogs, and a lion give shape to the pressure around him and the heavens seem to answer with silence.",
+    "reflection": "The psalm's images are deliberately bodily and frightening. Strength surrounds him. Mockery strips him. His bones feel exposed; his mouth is dry; his garments are divided. Yet the poem does not end inside the beasts. The afflicted one is heard, and the cry becomes testimony. Brothers hear the name of the LORD. The congregation joins praise. The ends of the earth remember and return.",
+    "christ_fulfillment": "Jesus Christ carried this psalm into literal history without confusing its images. He was physically nailed to Roman wood, pierced in His hands and feet, mocked by real crowds, and stripped while soldiers cast lots for His garments. He was not gored by literal bulls or torn by physical lions; spiritually, He stepped into the center of the roaring beasts and bore the true forsakenness of the cross. Then the Father raised Him, and the forsaken cry became praise among His brothers and the nations.",
+    "application": "When the beasts close in, name them honestly without letting them define reality. Sickness, betrayal, shame, or fear may form a circle, but in Christ that circle is not sealed. Bring the silent-heaven ache to the One who has already cried this psalm for you. Your feelings may say abandoned; the cross and resurrection answer held.",
+    "prayer": "Father, the silence of suffering frightens us. We confess how quickly the circling beasts become the only reality we can see. Thank You for Jesus Christ, who was nailed to the wood and entered the true forsakenness of the cross for us. Anchor our chests to the reality that Your Spirit keeps us in the love of the risen Son. When fear surrounds us, open the circle into praise. We ask this through Christ our faithful Savior. Amen.",
+    "next_in_sequence": "Psalm 23 - The Shepherd who leads through the valley."
+  },
+  "voice_keeper": {
+    "approved": true
+  },
+  "poet": {
+    "poem": "The sky is brass above the cry,\nno rain, no answer, no wing.\n\nBulls lower their weight at the edge of the dark.\nDogs pace the dust.\nA lion opens the air\nwith hunger for a name.\n\nBut wood is wood,\nand Rome is Rome,\nand nails are not a metaphor.\n\nThe King was fixed to the beam\nwhile the beasts of the psalm\nclosed in around the soul.\n\nThey took His garments.\nThey counted His bones.\nThey heard the first line\ntear through the dark.\n\nThen silence spent itself.\nThe grave lost its mouth.\nThe circle broke open\nand brothers began to sing.\n\nNow the nations come walking\nthrough the place where the beasts once stood.\nThe forsaken cry is not erased;\nit has become the door of praise."
+  },
+  "beauty_pass_agent": {
+    "lingering_lines": [
+      "The circle opens into song.",
+      "But wood is wood, and Rome is Rome, and nails are not a metaphor.",
+      "The forsaken cry is not erased; it has become the door of praise."
+    ],
+    "strongest_turn": "The poem distinguishes Roman wood from the psalm's beasts, then opens the circle into brotherhood and nations.",
+    "weakest_artistic_moment": "",
+    "mechanical_residue": [],
+    "beauty_score": 9,
+    "required_beauty_revisions": []
+  },
+  "evaluator": {
+    "textual_fidelity": 9,
+    "theological_accuracy": 9,
+    "christology_from_chapter_logic": 9,
+    "chapter_design_fidelity": 9,
+    "emotional_charged_phrase": 9,
+    "introduction_strength": 9,
+    "ancient_image_discipline": 9,
+    "register": 9,
+    "read_aloud_quality": 9,
+    "application_concreteness": 9,
+    "prayer": 9,
+    "poem_form": 9,
+    "poetic_vitality": 9,
+    "artful_design": 9,
+    "artifact_integrity": 9,
+    "fault_target": "none",
+    "notes": "Psalm 22 mock integration passes with historical metaphor collision avoided."
+  },
+  "contradiction_editor": {
+    "verdict": "Pass",
+    "major_conflicts": [],
+    "minor_conflicts": [],
+    "theological_risks": [],
+    "literary_risks": [],
+    "harness_risks": [],
+    "required_revisions": [],
+    "notes": "No conflicts."
+  },
+  "editorial_smoother": {
+    "prose": {}
+  }
+}
