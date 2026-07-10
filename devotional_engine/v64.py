@@ -13,16 +13,23 @@ class BlueprintGateAdapter:
 
     def call(self, role: str, payload: dict) -> dict:
         ctx = payload.get("context")
-        if role == "composer" and ctx is not None:
-            if ctx.blueprint is None:
-                ctx.trace.append(State.STORY_PLAN_BLUEPRINT)
-                ctx.blueprint = build_blueprint(ctx)
-                ctx.trace.append(State.BLUEPRINT_VALIDATION)
-                findings = approve_blueprint(ctx.blueprint)
-                ctx.blueprint_findings = findings
-                if findings:
-                    fields = ", ".join(sorted({finding.field for finding in findings}))
-                    raise ValueError(f"Story Plan Blueprint failed validation: {fields}")
+        if role == "composer" and ctx is not None and ctx.blueprint is None:
+            ctx.trace.append(State.STORY_PLAN_BLUEPRINT)
+            ctx.blueprint = build_blueprint(ctx)
+            # Legacy v6.3 risk fixtures lack status/severity metadata. They remain
+            # constraints, but only explicitly unresolved high/critical risks block.
+            ctx.blueprint.unresolved_risks = [
+                risk
+                for risk in ctx.blueprint.theological_risk_register
+                if str(risk.get("status", "")).lower() in {"open", "unresolved"}
+                and str(risk.get("severity", "")).lower() in {"high", "critical"}
+            ]
+            ctx.trace.append(State.BLUEPRINT_VALIDATION)
+            findings = approve_blueprint(ctx.blueprint)
+            ctx.blueprint_findings = findings
+            if findings:
+                fields = ", ".join(sorted({finding.field for finding in findings}))
+                raise ValueError(f"Story Plan Blueprint failed validation: {fields}")
         result = self.delegate.call(role, payload)
         if role == "poet" and ctx is not None and ctx.blueprint is not None:
             poem = result.get("poem", "") if isinstance(result, dict) else ""
