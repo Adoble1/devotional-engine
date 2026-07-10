@@ -14,6 +14,13 @@ class BlueprintGateAdapter:
     def call(self, role: str, payload: dict) -> dict:
         ctx = payload.get("context")
         if role == "composer" and ctx is not None and ctx.blueprint is None:
+            # The legacy runner records COMPOSE_PROSE immediately before calling the
+            # adapter. Reorder that trace entry so the recorded state sequence matches
+            # the actual v6.4 execution boundary: blueprint, validation, then script.
+            compose_already_recorded = bool(ctx.trace and ctx.trace[-1] is State.COMPOSE_PROSE)
+            if compose_already_recorded:
+                ctx.trace.pop()
+
             ctx.trace.append(State.STORY_PLAN_BLUEPRINT)
             ctx.blueprint = build_blueprint(ctx)
             # Legacy v6.3 risk fixtures lack status/severity metadata. They remain
@@ -30,6 +37,10 @@ class BlueprintGateAdapter:
             if findings:
                 fields = ", ".join(sorted({finding.field for finding in findings}))
                 raise ValueError(f"Story Plan Blueprint failed validation: {fields}")
+
+            if compose_already_recorded:
+                ctx.trace.append(State.COMPOSE_PROSE)
+
         result = self.delegate.call(role, payload)
         if role == "poet" and ctx is not None and ctx.blueprint is not None:
             poem = result.get("poem", "") if isinstance(result, dict) else ""
