@@ -23,7 +23,11 @@ def valid_blueprint():
         prayer_arc=["need", "petition", "praise"],
         poem_arc=["distress", "deliverance", "praise"],
         voice_constraints=["no sentimentality"],
-        structural_constraints=["blueprint_before_script"],
+        structural_constraints=[
+            "blueprint_before_script",
+            "emotion_earned_by_physical_fact",
+            "no_unwarranted_deprivation",
+        ],
     )
 
 
@@ -39,6 +43,22 @@ def test_blueprint_rejects_missing_section_purpose():
     findings = approve_blueprint(blueprint)
     assert blueprint.approved is False
     assert any(item.field == "section_purposes.application" for item in findings)
+
+
+def test_blueprint_rejects_missing_earned_emotion_constraint():
+    blueprint = valid_blueprint()
+    blueprint.structural_constraints.remove("emotion_earned_by_physical_fact")
+    findings = approve_blueprint(blueprint)
+    assert blueprint.approved is False
+    assert any(item.code == "B09" and "emotion_earned_by_physical_fact" in item.field for item in findings)
+
+
+def test_blueprint_rejects_unwarranted_deprivation_constraint_gap():
+    blueprint = valid_blueprint()
+    blueprint.structural_constraints.remove("no_unwarranted_deprivation")
+    findings = approve_blueprint(blueprint)
+    assert blueprint.approved is False
+    assert any(item.code == "B09" and "no_unwarranted_deprivation" in item.field for item in findings)
 
 
 def test_script_alignment_returns_structured_field_findings():
