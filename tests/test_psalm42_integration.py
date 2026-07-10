@@ -92,17 +92,17 @@ def _psalm42_outputs() -> dict:
         "christology_framing_candidates": ["Christ as giver of living water", "Christ securing access to the Father by the Spirit"],
         "poem_arc_candidates": ["dry channel to roaring deep to promised water", "thirst to submersion to patient praise"],
         "title_candidates": ["Water Beyond the Deer’s Reach", "Inside the Roar", "The Living Self Thirsts"],
-        "epigraph_candidates": ["The soul can remember God faithfully while still feeling His absence.", "Hope speaks from inside the roar.", "Memory can deepen thirst."],
+        "epigraph_candidates": ["Hope speaks from inside the roar.", "Memory can deepen thirst.", "Thirst can remember where water was."],
     }
     outputs["director"] = {
         "chapter_burden": "The psalm gives faithful language for longing, emotional heaviness, remembered worship, and hope that does not pretend relief has already arrived.",
         "opening_movement": "a thirsty deer reaches an empty channel",
         "closing_movement": "the living self waits for future praise without denying present heaviness",
-        "central_thought": "The living God remains trustworthy when the whole living self feels thirst, distance, and inward collapse.",
+        "central_thought": "A thirsty deer at an empty channel becomes the bowed-down living self who waits for future praise from the living God.",
         "emotional_charge": "thirst sharpened by memory and held within disciplined hope",
         "transcendent_force": "the living God whose covenant love and song remain present inside the roar",
-        "selected_threshold_phrase": "The soul can remember God faithfully while still feeling His absence.",
-        "threshold_phrase_rationale": "The line preserves both fidelity and phenomenological absence without equating feeling with divine reality.",
+        "selected_threshold_phrase": "Hope speaks from inside the roar.",
+        "threshold_phrase_rationale": "The line states the psalm's turn without denying the continuing sound of distress.",
         "governing_image": "a deer at an empty water channel",
         "image_lexicon": ["deer", "channel", "water", "thirst", "tears", "deep", "waterfalls", "waves", "song"],
         "image_head_terms": ["deer", "water"],
@@ -118,9 +118,9 @@ def _psalm42_outputs() -> dict:
     }
     outputs["composer"] = {
         "title": "Water Beyond the Deer’s Reach",
-        "epigraph": "The soul can remember God faithfully while still feeling His absence.",
+        "epigraph": "Hope speaks from inside the roar.",
         "focus_bible_verses": "Psalm 42:1-2, 5, 7-8, 11 — As a deer longs for channels of water, so my living self longs for You, God. Why are you bowed down, my living self? Wait for God, for I shall yet praise Him. Deep calls to deep beneath the sound of Your waterfalls. By day the LORD commands His covenant love, and at night His song is with me.",
-        "introduction": "A deer reaches an empty water channel and lowers its head. The stones are smooth, but no water moves between them. Dust clings to its mouth. Psalm 42 begins there, with a body that needs what it cannot reach.",
+        "introduction": "Hope speaks from inside the roar.\n\nA deer reaches an empty water channel and lowers its head. The stones are smooth, but no water moves between them. Dust clings to its mouth. Psalm 42 begins there, with a body that needs what it cannot reach.",
         "reflection": "The Hebrew word nephesh can name the living self, the whole breathing life of a person. The psalmist's memory, body, speech, appetite, and hope thirst together. He remembers the worshiping crowd, but memory sharpens the distance. Tears become food. Then water changes form. What was desired as relief arrives as waterfalls, breakers, and waves. The thirsty man feels submerged. The psalm does not diagnose him. It shows a faithful worshiper bent under loss and distance. He questions his bowed-down self without calling the pain imaginary. His feeling is truthful evidence of suffering, but it is not the whole account of God. By day covenant love remains. At night a song remains. Hope speaks from inside the roar.",
         "christ_fulfillment": "Psalm 42 is not directly cited as a prophecy of Christ. Its strongest New Testament correspondence is a thematic echo. Jesus calls the thirsty to come to Him and drink, and John explains this living water as the Spirit. Christ brings the worshiper to the Father. He does not promise that believers will never feel bowed down. He secures communion with God more firmly than our present ability to feel it.",
         "application": "Name what has bent your inner life without inventing certainty or assigning yourself a diagnosis. Read the psalm aloud. Remain among God's people when former intensity is absent. Tell one trusted person the truth. Eat, rest, and seek competent care when the body carries more than devotion alone can address. Waiting is not payment for relief. It is the posture of one who has nowhere truer to turn.",
