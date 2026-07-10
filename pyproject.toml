@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "devotional-engine"
-version = "6.3.0"
-description = "Deterministic Truth-Beauty devotional ghostwriting engine skeleton"
+version = "6.4.0"
+description = "Deterministic Truth-Beauty devotional ghostwriting engine with blueprint-first architecture"
 requires-python = ">=3.11"
 
 [project.optional-dependencies]
