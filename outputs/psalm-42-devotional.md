@@ -1,6 +1,6 @@
-# Water Beyond the Deer’s Reach
+# The Deer at the Stream
 ## Psalm 42
-> The soul can remember God faithfully while still feeling His absence.
+> Hope speaks while the soul is still thirsty.
 
 ### Anchor Texts
 
@@ -18,9 +18,9 @@
 
 ### Reflection
 
-A deer reaches an empty channel and lowers its head. The stones are smooth, but no water moves between them. Its sides rise quickly. Dust clings to its mouth.
+The deer comes panting toward the stream. Its flanks pull hard beneath the hide. It lowers its head and drinks fast, lifting only long enough to breathe before bending again to the water.
 
-Psalm 42 begins there.
+Psalm 42 begins with that kind of longing.
 
 The Hebrew word *nephesh*, often translated “soul,” means more than a hidden spiritual compartment. It can name the living self, the whole breathing life of a person. The psalmist does not bring God one religious portion of himself. His memory, body, speech, appetite, and hope all thirst together.
 
@@ -32,7 +32,7 @@ The psalm does not diagnose him. It gives no clinical label for his distress. It
 
 Then the psalmist speaks to himself. “Why are you bowed down?” He does not silence the pain or call it imaginary. He questions its final authority. His present feeling is truthful evidence of suffering, but it is not a complete account of God.
 
-Deep calls to deep under the sound of the cataracts. Water, first desired as relief, now arrives as overwhelming force. The image changes. The thirsty man feels submerged.
+Deep calls to deep under the sound of the cataracts. Water, first desired and sought, now becomes overwhelming force. The image changes. The thirsty man feels submerged.
 
 Still, one fact remains plain. He continues to address God.
 
@@ -64,7 +64,7 @@ Then wait for God. Waiting is the posture of one who has nowhere truer to turn.
 
 ### Prayer
 
-Living God, who hears us when our inner life is bowed down, keep us from mistaking Your silence for abandonment. Give us honest words for sorrow, patience without denial, courage to seek help, and hope without pretense. Bring our whole living selves to Christ, the giver of living water. Sustain us by Your Spirit until praise rises again, through Jesus Christ our Lord. Amen.
+Father, hear us when our inner life is bowed down. Keep us from mistaking Your silence for abandonment. Give us honest words for sorrow, patience without denial, courage to seek help, and hope without pretense. Bring our whole living selves to Christ, the giver of living water. Sustain us by Your Spirit until praise rises again, through Jesus Christ our Lord. Amen.
 
 ### Poetic Reflection
 
