@@ -45,7 +45,7 @@ def _psalm43_outputs() -> dict:
         "introduction_opening_candidates": ["The worshiper is still walking.", "Oppression has changed his pace, not his direction.", "He asks for light because the road is not clear."],
         "governing_image_candidates": ["light falling across a pilgrim road", "truth leading uphill", "the altar heard before it is reached"],
         "christology_framing_candidates": ["Christ as light and truth who brings us to the Father", "Christ refusing revenge while entrusting judgment to the Father"],
-        "poem_arc_candidates": ["dark road to holy mountain to altar song"],
+        "poem_arc_candidates": ["dark road to holy mountain to altar song", "courtroom plea to guided road to exceeding joy"],
         "title_candidates": ["Light for the Road", "Led Toward the Altar"],
         "epigraph_candidates": ["Truth must lead somewhere.", "The road bends toward the altar.", "Mourning still has a direction."],
     }
