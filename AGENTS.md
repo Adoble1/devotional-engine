@@ -13,6 +13,20 @@ Blueprint preserves coherence. Script performs beauty. Harness validates alignme
 - Script generation must not begin until the Story Plan Blueprint passes validation.
 - Repairs must target the failing component unless a finding explicitly requires global regeneration.
 - The engine remains provider-independent and fail-closed.
+- Emotion must be earned through bodily action, sensory fact, consequence, or pressure already warranted by the text.
+- Do not explain an emotion immediately after the physical scene has already made it legible.
+- Do not invent deprivation, danger, weather, pursuit, injury, or absence merely to intensify a biblical image.
+- Distinguish what the text establishes from what is only plausible. Plausible detail may never become asserted narrative fact.
+
+## Earned emotion rule
+
+The body must carry the feeling before the prose names it. Prefer panting, interrupted breathing, repeated drinking, clenched hands, lowered posture, tears used as food, or another warranted physical fact over an abstract emotional label.
+
+Bad: `The deer longs desperately for water.`
+
+Better: `The deer comes panting toward the stream. It lowers its head and drinks, lifting only long enough to breathe.`
+
+The second version earns thirst through action. It also preserves the text's claim without inventing a dry stream.
 
 ## Commands
 
