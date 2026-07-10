@@ -11,6 +11,9 @@ requires-python = ">=3.11"
 [project.optional-dependencies]
 test = ["pytest>=8"]
 
+[tool.setuptools.packages.find]
+include = ["devotional_engine*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
