@@ -19,6 +19,9 @@ class EngineContext:
     literary_style: dict = field(default_factory=dict)
     creative_divergence: dict = field(default_factory=dict)
     brief: dict = field(default_factory=dict)
+    blueprint: object | None = None
+    blueprint_findings: list = field(default_factory=list)
+    alignment_findings: list = field(default_factory=list)
     prose: dict = field(default_factory=dict)
     poem: str = ""
     artifact: str = ""
