@@ -36,7 +36,7 @@ Deep calls to deep under the sound of the cataracts. Water, first desired as rel
 
 Still, one fact remains plain. He continues to address God.
 
-At night, a song remains with him. It does not erase the roar. It gives him words inside it. Hope here is not emotional brightness. It is the disciplined refusal to treat the present hour as the last word.
+At night, a song remains with him. It does not erase the roar. It gives him words inside it. Hope here takes the form of disciplined refusal to treat the present hour as the last word.
 
 ### Christ the Fulfillment
 
@@ -60,11 +60,11 @@ Also remember what your pain cannot measure. God’s covenant faithfulness does 
 
 Give your thirst a concrete practice. Read the psalm aloud. Attend worship even when you cannot reproduce former intensity. Tell one trusted person the truth without polishing it. Eat, rest, and seek competent care when the body is carrying more than devotion alone can address.
 
-Then wait for God. Waiting is not payment for an answer. It is the posture of one who has nowhere truer to turn.
+Then wait for God. Waiting is the posture of one who has nowhere truer to turn.
 
 ### Prayer
 
-Living God, who hears us when our inner life is bowed down, keep us from mistaking Your silence for abandonment. Give us honest words for sorrow, patience without denial, and hope without pretense. Bring our whole living selves to Christ, the giver of living water. Sustain us by Your Spirit until praise rises again, through Jesus Christ our Lord. Amen.
+Living God, who hears us when our inner life is bowed down, keep us from mistaking Your silence for abandonment. Give us honest words for sorrow, patience without denial, courage to seek help, and hope without pretense. Bring our whole living selves to Christ, the giver of living water. Sustain us by Your Spirit until praise rises again, through Jesus Christ our Lord. Amen.
 
 ### Poetic Reflection
 
