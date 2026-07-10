@@ -13,6 +13,11 @@ REQUIRED_SECTION_PURPOSES = {
     "poem",
 }
 
+REQUIRED_STRUCTURAL_CONSTRAINTS = {
+    "emotion_earned_by_physical_fact",
+    "no_unwarranted_deprivation",
+}
+
 
 @dataclass(frozen=True)
 class BlueprintFinding:
@@ -103,7 +108,13 @@ def build_blueprint(ctx: Any) -> StoryPlanBlueprint:
         poem_arc=poem_arc,
         voice_constraints=[str(item) for item in _as_list(brief.get("negative_constraints", []))]
         + [str(item) for item in _as_list(ctx.art_direction.get("avoid", []))],
-        structural_constraints=["blueprint_before_script", "source_fields_immutable", "bounded_component_repairs"],
+        structural_constraints=[
+            "blueprint_before_script",
+            "source_fields_immutable",
+            "bounded_component_repairs",
+            "emotion_earned_by_physical_fact",
+            "no_unwarranted_deprivation",
+        ],
         unresolved_risks=unresolved,
         continuity_ledger_references=[str(entry.get("chapter_ref", "")) for entry in ctx.ledger.get("entries", [])],
     )
@@ -130,6 +141,15 @@ def validate_blueprint(blueprint: StoryPlanBlueprint) -> list[BlueprintFinding]:
     high_risks = [risk for risk in blueprint.unresolved_risks if str(risk.get("severity", "high")).lower() in {"high", "critical"}]
     if high_risks:
         findings.append(BlueprintFinding("B08", "unresolved_risks", "High-severity theological risks remain unresolved."))
+    missing_constraints = REQUIRED_STRUCTURAL_CONSTRAINTS - set(blueprint.structural_constraints)
+    for constraint in sorted(missing_constraints):
+        findings.append(
+            BlueprintFinding(
+                "B09",
+                f"structural_constraints.{constraint}",
+                "The blueprint must earn emotion through warranted physical fact and may not invent deprivation to intensify desire.",
+            )
+        )
     return findings
 
 
