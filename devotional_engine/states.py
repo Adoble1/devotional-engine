@@ -15,6 +15,8 @@ class State(Enum):
     DIRECTOR_BRIEF = auto()
     CHAPTER_ARC_GATE = auto()
     BRIEF_GATE = auto()
+    STORY_PLAN_BLUEPRINT = auto()
+    BLUEPRINT_VALIDATION = auto()
     COMPOSE_PROSE = auto()
     VOICE_REVIEW = auto()
     COMPOSE_POEM = auto()
