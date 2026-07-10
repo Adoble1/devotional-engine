@@ -45,13 +45,33 @@ class StoryPlanBlueprint:
     approved: bool = False
 
 
+def _as_list(value: Any) -> list[Any]:
+    if value in (None, ""):
+        return []
+    if isinstance(value, list):
+        return value
+    if isinstance(value, tuple):
+        return list(value)
+    return [value]
+
+
+def _poem_arc(poem_plan: Any) -> list[str]:
+    if isinstance(poem_plan, dict):
+        return [str(item) for item in _as_list(poem_plan.get("arc", poem_plan.get("movement", poem_plan)))]
+    return [str(item) for item in _as_list(poem_plan)]
+
+
 def build_blueprint(ctx: Any) -> StoryPlanBlueprint:
     brief = ctx.brief
     design = ctx.chapter_design_map
     poem_plan = brief.get("poem_plan", {})
-    poem_arc = poem_plan if isinstance(poem_plan, list) else poem_plan.get("arc", [])
+    poem_arc = _poem_arc(poem_plan)
     risks = list(ctx.theological_risk_register)
-    unresolved = [risk for risk in risks if str(risk.get("status", "open")).lower() not in {"resolved", "accepted"}]
+    unresolved = [
+        risk
+        for risk in risks
+        if "status" in risk and str(risk.get("status", "")).lower() not in {"resolved", "accepted"}
+    ]
     return StoryPlanBlueprint(
         chapter_ref=ctx.chapter_ref,
         source_state={
@@ -74,14 +94,15 @@ def build_blueprint(ctx: Any) -> StoryPlanBlueprint:
         emotional_arc=[design.get("emotional_movement", ""), brief.get("emotional_charge", ""), brief.get("closing_movement", "")],
         image_continuity={
             "governing_image": brief.get("governing_image", ""),
-            "image_lexicon": brief.get("image_lexicon", []),
-            "image_head_terms": brief.get("image_head_terms", []),
+            "image_lexicon": _as_list(brief.get("image_lexicon", [])),
+            "image_head_terms": _as_list(brief.get("image_head_terms", [])),
         },
         christology_pathway=[design.get("christward_fulfillment", ""), brief.get("christology_pathway", "")],
         application_target=brief.get("application_target", ""),
         prayer_arc=[brief.get("application_target", ""), brief.get("theological_terminus", "")],
-        poem_arc=list(poem_arc) if isinstance(poem_arc, list) else [str(poem_arc)],
-        voice_constraints=list(brief.get("negative_constraints", [])) + list(ctx.art_direction.get("avoid", [])),
+        poem_arc=poem_arc,
+        voice_constraints=[str(item) for item in _as_list(brief.get("negative_constraints", []))]
+        + [str(item) for item in _as_list(ctx.art_direction.get("avoid", []))],
         structural_constraints=["blueprint_before_script", "source_fields_immutable", "bounded_component_repairs"],
         unresolved_risks=unresolved,
         continuity_ledger_references=[str(entry.get("chapter_ref", "")) for entry in ctx.ledger.get("entries", [])],
