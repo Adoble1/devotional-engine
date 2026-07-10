@@ -47,7 +47,7 @@ def _psalm42_outputs() -> dict:
         "introduction_opening_candidates": ["The deer comes panting toward the stream.", "Its flanks pull hard beneath the hide.", "It drinks, lifts to breathe, and bends again."],
         "governing_image_candidates": ["a panting deer drinking at the stream", "tears eaten as food", "waterfalls becoming overwhelming waves"],
         "christology_framing_candidates": ["Christ as giver of living water", "Christ securing access to the Father by the Spirit"],
-        "poem_arc_candidates": ["panting thirst to roaring deep to patient praise"],
+        "poem_arc_candidates": ["panting thirst to roaring deep to patient praise", "stream to tears to night-song to future praise"],
         "title_candidates": ["The Deer at the Stream", "Inside the Roar"],
         "epigraph_candidates": ["Hope speaks from inside the roar.", "Memory can deepen thirst.", "The living self still waits."],
     }
