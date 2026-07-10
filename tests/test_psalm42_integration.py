@@ -43,13 +43,13 @@ def _psalm42_outputs() -> dict:
         "avoid": ["clinical diagnosis", "forced prophecy", "dry-stream invention", "instant relief"],
     }
     o["creative_divergence_agent"] = {
-        "threshold_phrase_candidates": ["Hope speaks from inside the roar.", "Memory can deepen thirst.", "The living self still waits."],
+        "threshold_phrase_candidates": ["Hope speaks from inside the roar.", "Memory can deepen thirst.", "The living self still waits.", "Thirst bends the whole body.", "Praise can remain in the future tense."],
         "introduction_opening_candidates": ["The deer comes panting toward the stream.", "Its flanks pull hard beneath the hide.", "It drinks, lifts to breathe, and bends again."],
         "governing_image_candidates": ["a panting deer drinking at the stream", "tears eaten as food", "waterfalls becoming overwhelming waves"],
         "christology_framing_candidates": ["Christ as giver of living water", "Christ securing access to the Father by the Spirit"],
         "poem_arc_candidates": ["panting thirst to roaring deep to patient praise"],
         "title_candidates": ["The Deer at the Stream", "Inside the Roar"],
-        "epigraph_candidates": ["Hope speaks from inside the roar.", "Memory can deepen thirst."],
+        "epigraph_candidates": ["Hope speaks from inside the roar.", "Memory can deepen thirst.", "The living self still waits."],
     }
     o["director"] = {
         "chapter_burden": "The psalm gives faithful language for longing, heaviness, remembered worship, and hope without pretending relief has arrived.",
