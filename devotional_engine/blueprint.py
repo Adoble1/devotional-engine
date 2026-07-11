@@ -16,6 +16,28 @@ REQUIRED_SECTION_PURPOSES = {
 REQUIRED_STRUCTURAL_CONSTRAINTS = {
     "emotion_earned_by_physical_fact",
     "no_unwarranted_deprivation",
+    "global_canonical_view",
+    "apostolic_priority",
+    "mystery_to_revelation",
+    "discovery_before_explanation",
+    "originality_check",
+}
+
+REQUIRED_CANONICAL_FIELDS = {
+    "historical_meaning",
+    "canonical_trajectory",
+    "apostolic_interpretation",
+    "christological_fulfillment",
+    "governing_mystery",
+    "governing_revelation",
+}
+
+REQUIRED_ORIGINALITY_RULES = {
+    "protect_scripture_and_standard_doctrine",
+    "reject_distinctive_unattributed_overlap",
+    "reject_living_author_imitation",
+    "flag_generic_ai_cadence",
+    "prefer_discovery_before_explanation",
 }
 
 
@@ -45,6 +67,8 @@ class StoryPlanBlueprint:
     poem_arc: list[str]
     voice_constraints: list[str]
     structural_constraints: list[str]
+    canonical_view: dict[str, Any] = field(default_factory=dict)
+    originality_rules: list[str] = field(default_factory=list)
     unresolved_risks: list[dict[str, Any]] = field(default_factory=list)
     continuity_ledger_references: list[str] = field(default_factory=list)
     approved: bool = False
@@ -77,6 +101,14 @@ def build_blueprint(ctx: Any) -> StoryPlanBlueprint:
         for risk in risks
         if "status" in risk and str(risk.get("status", "")).lower() not in {"resolved", "accepted"}
     ]
+    canonical_view = {
+        "historical_meaning": brief.get("historical_meaning", design.get("chapter_design_summary", "")),
+        "canonical_trajectory": brief.get("canonical_trajectory", ""),
+        "apostolic_interpretation": brief.get("apostolic_interpretation", ""),
+        "christological_fulfillment": brief.get("christology_pathway", design.get("christward_fulfillment", "")),
+        "governing_mystery": brief.get("governing_mystery", ""),
+        "governing_revelation": brief.get("governing_revelation", ""),
+    }
     return StoryPlanBlueprint(
         chapter_ref=ctx.chapter_ref,
         source_state={
@@ -114,7 +146,14 @@ def build_blueprint(ctx: Any) -> StoryPlanBlueprint:
             "bounded_component_repairs",
             "emotion_earned_by_physical_fact",
             "no_unwarranted_deprivation",
+            "global_canonical_view",
+            "apostolic_priority",
+            "mystery_to_revelation",
+            "discovery_before_explanation",
+            "originality_check",
         ],
+        canonical_view=canonical_view,
+        originality_rules=sorted(REQUIRED_ORIGINALITY_RULES),
         unresolved_risks=unresolved,
         continuity_ledger_references=[str(entry.get("chapter_ref", "")) for entry in ctx.ledger.get("entries", [])],
     )
@@ -143,13 +182,13 @@ def validate_blueprint(blueprint: StoryPlanBlueprint) -> list[BlueprintFinding]:
         findings.append(BlueprintFinding("B08", "unresolved_risks", "High-severity theological risks remain unresolved."))
     missing_constraints = REQUIRED_STRUCTURAL_CONSTRAINTS - set(blueprint.structural_constraints)
     for constraint in sorted(missing_constraints):
-        findings.append(
-            BlueprintFinding(
-                "B09",
-                f"structural_constraints.{constraint}",
-                "The blueprint must earn emotion through warranted physical fact and may not invent deprivation to intensify desire.",
-            )
-        )
+        findings.append(BlueprintFinding("B09", f"structural_constraints.{constraint}", "A required truth, canonical, emotional, or originality constraint is missing."))
+    for field_name in sorted(REQUIRED_CANONICAL_FIELDS):
+        if not str(blueprint.canonical_view.get(field_name, "")).strip():
+            findings.append(BlueprintFinding("B10", f"canonical_view.{field_name}", "Global canonical view is incomplete."))
+    missing_originality = REQUIRED_ORIGINALITY_RULES - set(blueprint.originality_rules)
+    for rule in sorted(missing_originality):
+        findings.append(BlueprintFinding("B11", f"originality_rules.{rule}", "Originality and plagiarism safeguards are incomplete."))
     return findings
 
 
