@@ -3,24 +3,40 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from .profiles import CORE_LAW_IDS, compile_rule_ids, get_profile, normalize_mode
+
 
 REQUIRED_SECTION_PURPOSES = {
-    "introduction", "reflection", "christ_fulfillment", "application", "prayer", "poem",
+    "introduction",
+    "reflection",
+    "christ_fulfillment",
+    "application",
+    "prayer",
+    "poem",
 }
 
+# Operational constraints control the engine. Truth and craft rules are compiled
+# through profiles instead of accumulating in this list indefinitely.
 REQUIRED_STRUCTURAL_CONSTRAINTS = {
-    "emotion_earned_by_physical_fact", "no_unwarranted_deprivation", "global_canonical_view",
-    "apostolic_priority", "mystery_to_revelation", "discovery_before_explanation", "originality_check",
+    "blueprint_before_script",
+    "source_fields_immutable",
+    "bounded_component_repairs",
 }
 
 REQUIRED_CANONICAL_FIELDS = {
-    "historical_meaning", "canonical_trajectory", "apostolic_interpretation",
-    "christological_fulfillment", "governing_mystery", "governing_revelation",
+    "historical_meaning",
+    "canonical_trajectory",
+    "apostolic_interpretation",
+    "christological_fulfillment",
+    "governing_mystery",
+    "governing_revelation",
 }
 
 REQUIRED_ORIGINALITY_RULES = {
-    "protect_scripture_and_standard_doctrine", "reject_distinctive_unattributed_overlap",
-    "reject_living_author_imitation", "flag_generic_ai_cadence", "prefer_discovery_before_explanation",
+    "protect_scripture_and_standard_doctrine",
+    "reject_distinctive_unattributed_overlap",
+    "reject_living_author_imitation",
+    "flag_generic_ai_cadence",
 }
 
 
@@ -50,6 +66,11 @@ class StoryPlanBlueprint:
     poem_arc: list[str]
     voice_constraints: list[str]
     structural_constraints: list[str]
+    mode: str = "devotional"
+    governing_laws: list[str] = field(default_factory=lambda: list(CORE_LAW_IDS))
+    profile_rules: list[str] = field(default_factory=lambda: list(compile_rule_ids("devotional")))
+    planning_maps: dict[str, Any] = field(default_factory=dict)
+    local_constraints: list[str] = field(default_factory=list)
     canonical_view: dict[str, Any] = field(default_factory=dict)
     originality_rules: list[str] = field(default_factory=list)
     unresolved_risks: list[dict[str, Any]] = field(default_factory=list)
@@ -73,81 +94,246 @@ def _poem_arc(poem_plan: Any) -> list[str]:
     return [str(item) for item in _as_list(poem_plan)]
 
 
+def _devotional_planning_maps(
+    ctx: Any,
+    central_claim: str,
+    christology: str,
+    canonical_view: dict[str, Any],
+) -> dict[str, Any]:
+    brief = ctx.brief
+    design = ctx.chapter_design_map
+    truth_map = {
+        "text_establishes": [
+            design.get("chapter_start", ""),
+            design.get("divine_action", ""),
+            central_claim,
+        ],
+        "text_does_not_establish": _as_list(brief.get("negative_constraints", [])),
+        "physical_and_literary_boundaries": {
+            "physical_vocabulary": _as_list(design.get("physical_vocabulary", [])),
+            "ordinary_physics_unless_revelation": True,
+            "preserve_literary_mode": True,
+        },
+    }
+    revelation_map = {
+        "entry": brief.get("opening_movement", design.get("chapter_start", "")),
+        "governing_question": brief.get(
+            "governing_question",
+            brief.get("governing_mystery", canonical_view.get("governing_mystery", central_claim)),
+        ),
+        "sequence": _as_list(brief.get("semantic_proof_chain", [])),
+        "hinge": brief.get("transcendent_force", design.get("divine_action", "")),
+        "final_recognition": brief.get("closing_movement", design.get("chapter_end", "")),
+    }
+    reader_transformation_map = {
+        "initial_assumption": brief.get("reader_initial_assumption", design.get("reader_felt_experience", "")),
+        "misbelief_displaced": brief.get("misbelief_displaced", central_claim),
+        "new_perception": brief.get("reader_new_perception", christology),
+        "faithful_response": brief.get("application_target", ""),
+    }
+    art_direction = {
+        "register": ctx.art_direction.get("register", ""),
+        "pace": ctx.art_direction.get("pace", ""),
+        "sentence_music": ctx.art_direction.get("sentence_music", ""),
+        "image_density": ctx.art_direction.get("image_density", ""),
+        "opening_mode": ctx.art_direction.get("opening_mode", ""),
+        "ending_resonance": ctx.art_direction.get("ending_resonance", ""),
+        "avoid": _as_list(ctx.art_direction.get("avoid", [])),
+    }
+    return {
+        "truth_map": truth_map,
+        "revelation_map": revelation_map,
+        "reader_transformation_map": reader_transformation_map,
+        "art_direction": art_direction,
+        "canonical_map": canonical_view,
+        "theological_risk_map": list(ctx.theological_risk_register),
+    }
+
+
 def build_blueprint(ctx: Any) -> StoryPlanBlueprint:
     brief = ctx.brief
     design = ctx.chapter_design_map
+    mode = normalize_mode(getattr(ctx, "mode", "devotional"))
+    if mode.value != "devotional":
+        raise ValueError(
+            "The legacy StoryPlanBlueprint builder is devotional-specific. "
+            "Use build_planning_packet/run_profiled_engine for fiction or nonfiction."
+        )
+
     poem_plan = brief.get("poem_plan", {})
     poem_arc = _poem_arc(poem_plan)
     risks = list(ctx.theological_risk_register)
-    unresolved = [risk for risk in risks if "status" in risk and str(risk.get("status", "")).lower() not in {"resolved", "accepted"}]
+    unresolved = [
+        risk
+        for risk in risks
+        if "status" in risk and str(risk.get("status", "")).lower() not in {"resolved", "accepted"}
+    ]
     christology = brief.get("christology_pathway", design.get("christward_fulfillment", ""))
     central_claim = design.get("central_theological_claim", brief.get("central_thought", ""))
     canonical_view = {
         "historical_meaning": brief.get("historical_meaning", design.get("chapter_design_summary", central_claim)),
         "canonical_trajectory": brief.get("canonical_trajectory", christology),
-        "apostolic_interpretation": brief.get("apostolic_interpretation", "No explicit apostolic quotation identified; rank canonical links by warrant."),
+        "apostolic_interpretation": brief.get(
+            "apostolic_interpretation",
+            "No explicit apostolic quotation identified; rank canonical links by warrant.",
+        ),
         "christological_fulfillment": christology,
         "governing_mystery": brief.get("governing_mystery", central_claim),
         "governing_revelation": brief.get("governing_revelation", christology),
     }
+    local_constraints = [
+        str(item)
+        for item in _as_list(brief.get("negative_constraints", []))
+        if str(item).strip()
+    ] + [
+        str(item)
+        for item in _as_list(ctx.art_direction.get("avoid", []))
+        if str(item).strip()
+    ]
     return StoryPlanBlueprint(
         chapter_ref=ctx.chapter_ref,
-        source_state={"source_text": ctx.source_text, "working_rendering": ctx.working_rendering, "source_layer": ctx.source_layer, "rendering_layer": ctx.rendering_layer},
+        source_state={
+            "source_text": ctx.source_text,
+            "working_rendering": ctx.working_rendering,
+            "source_layer": ctx.source_layer,
+            "rendering_layer": ctx.rendering_layer,
+        },
         chapter_design_map=design,
         section_purposes={
-            "introduction": brief.get("opening_movement", ""), "reflection": brief.get("central_thought", ""),
-            "christ_fulfillment": brief.get("christology_pathway", ""), "application": brief.get("application_target", ""),
-            "prayer": brief.get("theological_terminus", ""), "poem": str(poem_plan),
+            "introduction": brief.get("opening_movement", ""),
+            "reflection": brief.get("central_thought", ""),
+            "christ_fulfillment": brief.get("christology_pathway", ""),
+            "application": brief.get("application_target", ""),
+            "prayer": brief.get("theological_terminus", ""),
+            "poem": str(poem_plan),
         },
         theological_logic=[central_claim, brief.get("theological_terminus", "")],
         theological_risk_register=risks,
-        emotional_arc=[design.get("emotional_movement", ""), brief.get("emotional_charge", ""), brief.get("closing_movement", "")],
-        image_continuity={"governing_image": brief.get("governing_image", ""), "image_lexicon": _as_list(brief.get("image_lexicon", [])), "image_head_terms": _as_list(brief.get("image_head_terms", []))},
+        emotional_arc=[
+            design.get("emotional_movement", ""),
+            brief.get("emotional_charge", ""),
+            brief.get("closing_movement", ""),
+        ],
+        image_continuity={
+            "governing_image": brief.get("governing_image", ""),
+            "image_lexicon": _as_list(brief.get("image_lexicon", [])),
+            "image_head_terms": _as_list(brief.get("image_head_terms", [])),
+        },
         christology_pathway=[design.get("christward_fulfillment", ""), brief.get("christology_pathway", "")],
         application_target=brief.get("application_target", ""),
         prayer_arc=[brief.get("application_target", ""), brief.get("theological_terminus", "")],
         poem_arc=poem_arc,
-        voice_constraints=[str(item) for item in _as_list(brief.get("negative_constraints", []))] + [str(item) for item in _as_list(ctx.art_direction.get("avoid", []))],
-        structural_constraints=[
-            "blueprint_before_script", "source_fields_immutable", "bounded_component_repairs",
-            "emotion_earned_by_physical_fact", "no_unwarranted_deprivation", "global_canonical_view",
-            "apostolic_priority", "mystery_to_revelation", "discovery_before_explanation", "originality_check",
-        ],
+        voice_constraints=local_constraints,
+        structural_constraints=sorted(REQUIRED_STRUCTURAL_CONSTRAINTS),
+        mode=mode.value,
+        governing_laws=list(CORE_LAW_IDS),
+        profile_rules=list(compile_rule_ids(mode)),
+        planning_maps=_devotional_planning_maps(ctx, central_claim, christology, canonical_view),
+        local_constraints=local_constraints,
         canonical_view=canonical_view,
         originality_rules=sorted(REQUIRED_ORIGINALITY_RULES),
         unresolved_risks=unresolved,
-        continuity_ledger_references=[str(entry.get("chapter_ref", "")) for entry in ctx.ledger.get("entries", [])],
+        continuity_ledger_references=[
+            str(entry.get("chapter_ref", "")) for entry in ctx.ledger.get("entries", [])
+        ],
+    )
+
+
+def _nonempty_mapping(value: Any) -> bool:
+    return isinstance(value, dict) and bool(value) and any(
+        item not in (None, "", [], {}) for item in value.values()
     )
 
 
 def validate_blueprint(blueprint: StoryPlanBlueprint) -> list[BlueprintFinding]:
     findings: list[BlueprintFinding] = []
-    missing_sections = REQUIRED_SECTION_PURPOSES - set(blueprint.section_purposes)
-    empty_sections = {key for key, value in blueprint.section_purposes.items() if not str(value).strip()}
-    for key in sorted(missing_sections | empty_sections):
-        findings.append(BlueprintFinding("B01", f"section_purposes.{key}", "Section purpose is missing."))
-    if not all(str(item).strip() for item in blueprint.theological_logic):
-        findings.append(BlueprintFinding("B02", "theological_logic", "Theological logic contains an unsupported or empty claim."))
-    if not all(str(item).strip() for item in blueprint.christology_pathway):
-        findings.append(BlueprintFinding("B03", "christology_pathway", "Christological pathway is discontinuous."))
-    if len([item for item in blueprint.emotional_arc if str(item).strip()]) < 2:
-        findings.append(BlueprintFinding("B04", "emotional_arc", "Emotional arc lacks a meaningful movement."))
-    if not str(blueprint.image_continuity.get("governing_image", "")).strip():
-        findings.append(BlueprintFinding("B05", "image_continuity.governing_image", "Governing image is missing."))
-    if not blueprint.application_target.strip():
-        findings.append(BlueprintFinding("B06", "application_target", "Application does not arise from the chapter plan."))
-    if not any(str(item).strip() for item in blueprint.poem_arc):
-        findings.append(BlueprintFinding("B07", "poem_arc", "Poem arc is disconnected from the prose plan."))
-    high_risks = [risk for risk in blueprint.unresolved_risks if str(risk.get("severity", "high")).lower() in {"high", "critical"}]
+    mode = normalize_mode(blueprint.mode)
+    profile = get_profile(mode)
+
+    if mode.value == "devotional":
+        missing_sections = REQUIRED_SECTION_PURPOSES - set(blueprint.section_purposes)
+        empty_sections = {
+            key for key, value in blueprint.section_purposes.items() if not str(value).strip()
+        }
+        for key in sorted(missing_sections | empty_sections):
+            findings.append(BlueprintFinding("B01", f"section_purposes.{key}", "Section purpose is missing."))
+        if not all(str(item).strip() for item in blueprint.theological_logic):
+            findings.append(
+                BlueprintFinding("B02", "theological_logic", "Theological logic contains an unsupported or empty claim.")
+            )
+        if not all(str(item).strip() for item in blueprint.christology_pathway):
+            findings.append(
+                BlueprintFinding("B03", "christology_pathway", "Christological pathway is discontinuous.")
+            )
+        if len([item for item in blueprint.emotional_arc if str(item).strip()]) < 2:
+            findings.append(BlueprintFinding("B04", "emotional_arc", "Emotional arc lacks a meaningful movement."))
+        if not str(blueprint.image_continuity.get("governing_image", "")).strip():
+            findings.append(
+                BlueprintFinding("B05", "image_continuity.governing_image", "Governing image is missing.")
+            )
+        if not blueprint.application_target.strip():
+            findings.append(
+                BlueprintFinding("B06", "application_target", "Application does not arise from the chapter plan.")
+            )
+        if not any(str(item).strip() for item in blueprint.poem_arc):
+            findings.append(
+                BlueprintFinding("B07", "poem_arc", "Poem arc is disconnected from the prose plan.")
+            )
+
+    high_risks = [
+        risk
+        for risk in blueprint.unresolved_risks
+        if str(risk.get("severity", "high")).lower() in {"high", "critical"}
+    ]
     if high_risks:
-        findings.append(BlueprintFinding("B08", "unresolved_risks", "High-severity theological risks remain unresolved."))
+        findings.append(
+            BlueprintFinding("B08", "unresolved_risks", "High-severity risks remain unresolved.")
+        )
+
     for constraint in sorted(REQUIRED_STRUCTURAL_CONSTRAINTS - set(blueprint.structural_constraints)):
-        findings.append(BlueprintFinding("B09", f"structural_constraints.{constraint}", "A required truth, canonical, emotional, or originality constraint is missing."))
-    for field_name in sorted(REQUIRED_CANONICAL_FIELDS):
-        if not str(blueprint.canonical_view.get(field_name, "")).strip():
-            findings.append(BlueprintFinding("B10", f"canonical_view.{field_name}", "Global canonical view is incomplete."))
-    for rule in sorted(REQUIRED_ORIGINALITY_RULES - set(blueprint.originality_rules)):
-        findings.append(BlueprintFinding("B11", f"originality_rules.{rule}", "Originality and plagiarism safeguards are incomplete."))
+        findings.append(
+            BlueprintFinding(
+                "B09",
+                f"structural_constraints.{constraint}",
+                "A required operational constraint is missing.",
+            )
+        )
+
+    missing_laws = set(CORE_LAW_IDS) - set(blueprint.governing_laws)
+    for law in sorted(missing_laws):
+        findings.append(
+            BlueprintFinding("B10", f"governing_laws.{law}", "A governing law is missing.")
+        )
+
+    required_profile_rules = set(profile.profile_rule_ids)
+    missing_profile_rules = required_profile_rules - set(blueprint.profile_rules)
+    for rule in sorted(missing_profile_rules):
+        findings.append(
+            BlueprintFinding("B11", f"profile_rules.{rule}", "A profile-specific rule is missing.")
+        )
+
+    for map_name in profile.required_planning_maps:
+        if not _nonempty_mapping(blueprint.planning_maps.get(map_name)) and not isinstance(
+            blueprint.planning_maps.get(map_name), list
+        ):
+            findings.append(
+                BlueprintFinding("B12", f"planning_maps.{map_name}", "A required planning map is missing.")
+            )
+        elif isinstance(blueprint.planning_maps.get(map_name), list) and not blueprint.planning_maps.get(map_name):
+            findings.append(
+                BlueprintFinding("B12", f"planning_maps.{map_name}", "A required planning map is empty.")
+            )
+
+    if mode.value == "devotional":
+        for field_name in sorted(REQUIRED_CANONICAL_FIELDS):
+            if not str(blueprint.canonical_view.get(field_name, "")).strip():
+                findings.append(
+                    BlueprintFinding("B13", f"canonical_view.{field_name}", "Global canonical view is incomplete.")
+                )
+        for rule in sorted(REQUIRED_ORIGINALITY_RULES - set(blueprint.originality_rules)):
+            findings.append(
+                BlueprintFinding("B14", f"originality_rules.{rule}", "Originality safeguards are incomplete.")
+            )
     return findings
 
 
@@ -157,20 +343,51 @@ def approve_blueprint(blueprint: StoryPlanBlueprint) -> list[BlueprintFinding]:
     return findings
 
 
-def validate_script_alignment(blueprint: StoryPlanBlueprint, prose: dict[str, Any], poem: str) -> list[BlueprintFinding]:
+def validate_script_alignment(
+    blueprint: StoryPlanBlueprint,
+    prose: dict[str, Any],
+    poem: str,
+) -> list[BlueprintFinding]:
     findings: list[BlueprintFinding] = []
     if not blueprint.approved:
-        findings.append(BlueprintFinding("A00", "approved", "Script cannot be evaluated against an unapproved blueprint."))
+        findings.append(
+            BlueprintFinding("A00", "approved", "Script cannot be evaluated against an unapproved blueprint.")
+        )
         return findings
     if blueprint.application_target.lower() not in str(prose.get("application", "")).lower():
-        findings.append(BlueprintFinding("A01", "application_target", "Application diverges from the approved target.", repair_target="application"))
+        findings.append(
+            BlueprintFinding(
+                "A01",
+                "application_target",
+                "Application diverges from the approved target.",
+                repair_target="application",
+            )
+        )
     governing_image = str(blueprint.image_continuity.get("governing_image", "")).lower()
     combined = " ".join(str(value) for value in prose.values()).lower() + " " + poem.lower()
     if governing_image and governing_image not in combined:
-        findings.append(BlueprintFinding("A02", "image_continuity.governing_image", "The governing image is absent from the script.", repair_target="prose_and_poem"))
+        findings.append(
+            BlueprintFinding(
+                "A02",
+                "image_continuity.governing_image",
+                "The governing image is absent from the script.",
+                repair_target="prose_and_poem",
+            )
+        )
     christ_terms = [term.lower() for term in blueprint.christology_pathway if term]
-    if christ_terms and not any(term in str(prose.get("christ_fulfillment", "")).lower() for term in christ_terms):
-        findings.append(BlueprintFinding("A03", "christology_pathway", "Christological fulfillment diverges from the blueprint.", repair_target="christ_fulfillment"))
+    if christ_terms and not any(
+        term in str(prose.get("christ_fulfillment", "")).lower() for term in christ_terms
+    ):
+        findings.append(
+            BlueprintFinding(
+                "A03",
+                "christology_pathway",
+                "Christological fulfillment diverges from the blueprint.",
+                repair_target="christ_fulfillment",
+            )
+        )
     if not poem.strip():
-        findings.append(BlueprintFinding("A04", "poem_arc", "Poem is missing.", repair_target="poem"))
+        findings.append(
+            BlueprintFinding("A04", "poem_arc", "Poem is missing.", repair_target="poem")
+        )
     return findings
