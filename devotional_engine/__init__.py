@@ -26,8 +26,18 @@ from .config import EngineConfig, ROLE_CONFIG
 from .classical_hymnody import CLASSICAL_HYMNODY_PROFILE, build_hymnody_brief
 from .poetic_music import POETIC_MUSIC_PROFILE, analyze_euphony, build_poetic_music_brief, has_midline_caesura
 from .engine import apply_american_literary_style, apply_editorial_smoothing, route_after_failure
-from .v64 import run_engine
+from .v65 import run_engine
 from .models import EngineContext
+from .profiles import (
+    CORE_LAWS,
+    PROFILE_REGISTRY,
+    GoverningLaw,
+    WritingMode,
+    WritingProfile,
+    compile_rule_ids,
+    get_profile,
+    normalize_mode,
+)
 from .renderer import render_flow_artifact
 from .stage_cycle import (
     ReflectionReport,
@@ -43,6 +53,17 @@ from .stage_cycle import (
     verification_stage,
 )
 from .states import State
+from .writing_core import (
+    PlanFinding,
+    PlanningPacket,
+    ProfiledRunResult,
+    WritingRequest,
+    approve_planning_packet,
+    build_planning_packet,
+    run_profiled_engine,
+    validate_planning_packet,
+    validate_profiled_draft,
+)
 
 __all__ = [
     "AgentAdapter", "AuditRecord", "BlueprintFinding", "EngineConfig", "EngineContext",
@@ -59,4 +80,8 @@ __all__ = [
     "run_engine", "run_stage_cycle", "tool_use_stage", "validate_blueprint",
     "validate_external_adapter_config", "validate_script_alignment", "validate_style_brief",
     "verification_stage", "write_audit_record",
+    "CORE_LAWS", "PROFILE_REGISTRY", "GoverningLaw", "WritingMode", "WritingProfile",
+    "compile_rule_ids", "get_profile", "normalize_mode", "PlanFinding", "PlanningPacket",
+    "ProfiledRunResult", "WritingRequest", "approve_planning_packet", "build_planning_packet",
+    "run_profiled_engine", "validate_planning_packet", "validate_profiled_draft",
 ]
