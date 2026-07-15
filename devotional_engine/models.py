@@ -39,3 +39,5 @@ class EngineContext:
     beauty_loops: int = 0
     contradiction_loops: int = 0
     error: str = ""
+    mode: str = "devotional"
+    planning_packet: object | None = None
