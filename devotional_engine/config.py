@@ -10,6 +10,11 @@ ROLE_CONFIG = {
     "poet": {"temperature": 1.0}, "beauty_pass_agent": {"temperature": 0.35},
     "evaluator": {"temperature": 0.1}, "contradiction_editor": {"temperature": 0.1},
     "editorial_smoother": {"temperature": 0.18},
+    # Lean shared-core roles for fiction and nonfiction.
+    "profile_planner": {"temperature": 0.35},
+    "profile_composer": {"temperature": 0.8},
+    "profile_evaluator": {"temperature": 0.1},
+    "profile_reviser": {"temperature": 0.45},
 }
 MAX_GATE_REVISIONS = 2
 MAX_CHECKER_LOOPS = 3
@@ -48,6 +53,8 @@ class EngineConfig:
     qualia_min_grounded_terms: int = 2
     qualia_max_emotion_to_grounded_ratio: int = 3
     focus_verses_min_words: int = 35
+    profiled_max_revisions: int = 1
+    mode: str = "devotional"
     max_state_transitions: int = MAX_STATE_TRANSITIONS
     max_gate_revisions: int = MAX_GATE_REVISIONS
     max_checker_loops: int = MAX_CHECKER_LOOPS
