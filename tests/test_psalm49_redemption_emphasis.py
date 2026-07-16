@@ -13,28 +13,8 @@ def _redemption_centered_outputs() -> dict:
             "divine_action": "God ransoms from Sheol, receives His servant, provides the ransom in Christ, and raises the whole person.",
             "central_theological_claim": "Human beings cannot redeem life from death, but God receives His own and fulfills that hope through Christ's ransom and resurrection.",
             "christward_fulfillment": "Christ gives His life as the God-provided ransom, rises bodily, receives His people through death, and will raise their bodies.",
-            "reader_felt_experience": "Death appears as a shepherd gathering every rank, until God's promise to receive His servant interrupts the procession.",
+            "reader_felt_experience": "Death appears as a shepherd gathering every rank until God's promise to receive His servant interrupts the procession.",
             "chapter_design_summary": "The wisdom poem moves from death's universal shepherding to God's personal act of ransoming and receiving, then toward resurrection in Christ.",
-        }
-    )
-
-    outputs["art_director"].update(
-        {
-            "register": "sober wisdom opening in death's procession and widening into resurrection hope",
-            "pace": "brief material contrast, sustained Sheol imagery, decisive turn at divine receiving, expansive resurrection close",
-            "sentence_music": "grave declarative clauses opening into longer sentences of promise",
-            "image_density": "death shepherding, Sheol receiving, God receiving, Christ rising, dust awakened",
-            "emotional_color": "mortality faced without evasion and hope stated without sentimentality",
-            "opening_mode": "begin with death as shepherd rather than wealth as spectacle",
-            "poem_tone": "measured passage from death's flock to the risen Shepherd",
-            "ending_resonance": "redemption reaches the body and even the dust",
-            "avoid": [
-                "letting material wealth dominate the reflection",
-                "reducing redemption to financial metaphor",
-                "reducing salvation to survival of an immaterial soul",
-                "invented funeral scene",
-                "direct-quotation overclaim",
-            ],
         }
     )
 
@@ -83,7 +63,7 @@ def _redemption_centered_outputs() -> dict:
             "emotional_charge": "the severe quiet of a universal procession interrupted by divine possession and promise",
             "transcendent_force": "the God whose receiving mercy reaches farther than Sheol and culminates in resurrection",
             "selected_threshold_phrase": "Death becomes a shepherd.",
-            "threshold_phrase_rationale": "The phrase comes directly from verse 14 and places the true subject, death's dominion, before the failed instrument of wealth.",
+            "threshold_phrase_rationale": "The phrase comes directly from verse 14 and places death's dominion before the failed instrument of wealth.",
             "governing_image": "death becomes a shepherd",
             "image_lexicon": ["shepherd", "sheep", "staff", "Sheol", "ransom", "receive", "grave", "dust", "rise"],
             "image_head_terms": ["shepherd", "receive"],
@@ -141,9 +121,10 @@ def _redemption_centered_outputs() -> dict:
             "moves toward Christ. Jesus gives His life as a ransom for many, and Peter says believers were "
             "redeemed not with silver or gold but with the precious blood of Christ. God provides what no "
             "human fortune can supply. Yet Christian hope is not merely the survival of an immaterial soul. "
-            "Christ rises bodily. Those united to Him remain His through death, and their bodies await "
-            "resurrection. The God who receives the person will redeem the whole person. At Christ's appearing, "
-            "what was sown perishable will be raised imperishable, and even the dust will answer the risen Lord."
+            "Christ rises bodily. The body is not abandoned: those united to Him remain His through death, "
+            "and their bodies await resurrection. The God who receives the person will redeem the whole person. "
+            "At Christ's appearing, what was sown perishable will be raised imperishable, and even the dust will "
+            "answer the risen Lord."
         ),
         "application": (
             "Entrust the whole person to Christ. Earthly provisions may serve the living, but they cannot carry "
@@ -206,6 +187,7 @@ def test_psalm49_centers_redemption_from_death() -> None:
     assert "god receives" in reflection
 
     assert "not merely the survival of an immaterial soul" in christology
+    assert "the body is not abandoned" in christology
     assert "bodies await resurrection" in christology
     assert "redeem the whole person" in christology
     assert "entrust the whole person to christ" in application
