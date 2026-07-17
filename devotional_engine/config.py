@@ -58,7 +58,9 @@ class EngineConfig:
     # v6.5 coherence contract. Hard checks protect the plan boundary; warnings
     # surface repetition or theme displacement without forcing safe sameness.
     enforce_instruction_coherence: bool = True
-    enforce_title_opening_distinction: bool = True
+    # This is a local editorial option, not a global devotional law. Some Psalms
+    # intentionally use a refrain as title, epigraph, and opening threshold.
+    enforce_title_opening_distinction: bool = False
     warn_cross_section_repetition: bool = True
     warn_theme_displacement: bool = True
     max_state_transitions: int = MAX_STATE_TRANSITIONS
