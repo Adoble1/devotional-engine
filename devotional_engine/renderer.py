@@ -1,4 +1,5 @@
 from .models import EngineContext
+from .scripture import scripture_attribution
 import re
 
 HEADINGS = [
@@ -27,11 +28,19 @@ def _split_opening_sentence(text: str) -> tuple[str, str]:
     return stripped[: match.start()].strip(), stripped[match.end() :].strip()
 
 
+def _scripture_source_note(ctx: EngineContext) -> str:
+    attribution = scripture_attribution(ctx).rstrip(". ")
+    return f"*Scripture source: {attribution}.*" if attribution else ""
+
+
 def render_artifact(ctx: EngineContext) -> str:
     p = ctx.prose
+    source_note = _scripture_source_note(ctx)
+    source_block = f"{source_note}\n\n" if source_note else ""
     return (
         f"# {p['title']}\n\n" f"*{p['epigraph']}*\n\n"
         f"## Focus Bible Verses\n\n" f"{p['focus_bible_verses'].strip()}\n\n"
+        f"{source_block}"
         f"## I. Introduction\n\n" f"{p['introduction'].strip()}\n\n"
         f"## II. Reflection\n\n" f"{p['reflection'].strip()}\n\n"
         f"## III. Christ the Fulfillment\n\n" f"{p['christ_fulfillment'].strip()}\n\n"
@@ -65,6 +74,9 @@ def render_flow_artifact(ctx: EngineContext) -> str:
     if opening and opening_key != title_key:
         blocks.append(opening)
     blocks.append(p["focus_bible_verses"].strip())
+    source_note = _scripture_source_note(ctx)
+    if source_note:
+        blocks.append(source_note)
     if introduction_remainder:
         blocks.append(introduction_remainder)
     blocks.extend(p[key].strip() for key in FLOW_KEYS)
