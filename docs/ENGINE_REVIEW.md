@@ -12,6 +12,8 @@ Current support:
 - American literary style matching supplies craft movements and anti-pastiche guidance rather than copied source text.
 - A creative mastery layer adds chapter-born imagery, organic form, emotional inevitability, musical cadence, and anti-cleverness revision targets without unsafe persona or imitation instructions.
 - Flow rendering can omit devotional headings while preserving structured-field validation.
+- The v6.5 coherence contract treats cross-section repetition and supporting-theme displacement as advisory findings, not universal style bans.
+- Title/opening distinction is an explicit local option. Biblical refrain may still govern title, epigraph, and opening when the passage warrants it.
 
 Watch points:
 
@@ -23,6 +25,11 @@ Watch points:
 Current support:
 
 - Chapter arc gate ties opening, closing, central thought, emotional charge, threshold phrase, and rationale together.
+- The v6.5 coherence gate compiles one passage-center map before prose: governing subject, human predicament, supporting elements, textual hinge, divine answer, canonical fulfillment, and reader response.
+- List-shaped director and art-direction instructions are deduplicated while preserving their first wording and order.
+- Local and art-direction constraints are compared as one effective set; conservative exact contradictions fail before composition.
+- Exact duplicate section burdens fail before composition so reflection, Christ fulfillment, application, prayer, and poem do not become the same paragraph in different clothing.
+- Final prose is checked again after editorial smoothing, preventing a passing draft from drifting before artifact emission.
 - Same-chapter reference discipline can require repeated chapter references to become "the psalm."
 - Full focus-verse checks can reject citation-only text and KJV-style archaisms.
 - Historical metaphor collision protects Psalm 22-style typology from confusing poetic beasts with physical crucifixion.
@@ -33,6 +40,8 @@ Current support:
 
 Watch points:
 
+- Passage-center weighting is lexical and advisory; it cannot replace theological and literary judgment.
+- Contradiction detection is deliberately conservative. It catches normalized opposite directives, not every subtle tension between two instructions.
 - Image-physics detection is intentionally conservative and pattern-based.
 - Coherence still needs human review for subtle theological overreach or weak literary judgment.
 
@@ -45,18 +54,16 @@ Current support:
 - Gate, checker, evaluator, editorial, voice, beauty, and contradiction loops are configurable through `EngineConfig`.
 - Exceptions fail closed into `ESCALATED` with `ctx.error` preserved.
 - Editorial smoothing snapshots prose, forbids poem/focus-verse/christology changes, and rolls back on deterministic failure.
-- Regression tests cover route targets, loop termination, artifact rendering, prayer validation, poem form, style rights, reference discipline, and Psalm 18-23 mock runs.
+- Final v6.5 coherence errors convert `DONE` to `ESCALATED`; advisory warnings are deduplicated.
+- Regression tests cover route targets, loop termination, artifact rendering, prayer validation, poem form, style rights, reference discipline, passage-center compilation, instruction conflicts, section-burden duplication, local title/opening distinction, final post-edit coherence, and Psalm 18-24 plus Psalm 49 runs.
 
 Verification commands:
 
 ```bash
-PYTHONPATH=/tmp/devotional-engine-test-deps python3 -m pytest -q
-python3 examples/run_psalm22_flow.py
-python3 examples/run_psalm23_flow.py
-python3 -m compileall -q devotional_engine examples
-git diff --check
+python -m pytest -q
+python -m compileall -q devotional_engine examples
 ```
 
 ## Current Conclusion
 
-The engine is stable for local deterministic Psalm mock testing and has improved creative freedom and coherence guardrails. It is not production-ready for public devotional publishing until the go-live checklist is satisfied, especially human review, source-rights confirmation, live adapter hardening, and persistent audit logging.
+The engine is stable for deterministic biblical devotional mock testing and has stronger creative-freedom and coherence guardrails. It protects a passage's governing burden without turning every successful local edit into a global formula. It is not production-ready for public devotional publishing until the go-live checklist is satisfied, especially human theological and editorial review, source-rights confirmation, live-adapter hardening, and persistent audit logging.
