@@ -95,7 +95,7 @@ def test_duplicate_section_burdens_are_detected_before_composition():
     assert any(item.code == "C03" for item in findings)
 
 
-def test_title_and_opening_must_perform_different_work():
+def test_title_and_opening_distinction_is_a_local_editorial_option():
     ctx = _context()
     ctx.brief = {"passage_center_map": prepare_director_output(ctx, _director_output())["passage_center_map"]}
     prose = {
@@ -108,9 +108,15 @@ def test_title_and_opening_must_perform_different_work():
         "prayer": "Father, teach us grateful obedience through Jesus Christ our Lord. Amen.",
     }
 
-    findings = audit_prose(ctx, prose, EngineConfig())
+    default_findings = audit_prose(ctx, prose, EngineConfig())
+    local_findings = audit_prose(
+        ctx,
+        prose,
+        EngineConfig(enforce_title_opening_distinction=True),
+    )
 
-    assert any(item.code == "C10" and item.severity == "error" for item in findings)
+    assert not any(item.code == "C10" for item in default_findings)
+    assert any(item.code == "C10" and item.severity == "error" for item in local_findings)
 
 
 def test_repetition_and_theme_displacement_are_warnings_not_global_style_rules():
