@@ -10,6 +10,7 @@ class EngineContext:
     working_rendering: str = ""
     source_layer: dict = field(default_factory=dict)
     rendering_layer: dict = field(default_factory=dict)
+    scripture_provenance: dict = field(default_factory=dict)
     chapter_design_map: dict = field(default_factory=dict)
     correspondence: dict = field(default_factory=dict)
     theological_risk_register: list = field(default_factory=list)
