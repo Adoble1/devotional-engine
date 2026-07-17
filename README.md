@@ -55,6 +55,49 @@ result = run_engine(ctx, RealAdapter())
 
 `run_engine` remains the full devotional path. It is blueprint-first, fail-closed, and compatible with the existing deterministic mock fixtures.
 
+### Scripture source contract
+
+Real devotional adapters must attach a `scripture_provenance` dictionary to both `source_agent` and `translator` output. The engine accepts four publication modes:
+
+- `public_domain`: named translation and edition, attribution, and verified exact quotation.
+- `licensed`: named translation and edition, attribution, license profile, and verified exact quotation.
+- `independent_rendering`: identified Hebrew or Greek source text, explicit attribution, and mandatory human review.
+- `paraphrase`: identified source, explicit attribution, and mandatory human review.
+
+Example public-domain source:
+
+```python
+{
+    "source_text": "...",
+    "chapter_verse_count": 20,
+    "scripture_provenance": {
+        "quotation_mode": "public_domain",
+        "translation_id": "WEB",
+        "edition": "World English Bible",
+        "attribution": "World English Bible (Public Domain)",
+        "verified_exact_match": True,
+        "human_review_required": False,
+    },
+}
+```
+
+Example independent rendering:
+
+```python
+{
+    "working_rendering": "...",
+    "scripture_provenance": {
+        "quotation_mode": "independent_rendering",
+        "source_text_id": "Masoretic Text / Psalm 52",
+        "attribution": "Independent rendering from the Hebrew",
+        "verified_exact_match": False,
+        "human_review_required": True,
+    },
+}
+```
+
+Missing or malformed provenance fails before chapter design and composition. The selected attribution is printed directly beneath the focus verses. Deterministic `MockAgentAdapter` runs receive an explicit `test_fixture` record labeled “not for publication”; real adapters may not use that mode.
+
 ### Devotional coherence contract
 
 Before composition, v6.5 compiles one passage-center map from the chapter design and director brief. It distinguishes the governing subject from supporting material, identifies the textual hinge and divine answer, and gives each devotional section a separate burden.
@@ -113,4 +156,4 @@ The profiled runner uses four roles:
 
 The repository contains no provider credentials or live model implementation. Real adapters must handle timeouts, bounded retries, model/version logging, secret management, prompt-injection isolation, and provider response normalization.
 
-`DONE` or a passing profile evaluation means the configured local checks passed. It does not replace human theological, editorial, factual, or publication review.
+`DONE` or a passing profile evaluation means the configured local checks passed. It does not replace human theological, editorial, factual, rights, or publication review.

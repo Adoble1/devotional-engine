@@ -39,6 +39,13 @@ from .profiles import (
     normalize_mode,
 )
 from .renderer import render_flow_artifact
+from .scripture import (
+    PUBLICATION_MODES,
+    ScriptureProvenance,
+    scripture_attribution,
+    validate_provenance_record,
+    validate_scripture_context,
+)
 from .stage_cycle import (
     ReflectionReport,
     RejectedArtifact,
@@ -84,4 +91,6 @@ __all__ = [
     "compile_rule_ids", "get_profile", "normalize_mode", "PlanFinding", "PlanningPacket",
     "ProfiledRunResult", "WritingRequest", "approve_planning_packet", "build_planning_packet",
     "run_profiled_engine", "validate_planning_packet", "validate_profiled_draft",
+    "PUBLICATION_MODES", "ScriptureProvenance", "scripture_attribution",
+    "validate_provenance_record", "validate_scripture_context",
 ]

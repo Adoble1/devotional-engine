@@ -55,6 +55,10 @@ class EngineConfig:
     focus_verses_min_words: int = 35
     profiled_max_revisions: int = 1
     mode: str = "devotional"
+    # Real adapters must identify every biblical source or rendering before the
+    # engine may compose. Deterministic MockAgentAdapter fixtures are labeled as
+    # test-only material and remain explicitly non-publication.
+    enforce_scripture_provenance: bool = True
     # v6.5 coherence contract. Hard checks protect the plan boundary; warnings
     # surface repetition or theme displacement without forcing safe sameness.
     enforce_instruction_coherence: bool = True
