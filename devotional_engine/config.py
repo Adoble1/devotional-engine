@@ -55,6 +55,12 @@ class EngineConfig:
     focus_verses_min_words: int = 35
     profiled_max_revisions: int = 1
     mode: str = "devotional"
+    # v6.5 coherence contract. Hard checks protect the plan boundary; warnings
+    # surface repetition or theme displacement without forcing safe sameness.
+    enforce_instruction_coherence: bool = True
+    enforce_title_opening_distinction: bool = True
+    warn_cross_section_repetition: bool = True
+    warn_theme_displacement: bool = True
     max_state_transitions: int = MAX_STATE_TRANSITIONS
     max_gate_revisions: int = MAX_GATE_REVISIONS
     max_checker_loops: int = MAX_CHECKER_LOOPS
