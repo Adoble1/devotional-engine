@@ -55,6 +55,24 @@ result = run_engine(ctx, RealAdapter())
 
 `run_engine` remains the full devotional path. It is blueprint-first, fail-closed, and compatible with the existing deterministic mock fixtures.
 
+### Devotional coherence contract
+
+Before composition, v6.5 compiles one passage-center map from the chapter design and director brief. It distinguishes the governing subject from supporting material, identifies the textual hinge and divine answer, and gives each devotional section a separate burden.
+
+Existing fixtures remain compatible through fallbacks. New devotional adapters should provide these director fields when the passage warrants explicit control:
+
+```python
+{
+    "supporting_elements": ["a secondary contrast or failed human instrument"],
+    "textual_hinge": "the verse, event, refrain, or logical turn that changes the movement",
+    "divine_answer": "the principal divine action or resolution",
+}
+```
+
+These are passage-planning fields, not new global rules. Exact duplicate instructions and conservative exact contradictions fail before composition. Cross-section repetition and thematic displacement remain advisory findings. A title/opening distinction can be enabled locally with `EngineConfig(enforce_title_opening_distinction=True)`; it is off by default so warranted biblical refrain remains available.
+
+The final prose is checked again after editorial smoothing so the emitted artifact cannot drift from the approved passage center.
+
 ## Lean fiction or nonfiction pipeline
 
 ```python
