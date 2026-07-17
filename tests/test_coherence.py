@@ -74,7 +74,7 @@ def test_conflicting_directives_fail_the_coherence_contract():
     ctx = _context()
     output = _director_output()
     output["negative_constraints"] = [
-        "do not include invented weather",
+        "avoid invented weather",
         "include invented weather",
     ]
 
