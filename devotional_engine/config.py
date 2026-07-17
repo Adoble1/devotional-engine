@@ -55,6 +55,14 @@ class EngineConfig:
     focus_verses_min_words: int = 35
     profiled_max_revisions: int = 1
     mode: str = "devotional"
+    # v6.5 coherence contract. Hard checks protect the plan boundary; warnings
+    # surface repetition or theme displacement without forcing safe sameness.
+    enforce_instruction_coherence: bool = True
+    # This is a local editorial option, not a global devotional law. Some Psalms
+    # intentionally use a refrain as title, epigraph, and opening threshold.
+    enforce_title_opening_distinction: bool = False
+    warn_cross_section_repetition: bool = True
+    warn_theme_displacement: bool = True
     max_state_transitions: int = MAX_STATE_TRANSITIONS
     max_gate_revisions: int = MAX_GATE_REVISIONS
     max_checker_loops: int = MAX_CHECKER_LOOPS
