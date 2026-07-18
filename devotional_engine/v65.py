@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from .coherence import CoherenceGateAdapter, audit_prose
 from .config import EngineConfig
+from .integrated import adapter_supports_integrated_devotional, run_integrated_devotional
 from .profiles import WritingMode, normalize_mode
 from .scripture import ScriptureProvenanceAdapter
 from .states import State
@@ -29,30 +30,45 @@ def _record_final_coherence(ctx, config) -> None:
         ctx.trace[-1] = State.ESCALATED
 
 
-def run_engine(ctx, adapter, config=None):
-    """Run the full v6.5 devotional pipeline.
+def _run_legacy(ctx, adapter, config):
+    """Compatibility path for pre-v6.6 deterministic fixtures."""
 
-    v6.5 keeps the v6.4 blueprint boundary and adds one coherence contract
-    between the director brief and the finished devotional. Scripture source and
-    rendering provenance are validated before chapter design begins, then the
-    coherence contract is checked again after editorial smoothing. Fiction and
-    nonfiction continue to use ``run_profiled_engine`` so devotional concerns do
-    not leak into other profiles.
+    ctx.pipeline_mode = "legacy"
+    provenance_adapter = ScriptureProvenanceAdapter(adapter, config)
+    result = run_engine_v64(
+        ctx,
+        CoherenceGateAdapter(provenance_adapter, config),
+        config,
+    )
+    if result.trace and result.trace[-1] is State.DONE:
+        _record_final_coherence(result, config)
+    return result
+
+
+def run_engine(ctx, adapter, config=None):
+    """Run the devotional engine.
+
+    Production adapters use the four-stage integrated path: Text Grounding,
+    Passage Blueprint, protected Composition, and Integrated Review. Existing
+    deterministic fixtures without those four roles continue through the legacy
+    compatibility runner so the refactor remains regression-safe.
     """
 
     mode = normalize_mode(getattr(ctx, "mode", WritingMode.DEVOTIONAL.value))
     if mode is not WritingMode.DEVOTIONAL:
         raise ValueError(
-            "run_engine is the full devotional pipeline. "
+            "run_engine is the devotional pipeline. "
             "Use run_profiled_engine with WritingRequest for fiction or nonfiction."
         )
+
     resolved_config = config or EngineConfig()
-    provenance_adapter = ScriptureProvenanceAdapter(adapter, resolved_config)
-    result = run_engine_v64(
-        ctx,
-        CoherenceGateAdapter(provenance_adapter, resolved_config),
-        resolved_config,
+    requested = str(getattr(resolved_config, "devotional_pipeline", "auto")).strip().lower()
+    if requested not in {"auto", "integrated", "legacy"}:
+        raise ValueError("devotional_pipeline must be auto, integrated, or legacy")
+
+    use_integrated = requested == "integrated" or (
+        requested == "auto" and adapter_supports_integrated_devotional(adapter)
     )
-    if result.trace and result.trace[-1] is State.DONE:
-        _record_final_coherence(result, resolved_config)
-    return result
+    if use_integrated:
+        return run_integrated_devotional(ctx, adapter, resolved_config)
+    return _run_legacy(ctx, adapter, resolved_config)
