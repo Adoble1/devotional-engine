@@ -88,11 +88,7 @@ class IntegratedPassageBlueprint:
         return [_text(item) for item in values if _text(item)]
 
 
-def build_blueprint(
-    ctx: Any,
-    grounding: Mapping[str, Any],
-    plan: Mapping[str, Any],
-) -> IntegratedPassageBlueprint:
+def build_blueprint(ctx: Any, grounding: Mapping[str, Any], plan: Mapping[str, Any]) -> IntegratedPassageBlueprint:
     transform = dict(plan.get("reader_transformation", {}))
     evidence_ids = [
         _text(item.get("id"))
@@ -108,33 +104,20 @@ def build_blueprint(
         chapter_ref=ctx.chapter_ref,
         governing_question=_text(plan.get("governing_question")),
         governing_subject=_text(grounding.get("governing_claim")),
-        human_predicament=_text(
-            plan.get("human_predicament")
-            or grounding.get("reader_felt_experience")
-        ),
+        human_predicament=_text(plan.get("human_predicament") or grounding.get("reader_felt_experience")),
         textual_hinge=_text(grounding.get("textual_hinge")),
         divine_answer=_text(grounding.get("divine_action")),
         canonical_fulfillment=_text(grounding.get("christological_fulfillment")),
         reader_transformation={
-            "initial_assumption": _text(
-                transform.get("initial_assumption") or transform.get("from")
-            ),
-            "new_perception": _text(
-                transform.get("new_perception") or transform.get("to")
-            ),
-            "faithful_response": _text(
-                transform.get("faithful_response") or transform.get("response")
-            ),
+            "initial_assumption": _text(transform.get("initial_assumption") or transform.get("from")),
+            "new_perception": _text(transform.get("new_perception") or transform.get("to")),
+            "faithful_response": _text(transform.get("faithful_response") or transform.get("response")),
         },
         section_burdens=section_burdens,
         art_direction=dict(plan.get("art_direction", {})),
         narrative_design=build_narrative_design(plan, grounding),
         poem_design=build_poem_design(plan, grounding),
-        supporting_elements=[
-            _text(item)
-            for item in _list(plan.get("supporting_elements"))
-            if _text(item)
-        ],
+        supporting_elements=[_text(item) for item in _list(plan.get("supporting_elements")) if _text(item)],
         local_constraints=prune_local_constraints(
             _list(plan.get("local_constraints")),
             _list(grounding.get("risks")),
@@ -151,66 +134,45 @@ def build_blueprint(
     )
 
 
-def _validate_taste_design(
-    blueprint: IntegratedPassageBlueprint,
-    *,
-    required: bool,
-) -> list[IntegratedFinding]:
+def _validate_taste_design(blueprint: IntegratedPassageBlueprint, *, required: bool) -> list[IntegratedFinding]:
     findings: list[IntegratedFinding] = []
     candidates = [
         item
-        for item in _list(
-            blueprint.poem_design.get("governing_image_candidates")
-        )
+        for item in _list(blueprint.poem_design.get("governing_image_candidates"))
         if isinstance(item, Mapping)
     ]
     if required and len(candidates) < 3:
-        findings.append(
-            IntegratedFinding(
-                "P09",
-                "governing_image_candidates",
-                "Production planning requires at least three warranted governing-image candidates.",
-                repair_target="blueprint",
-            )
-        )
+        findings.append(IntegratedFinding(
+            "P09",
+            "governing_image_candidates",
+            "Production planning requires at least three warranted governing-image candidates.",
+            repair_target="blueprint",
+        ))
     if required or candidates:
         for index, candidate in enumerate(candidates):
             for field_name in ("image", "warrant", "transformation"):
                 if not _text(candidate.get(field_name)):
-                    findings.append(
-                        IntegratedFinding(
-                            "P10",
-                            f"governing_image_candidates.{index}.{field_name}",
-                            "Each image candidate needs an image, textual warrant, and transformation path.",
-                            repair_target="blueprint",
-                        )
-                    )
-        selected = blueprint.governing_image
-        candidate_names = {
-            _text(item.get("image"))
-            for item in candidates
-            if _text(item.get("image"))
-        }
-        if selected and candidates and selected not in candidate_names:
-            findings.append(
-                IntegratedFinding(
-                    "P11",
-                    "selected_governing_image",
-                    "The selected governing image must come from the candidate set.",
-                    repair_target="blueprint",
-                )
-            )
-        if required and not _text(
-            blueprint.poem_design.get("selection_rationale")
-        ):
-            findings.append(
-                IntegratedFinding(
-                    "P12",
-                    "image_selection_rationale",
-                    "Image selection must state warrant, sensory grain, transformation, and ledger novelty.",
-                    repair_target="blueprint",
-                )
-            )
+                    findings.append(IntegratedFinding(
+                        "P10",
+                        f"governing_image_candidates.{index}.{field_name}",
+                        "Each image candidate needs an image, textual warrant, and transformation path.",
+                        repair_target="blueprint",
+                    ))
+        names = {_text(item.get("image")) for item in candidates if _text(item.get("image"))}
+        if blueprint.governing_image and candidates and blueprint.governing_image not in names:
+            findings.append(IntegratedFinding(
+                "P11",
+                "selected_governing_image",
+                "The selected governing image must come from the candidate set.",
+                repair_target="blueprint",
+            ))
+        if required and not _text(blueprint.poem_design.get("selection_rationale")):
+            findings.append(IntegratedFinding(
+                "P12",
+                "image_selection_rationale",
+                "Image selection must state warrant, sensory grain, transformation, and ledger novelty.",
+                repair_target="blueprint",
+            ))
 
     narrative = blueprint.narrative_design
     try:
@@ -218,34 +180,18 @@ def _validate_taste_design(
     except (TypeError, ValueError):
         level = 0
     if required and level not in {1, 2, 3}:
-        findings.append(
-            IntegratedFinding(
-                "P13",
-                "narrative_design.level",
-                "Narrative depth must be Level 1, 2, or 3.",
-                repair_target="blueprint",
-            )
-        )
+        findings.append(IntegratedFinding("P13", "narrative_design.level", "Narrative depth must be Level 1, 2, or 3.", repair_target="blueprint"))
     if required and not _text(narrative.get("warrant")):
-        findings.append(
-            IntegratedFinding(
-                "P13",
-                "narrative_design.warrant",
-                "Narrative depth requires an explicit textual or canonical warrant.",
-                repair_target="blueprint",
-            )
-        )
+        findings.append(IntegratedFinding("P13", "narrative_design.warrant", "Narrative depth requires an explicit textual or canonical warrant.", repair_target="blueprint"))
     if required and level > 1:
         for field_name in ("source_basis", "bounded_scene"):
             if not _text(narrative.get(field_name)):
-                findings.append(
-                    IntegratedFinding(
-                        "P14",
-                        f"narrative_design.{field_name}",
-                        "Level 2 or 3 requires a source basis and a bounded scene.",
-                        repair_target="blueprint",
-                    )
-                )
+                findings.append(IntegratedFinding(
+                    "P14",
+                    f"narrative_design.{field_name}",
+                    "Level 2 or 3 requires a source basis and a bounded scene.",
+                    repair_target="blueprint",
+                ))
     return findings
 
 
@@ -264,12 +210,7 @@ def validate_blueprint(
     }
     findings = _missing(required, tuple(required), "P01", "blueprint")
     findings.extend(
-        IntegratedFinding(
-            "P02",
-            f"reader_transformation.{name}",
-            "Reader Transformation Map is incomplete.",
-            repair_target="blueprint",
-        )
+        IntegratedFinding("P02", f"reader_transformation.{name}", "Reader Transformation Map is incomplete.", repair_target="blueprint")
         for name in ("initial_assumption", "new_perception", "faithful_response")
         if not _text(blueprint.reader_transformation.get(name))
     )
@@ -278,122 +219,40 @@ def validate_blueprint(
     for section in PROSE_SECTIONS:
         burden = _text(blueprint.section_burdens.get(section))
         if not burden:
-            findings.append(
-                IntegratedFinding(
-                    "P03",
-                    f"section_burdens.{section}",
-                    "One concise prose movement is required.",
-                    repair_target="blueprint",
-                )
-            )
+            findings.append(IntegratedFinding("P03", f"section_burdens.{section}", "One concise prose movement is required.", repair_target="blueprint"))
         else:
-            burden_index.setdefault(
-                " ".join(burden.lower().split()),
-                [],
-            ).append(section)
+            burden_index.setdefault(" ".join(burden.lower().split()), []).append(section)
     for sections in burden_index.values():
         if len(sections) > 1:
-            findings.append(
-                IntegratedFinding(
-                    "P04",
-                    "section_burdens",
-                    f"Repeated prose movement: {', '.join(sections)}.",
-                    repair_target="blueprint",
-                )
-            )
+            findings.append(IntegratedFinding("P04", "section_burdens", f"Repeated prose movement: {', '.join(sections)}.", repair_target="blueprint"))
 
     if not blueprint.art_direction:
-        findings.append(
-            IntegratedFinding(
-                "P05",
-                "art_direction",
-                "Art direction is required.",
-                repair_target="blueprint",
-            )
-        )
-    for name in (
-        "image_field",
-        "sensory_palette",
-        "sonic_movement",
-        "emotional_turn",
-    ):
+        findings.append(IntegratedFinding("P05", "art_direction", "Art direction is required.", repair_target="blueprint"))
+    for name in ("image_field", "sensory_palette", "sonic_movement", "emotional_turn"):
         if blueprint.poem_design.get(name) in (None, "", [], {}):
-            findings.append(
-                IntegratedFinding(
-                    "P06",
-                    f"poem_design.{name}",
-                    "Poem design is incomplete.",
-                    repair_target="blueprint",
-                )
-            )
+            findings.append(IntegratedFinding("P06", f"poem_design.{name}", "Poem design is incomplete.", repair_target="blueprint"))
     if len(blueprint.poem_design.get("sensory_palette", [])) < 2:
-        findings.append(
-            IntegratedFinding(
-                "P07",
-                "poem_design.sensory_palette",
-                "Poem needs at least two passage-born sensory anchors.",
-                repair_target="blueprint",
-            )
-        )
+        findings.append(IntegratedFinding("P07", "poem_design.sensory_palette", "Poem needs at least two passage-born sensory anchors.", repair_target="blueprint"))
     if len(blueprint.evidence_path) < 6:
-        findings.append(
-            IntegratedFinding(
-                "P08",
-                "evidence_path",
-                "Evidence path is incomplete.",
-                repair_target="blueprint",
-            )
-        )
-    findings.extend(
-        _validate_taste_design(
-            blueprint,
-            required=require_taste_design,
-        )
-    )
+        findings.append(IntegratedFinding("P08", "evidence_path", "Evidence path is incomplete.", repair_target="blueprint"))
+    findings.extend(_validate_taste_design(blueprint, required=require_taste_design))
     blueprint.approved = not findings
     return findings
 
 
-def _materialize_context(
-    ctx: Any,
-    grounding: Mapping[str, Any],
-    blueprint: IntegratedPassageBlueprint,
-) -> None:
+def _materialize_context(ctx: Any, grounding: Mapping[str, Any], blueprint: IntegratedPassageBlueprint) -> None:
     source = normalize_provenance_record(grounding["source_provenance"])
     rendering = normalize_provenance_record(grounding["rendering_provenance"])
     ctx.source_text = _text(grounding["source_text"])
     ctx.working_rendering = _text(grounding["working_rendering"])
-    ctx.source_layer = {
-        "source_text": ctx.source_text,
-        "chapter_verse_count": grounding.get("chapter_verse_count"),
-        "scripture_provenance": source,
-    }
-    ctx.rendering_layer = {
-        "working_rendering": ctx.working_rendering,
-        "scripture_provenance": rendering,
-    }
-    ctx.scripture_provenance = {
-        "source": source,
-        "rendering": rendering,
-        "focus": rendering,
-    }
-    physical = [
-        _text(item)
-        for item in _list(grounding.get("physical_vocabulary"))
-        if _text(item)
-    ]
+    ctx.source_layer = {"source_text": ctx.source_text, "chapter_verse_count": grounding.get("chapter_verse_count"), "scripture_provenance": source}
+    ctx.rendering_layer = {"working_rendering": ctx.working_rendering, "scripture_provenance": rendering}
+    ctx.scripture_provenance = {"source": source, "rendering": rendering, "focus": rendering}
+    physical = [_text(item) for item in _list(grounding.get("physical_vocabulary")) if _text(item)]
     ctx.chapter_design_map = {
-        "chapter_start": _text(
-            grounding.get("chapter_start") or grounding["historical_meaning"]
-        ),
-        "chapter_end": _text(
-            grounding.get("chapter_end")
-            or blueprint.reader_transformation["new_perception"]
-        ),
-        "emotional_movement": (
-            f"{blueprint.human_predicament} -> "
-            f"{blueprint.reader_transformation['new_perception']}"
-        ),
+        "chapter_start": _text(grounding.get("chapter_start") or grounding["historical_meaning"]),
+        "chapter_end": _text(grounding.get("chapter_end") or blueprint.reader_transformation["new_perception"]),
+        "emotional_movement": f"{blueprint.human_predicament} -> {blueprint.reader_transformation['new_perception']}",
         "divine_action": blueprint.divine_answer,
         "physical_vocabulary": physical,
         "central_theological_claim": blueprint.governing_subject,
@@ -402,33 +261,20 @@ def _materialize_context(
         "chapter_design_summary": _text(grounding["historical_meaning"]),
     }
     ctx.correspondence = dict(grounding["canonical_relationship"])
-    ctx.theological_risk_register = [
-        dict(item)
-        for item in _list(grounding["risks"])
-        if isinstance(item, Mapping)
-    ]
+    ctx.theological_risk_register = [dict(item) for item in _list(grounding["risks"]) if isinstance(item, Mapping)]
     ctx.historical_linguistic = {
         "historical_meaning": _text(grounding["historical_meaning"]),
         "literary_mode": _text(grounding["literary_mode"]),
         "lexical_insight": dict(grounding.get("lexical_insight", {})),
         "narrative_design": dict(blueprint.narrative_design),
     }
-    ctx.commentary_grounding = {
-        "textual_evidence": list(_list(grounding["textual_evidence"])),
-        "unsupported_claims": list(_list(grounding.get("unsupported_claims"))),
-    }
+    ctx.commentary_grounding = {"textual_evidence": list(_list(grounding["textual_evidence"])), "unsupported_claims": list(_list(grounding.get("unsupported_claims")))}
     ctx.art_direction = dict(blueprint.art_direction)
     ctx.brief = {
         "selected_threshold_phrase": "",
         "governing_image": blueprint.governing_image,
-        "image_lexicon": list(
-            blueprint.poem_design.get("sensory_palette", physical)
-        ),
-        "chapter_specific_terms": [
-            _text(item.get("reference"))
-            for item in _list(grounding["textual_evidence"])
-            if isinstance(item, Mapping)
-        ],
+        "image_lexicon": list(blueprint.poem_design.get("sensory_palette", physical)),
+        "chapter_specific_terms": [_text(item.get("reference")) for item in _list(grounding["textual_evidence"]) if isinstance(item, Mapping)],
         "christology_required_echoes": [],
         "christology_pathway": blueprint.canonical_fulfillment,
         "theological_terminus": blueprint.canonical_fulfillment,
@@ -441,155 +287,62 @@ def _materialize_context(
             "divine_answer": blueprint.divine_answer,
             "resolution": blueprint.reader_transformation["new_perception"],
             "canonical_fulfillment": blueprint.canonical_fulfillment,
-            "reader_response": blueprint.reader_transformation[
-                "faithful_response"
-            ],
+            "reader_response": blueprint.reader_transformation["faithful_response"],
             "section_burdens": dict(blueprint.section_burdens),
-            "governing_terms": [
-                word
-                for word in blueprint.governing_subject.lower().split()
-                if len(word) >= 4
-            ],
-            "supporting_terms": [
-                word
-                for item in blueprint.supporting_elements
-                for word in item.lower().split()
-                if len(word) >= 4
-            ],
+            "governing_terms": [word for word in blueprint.governing_subject.lower().split() if len(word) >= 4],
+            "supporting_terms": [word for item in blueprint.supporting_elements for word in item.lower().split() if len(word) >= 4],
         },
     }
     ctx.blueprint = blueprint
     ctx.planning_packet = {
-        "passage": {
-            "question": blueprint.governing_question,
-            "subject": blueprint.governing_subject,
-            "hinge": blueprint.textual_hinge,
-            "divine_answer": blueprint.divine_answer,
-        },
+        "passage": {"question": blueprint.governing_question, "subject": blueprint.governing_subject, "hinge": blueprint.textual_hinge, "divine_answer": blueprint.divine_answer},
         "narrative_design": dict(blueprint.narrative_design),
         "poem_design": dict(blueprint.poem_design),
     }
 
 
-def validate_review(
-    review: Mapping[str, Any],
-    config: EngineConfig | None = None,
-) -> tuple[list[IntegratedFinding], list[IntegratedFinding]]:
+def validate_review(review: Mapping[str, Any], config: EngineConfig | None = None) -> tuple[list[IntegratedFinding], list[IntegratedFinding]]:
     config = config or EngineConfig()
     verdict = _text(review.get("verdict")).lower()
-    hard = [
-        _review_finding(item, "error")
-        for item in _list(review.get("hard_findings"))
-    ]
-    advisory = [
-        _review_finding(item, "warning")
-        for item in _list(review.get("advisory_findings"))
-    ]
+    hard = [_review_finding(item, "error") for item in _list(review.get("hard_findings"))]
+    advisory = [_review_finding(item, "warning") for item in _list(review.get("advisory_findings"))]
     if verdict not in {"pass", "revise", "fail"}:
-        hard.append(
-            IntegratedFinding(
-                "R00",
-                "verdict",
-                "Verdict must be Pass, Revise, or Fail.",
-                repair_target="review",
-            )
-        )
+        hard.append(IntegratedFinding("R00", "verdict", "Verdict must be Pass, Revise, or Fail.", repair_target="review"))
     dimensions = review.get("dimensions")
     if not isinstance(dimensions, Mapping):
-        hard.append(
-            IntegratedFinding(
-                "R02",
-                "dimensions",
-                "Review dimensions are required.",
-                repair_target="review",
-            )
-        )
+        hard.append(IntegratedFinding("R02", "dimensions", "Review dimensions are required.", repair_target="review"))
     else:
-        minimum = float(
-            getattr(config, "integrated_review_min_score", 8.0)
-        )
+        minimum = float(getattr(config, "integrated_review_min_score", 8.0))
         for name in REVIEW_DIMENSIONS:
             if name not in dimensions:
-                hard.append(
-                    IntegratedFinding(
-                        "R03",
-                        f"dimensions.{name}",
-                        "Review dimension is required.",
-                        repair_target="review",
-                    )
-                )
+                hard.append(IntegratedFinding("R03", f"dimensions.{name}", "Review dimension is required.", repair_target="review"))
                 continue
             try:
                 score = float(dimensions[name])
             except (TypeError, ValueError):
-                hard.append(
-                    IntegratedFinding(
-                        "R04",
-                        f"dimensions.{name}",
-                        "Review dimension must be numeric.",
-                        repair_target="review",
-                    )
-                )
+                hard.append(IntegratedFinding("R04", f"dimensions.{name}", "Review dimension must be numeric.", repair_target="review"))
                 continue
             if verdict == "pass" and score < minimum:
-                hard.append(
-                    IntegratedFinding(
-                        "R05",
-                        f"dimensions.{name}",
-                        (
-                            f"Passing score {score:g} is below the "
-                            f"configured minimum {minimum:g}."
-                        ),
-                        repair_target="review",
-                    )
-                )
+                hard.append(IntegratedFinding("R05", f"dimensions.{name}", f"Passing score {score:g} is below the configured minimum {minimum:g}.", repair_target="review"))
     if verdict == "pass" and hard:
-        hard.append(
-            IntegratedFinding(
-                "R06",
-                "verdict",
-                "Passing review contains unresolved hard findings.",
-                repair_target="review",
-            )
-        )
+        hard.append(IntegratedFinding("R06", "verdict", "Passing review contains unresolved hard findings.", repair_target="review"))
     return hard, advisory
 
 
-def _apply_draft(
-    ctx: Any,
-    draft: Mapping[str, Any],
-) -> list[IntegratedFinding]:
-    findings = _missing(
-        draft,
-        (*PROSE_FIELDS, "poem"),
-        "D01",
-        "draft",
-    )
+def _apply_draft(ctx: Any, draft: Mapping[str, Any]) -> list[IntegratedFinding]:
+    findings = _missing(draft, (*PROSE_FIELDS, "poem"), "D01", "draft")
     if findings:
         return findings
-    ctx.prose = {
-        name: _text(draft[name])
-        for name in PROSE_FIELDS
-    }
+    ctx.prose = {name: _text(draft[name]) for name in PROSE_FIELDS}
     ctx.poem = _text(draft["poem"])
     return []
 
 
 def _as_integrated(item: LiteraryFinding) -> IntegratedFinding:
-    return IntegratedFinding(
-        item.code,
-        item.field,
-        item.message,
-        item.severity,
-        item.repair_target,
-    )
+    return IntegratedFinding(item.code, item.field, item.message, item.severity, item.repair_target)
 
 
-def run_integrated_devotional(
-    ctx: Any,
-    adapter: Any,
-    config: EngineConfig | None = None,
-) -> Any:
+def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | None = None) -> Any:
     """Run dense grounding, spare blueprint, liberated composition, and one review."""
 
     config = config or EngineConfig()
@@ -597,30 +350,12 @@ def run_integrated_devotional(
     is_mock = _is_mock(adapter)
     try:
         ctx.trace.append(State.TEXT_GROUNDING)
-        grounding = adapter.call(
-            "devotional_grounder",
-            {
-                "chapter_ref": ctx.chapter_ref,
-                "source_text": ctx.source_text,
-                "context": ctx,
-            },
-        )
+        grounding = adapter.call("devotional_grounder", {"chapter_ref": ctx.chapter_ref, "source_text": ctx.source_text, "context": ctx})
         if not isinstance(grounding, Mapping):
-            raise ValidationError(
-                "devotional_grounder output must be a dictionary"
-            )
-        findings = validate_grounding(
-            grounding,
-            allow_test_fixture=is_mock,
-            config=config,
-        )
+            raise ValidationError("devotional_grounder output must be a dictionary")
+        findings = validate_grounding(grounding, allow_test_fixture=is_mock, config=config)
         if findings:
-            raise ValidationError(
-                "; ".join(
-                    f"{item.field}: {item.message}"
-                    for item in findings
-                )
-            )
+            raise ValidationError("; ".join(f"{item.field}: {item.message}" for item in findings))
         ctx.grounding_packet = dict(grounding)
 
         ctx.trace.append(State.PASSAGE_BLUEPRINT)
@@ -633,132 +368,54 @@ def run_integrated_devotional(
                     "governing_claim": grounding["governing_claim"],
                     "textual_hinge": grounding["textual_hinge"],
                     "divine_action": grounding["divine_action"],
-                    "canonical_relationship": grounding[
-                        "canonical_relationship"
-                    ],
-                    "christological_fulfillment": grounding[
-                        "christological_fulfillment"
-                    ],
+                    "canonical_relationship": grounding["canonical_relationship"],
+                    "christological_fulfillment": grounding["christological_fulfillment"],
                 },
                 "series_ledger": dict(getattr(ctx, "ledger", {}) or {}),
                 "planning_instruction": (
-                    "Build a spare blueprint with one movement per prose "
-                    "section. Generate at least three governing-image "
-                    "candidates, each with textual warrant, sensory grain, "
-                    "ledger novelty, and a transformation path. Select one "
-                    "and explain the choice. Choose Narrative Level 1, 2, "
-                    "or 3 by warrant, bounding any Level 2 or 3 scene. Keep "
-                    "the poem design separate: image field, sensory palette, "
-                    "sonic movement, and emotional turn."
+                    "Build a spare blueprint with one movement per prose section. Generate at least three "
+                    "governing-image candidates, each with textual warrant, sensory grain, ledger novelty, "
+                    "and a transformation path. Select one and explain the choice. Choose Narrative Level 1, "
+                    "2, or 3 by warrant, bounding any Level 2 or 3 scene. Keep the poem design separate: "
+                    "image field, sensory palette, sonic movement, and emotional turn."
                 ),
                 "context": ctx,
             },
         )
         if not isinstance(plan, Mapping):
-            raise ValidationError(
-                "devotional_planner output must be a dictionary"
-            )
+            raise ValidationError("devotional_planner output must be a dictionary")
         blueprint = build_blueprint(ctx, grounding, plan)
-        findings = validate_blueprint(
-            blueprint,
-            require_taste_design=not is_mock,
-        )
+        findings = validate_blueprint(blueprint, require_taste_design=not is_mock)
         ctx.blueprint_findings = findings
         if findings:
-            raise ValidationError(
-                "; ".join(
-                    f"{item.field}: {item.message}"
-                    for item in findings
-                )
-            )
+            raise ValidationError("; ".join(f"{item.field}: {item.message}" for item in findings))
         _materialize_context(ctx, grounding, blueprint)
         scripture_failures = validate_scripture_context(ctx)
         if scripture_failures:
             raise ValidationError("; ".join(scripture_failures))
 
-        packet = composition_packet(
-            ctx,
-            grounding,
-            blueprint,
-            config,
-        )
-        max_revisions = max(
-            0,
-            int(getattr(config, "integrated_max_revisions", 1)),
-        )
+        packet = composition_packet(ctx, grounding, blueprint, config)
+        max_revisions = max(0, int(getattr(config, "integrated_max_revisions", 1)))
         revision = 0
         revision_brief: dict[str, Any] = {}
         while True:
-            ctx.trace.append(
-                State.INTEGRATED_COMPOSITION
-                if revision == 0
-                else State.TARGETED_REVISION
-            )
-            draft = adapter.call(
-                "devotional_composer",
-                {
-                    "composition_packet": packet,
-                    "revision": revision,
-                    "revision_brief": revision_brief,
-                },
-            )
+            ctx.trace.append(State.INTEGRATED_COMPOSITION if revision == 0 else State.TARGETED_REVISION)
+            draft = adapter.call("devotional_composer", {"composition_packet": packet, "revision": revision, "revision_brief": revision_brief})
             if not isinstance(draft, Mapping):
-                raise ValidationError(
-                    "devotional_composer output must be a dictionary"
-                )
+                raise ValidationError("devotional_composer output must be a dictionary")
             findings = _apply_draft(ctx, draft)
             if findings:
-                raise ValidationError(
-                    "; ".join(
-                        f"{item.field}: {item.message}"
-                        for item in findings
-                    )
-                )
-            ctx.draft_log.append(
-                {
-                    "revision": revision,
-                    "prose": dict(ctx.prose),
-                    "poem": ctx.poem,
-                }
-            )
+                raise ValidationError("; ".join(f"{item.field}: {item.message}" for item in findings))
+            ctx.draft_log.append({"revision": revision, "prose": dict(ctx.prose), "poem": ctx.poem})
 
-            harness_failures, harness_warnings = (
-                run_deterministic_harness(ctx, config)
-            )
+            harness_failures, harness_warnings = run_deterministic_harness(ctx, config)
             for warning in harness_warnings:
                 if warning not in ctx.warnings:
                     ctx.warnings.append(warning)
             coherence = audit_prose(ctx, ctx.prose, config)
-            coherence_hard = [
-                IntegratedFinding(
-                    f"COHERENCE_{item.code}",
-                    item.field,
-                    item.message,
-                    "error",
-                    item.field,
-                )
-                for item in coherence
-                if item.severity == "error"
-            ]
-            coherence_advisory = [
-                IntegratedFinding(
-                    f"COHERENCE_{item.code}",
-                    item.field,
-                    item.message,
-                    "warning",
-                    item.field,
-                )
-                for item in coherence
-                if item.severity != "error"
-            ]
-            literary = [
-                _as_integrated(item)
-                for item in audit_literary_economy(
-                    ctx,
-                    blueprint,
-                    config,
-                )
-            ]
+            coherence_hard = [IntegratedFinding(f"COHERENCE_{item.code}", item.field, item.message, "error", item.field) for item in coherence if item.severity == "error"]
+            coherence_advisory = [IntegratedFinding(f"COHERENCE_{item.code}", item.field, item.message, "warning", item.field) for item in coherence if item.severity != "error"]
+            literary = [_as_integrated(item) for item in audit_literary_economy(ctx, blueprint, config)]
 
             ctx.trace.append(State.INTEGRATED_REVIEW)
             review = adapter.call(
@@ -768,65 +425,31 @@ def run_integrated_devotional(
                     "protected": {
                         "passage": packet["passage"],
                         "canonical": packet["canonical"],
-                        "reader_transformation": packet[
-                            "reader_transformation"
-                        ],
+                        "reader_transformation": packet["reader_transformation"],
                         "narrative_design": packet["narrative_design"],
                         "boundaries": packet["boundaries"],
                     },
                     "draft": {**ctx.prose, "poem": ctx.poem},
                     "deterministic_failures": list(harness_failures),
-                    "coherence_findings": [
-                        item.__dict__
-                        for item in (
-                            coherence_hard + coherence_advisory
-                        )
-                    ],
-                    "literary_findings": [
-                        item.__dict__
-                        for item in literary
-                    ],
+                    "coherence_findings": [item.__dict__ for item in coherence_hard + coherence_advisory],
+                    "literary_findings": [item.__dict__ for item in literary],
                     "review_instruction": (
-                        "Truth failures are hard. Confirm that the lexical "
-                        "insight is standard and serves the argument, that "
-                        "narrative detail stays inside its warrant, and that "
-                        "the epigraph implies a true mechanism. Test whether "
-                        "each sentence and line earns its place. Prefer "
-                        "varied breath, plainness after image, and one "
-                        "decisive reversal. The poem needs image, qualia, "
-                        "music, breath, and an emotional turn without "
-                        "summarizing the devotional."
+                        "Truth failures are hard. Confirm that the lexical insight is standard and serves the "
+                        "argument, that narrative detail stays inside its warrant, and that the epigraph implies "
+                        "a true mechanism. Test whether each sentence and line earns its place. Prefer varied "
+                        "breath, plainness after image, and one decisive reversal. The poem needs image, qualia, "
+                        "music, breath, and an emotional turn without summarizing the devotional."
                     ),
                     "revision": revision,
                 },
             )
             if not isinstance(review, Mapping):
-                raise ValidationError(
-                    "devotional_reviewer output must be a dictionary"
-                )
-            review_hard, review_advisory = validate_review(
-                review,
-                config,
-            )
+                raise ValidationError("devotional_reviewer output must be a dictionary")
+            review_hard, review_advisory = validate_review(review, config)
             ctx.integrated_review = dict(review)
             ctx.scores["integrated_review"] = dict(review)
-            hard = [
-                *[
-                    IntegratedFinding(
-                        "HARNESS",
-                        "draft",
-                        message,
-                    )
-                    for message in harness_failures
-                ],
-                *coherence_hard,
-                *review_hard,
-            ]
-            advisory = [
-                *coherence_advisory,
-                *literary,
-                *review_advisory,
-            ]
+            hard = [*[IntegratedFinding("HARNESS", "draft", message) for message in harness_failures], *coherence_hard, *review_hard]
+            advisory = [*coherence_advisory, *literary, *review_advisory]
             _warn(ctx, advisory)
             verdict = _text(review.get("verdict")).lower()
 
@@ -843,29 +466,14 @@ def run_integrated_devotional(
                 return _escalate(ctx, hard)
             revision += 1
             revision_brief = {
-                "hard_findings": [
-                    item.__dict__
-                    for item in hard
-                ],
-                "literary_findings": [
-                    item.__dict__
-                    for item in literary
-                ],
-                "advisory_findings": [
-                    item.__dict__
-                    for item in advisory
-                ],
-                "instruction": (
-                    "Repair only identified fields. Preserve Scripture, "
-                    "grounding, blueprint, narrative warrant, and unaffected "
-                    "artistic choices. Cut before adding."
-                ),
+                "hard_findings": [item.__dict__ for item in hard],
+                "literary_findings": [item.__dict__ for item in literary],
+                "advisory_findings": [item.__dict__ for item in advisory],
+                "instruction": "Repair only identified fields. Preserve Scripture, grounding, blueprint, narrative warrant, and unaffected artistic choices. Cut before adding.",
             }
     except Exception as exc:
         ctx.error = f"{type(exc).__name__}: {exc}"
-        ctx.failed_checks = ctx.failed_checks or [
-            f"[BOTH] integrated devotional exception: {exc}"
-        ]
+        ctx.failed_checks = ctx.failed_checks or [f"[BOTH] integrated devotional exception: {exc}"]
         if not ctx.trace or ctx.trace[-1] is not State.ESCALATED:
             ctx.trace.append(State.ESCALATED)
         return ctx
