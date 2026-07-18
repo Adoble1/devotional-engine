@@ -1,7 +1,7 @@
 from copy import deepcopy
 
 from devotional_engine import EngineConfig, EngineContext, MockAgentAdapter, State, run_engine
-from devotional_engine.integrated import adapter_supports_integrated_devotional
+from devotional_engine.integrated_v67 import adapter_supports_integrated_devotional
 
 
 def _grounding() -> dict:
@@ -46,7 +46,7 @@ def _grounding() -> dict:
             "and roots His people in God's love."
         ),
         "reader_felt_experience": "Words and influence can appear powerful enough to make harm permanent.",
-        "physical_vocabulary": ["tongue", "razor", "tent", "root", "olive tree", "house"],
+        "physical_vocabulary": ["tongue", "razor", "tent", "root", "olive leaf", "oil", "wind"],
         "risks": [
             {
                 "risk_description": "Treat every report of wrongdoing as destructive speech.",
@@ -57,7 +57,7 @@ def _grounding() -> dict:
                 "avoidance_rule": "Use only details established by Scripture and the psalm's poetic claims.",
             },
         ],
-        "unsupported_claims": ["Do not invent Doeg's private emotions or David's location while composing the psalm."],
+        "unsupported_claims": ["Do not invent Doeg's private emotions or David's location."],
     }
 
 
@@ -71,69 +71,63 @@ def _plan() -> dict:
             "faithful_response": "Speak truth without making destruction your refuge.",
         },
         "section_burdens": {
-            "introduction": "Enter through the speed and consequence of the tongue.",
-            "reflection": "Trace destructive speech to its false refuge and divine uprooting.",
-            "christ_fulfillment": "Show the truthful King bearing accusation and rising beyond its verdict.",
-            "application": "Test the purpose, context, and desired effect of one's speech.",
-            "prayer": "Ask for rooted trust and speech governed by covenant love.",
-            "poem": "Move from the razor and shallow root to the living olive tree.",
+            "introduction": "Enter through the sudden cut of a word.",
+            "reflection": "Move from destructive speech to the false refuge beneath it.",
+            "christ_fulfillment": "Let resurrection overturn the verdict of destructive speech.",
+            "application": "Examine the refuge and purpose beneath one's words.",
+            "prayer": "Ask for rooted trust and truthful speech.",
         },
         "art_direction": {
-            "register": "compressed moral clarity with organic imagery",
-            "pace": "quick opening, patient contrast, quiet rooted ending",
-            "image_lexicon": ["razor", "root", "tent", "olive tree", "house"],
-            "threshold_phrase": "Destruction cannot make deep roots.",
+            "register": "compressed, lucid, contemplative",
+            "pace": "a quick cut followed by slower rooted breath",
+            "image_lexicon": ["razor", "root", "olive leaf", "oil", "wind"],
         },
-        "governing_image": "a green olive tree remaining where a violent refuge is uprooted",
-        "poem_arc": ["cutting word", "shallow root", "divine uprooting", "olive tree", "truthful praise"],
+        "poem_design": {
+            "image_field": ["razor", "olive tree"],
+            "sensory_palette": ["razor", "root", "olive leaf", "oil", "wind"],
+            "sonic_movement": "hard consonants opening into long vowels and quieter breath",
+            "emotional_turn": "from the flash of injury to life held underground",
+            "prohibited_exposition": ["do not name the lesson"],
+        },
         "supporting_elements": ["wealth and influence function as false refuges"],
         "local_constraints": [
-            "do not invent motives for Doeg",
             "do not condemn necessary reporting of abuse or danger",
             "do not make speech rather than steadfast love the final subject",
         ],
     }
 
 
-def _draft(application: str | None = None) -> dict:
+def _draft(application: str | None = None, poem: str | None = None) -> dict:
     return {
-        "title": "The Tree That Remains",
-        "epigraph": "A razor can cut; it cannot take root.",
+        "title": "Under the Olive",
+        "epigraph": "The blade flashes. The root keeps its dark counsel.",
         "focus_bible_verses": (
             "Psalm 52:1, 5, 8-9 — Why do you boast in evil? God's steadfast love endures continually. "
             "God will uproot the false refuge, but I am like a flourishing olive tree in His house."
         ),
-        "introduction": (
-            "The tongue moves first. A report crosses a room, reaches power, and leaves other people "
-            "to bear what the speaker set in motion."
-        ),
+        "introduction": "A word can cross a room before mercy has risen from its chair.",
         "reflection": (
-            "Psalm 52 joins the sharpened tongue to a deeper trust. The destructive person makes wealth, "
-            "influence, and successful harm into a refuge. Yet God's steadfast love endures continually. "
-            "The hinge is divine uprooting: power that looked planted is pulled from its tent, while the "
-            "faithful person remains like an olive tree in God's house. The final subject is not the razor. "
-            "It is the covenant love that keeps life rooted and turns speech toward thanksgiving."
+            "Psalm 52 follows the cut to its hidden root. The destructive tongue trusts wealth, access, "
+            "and the thrill of successful harm. God answers not by admiring the blade but by pulling up "
+            "the refuge beneath it. What remains is the olive tree: life held by steadfast love, its mouth "
+            "turned at last toward thanks."
         ),
         "christ_fulfillment": (
-            "The New Testament does not identify Psalm 52 as a direct prophecy of Christ. The correspondence "
-            "is thematic. Jesus is the truthful King in whose mouth there is no deceit. False witnesses use "
-            "words to secure His death, but the Father raises Him beyond their verdict. United to Him, His "
-            "people learn to refuse manipulative speech and to remain rooted in God's love."
+            "The correspondence is thematic, not a direct New Testament quotation. False witnesses sharpen "
+            "words against Jesus, yet the Father raises Him beyond their verdict. In Him, the uprooted are "
+            "given a life no accusation can finally sever."
         ),
         "application": application or (
-            "Speak truth without making destruction your refuge. Before repeating a fact, ask whether context "
-            "has been preserved, whether protection requires disclosure, and whether your desired outcome is "
-            "truth or injury. Report real danger plainly. Refuse the private pleasure of controlling another "
-            "person's reputation."
+            "Before speaking, ask what shelter the sentence is building. Tell the truth needed for protection "
+            "or justice; refuse the extra turn of the blade that only feeds control."
         ),
         "prayer": (
             "Father, root us in Your steadfast love. Forgive the words we have used to control or injure. "
-            "Give us courage to report real evil truthfully and without cruelty. Form our speech after Jesus, "
-            "in whose mouth there was no deceit. Keep us grateful and faithful through Jesus Christ our Lord."
+            "Give us courage to tell necessary truth without cruelty. Shape our speech after Jesus. "
+            "Keep us faithful through Jesus Christ our Lord."
         ),
-        "poem": (
-            "A sharpened word may cross the room,\nAnd leave a wound behind;\nBut shallow roots cannot endure\nThe judgment truth will find.\n\n"
-            "Within God's house the olive lives,\nIts leaves turned toward the light;\nSteadfast love holds every root,\nAnd teaches speech the right."
+        "poem": poem or (
+            "Razor-light—\nthen the room goes still.\n\nUnder stone,\na root drinks darkness.\n\nOne olive leaf\nturns in the wind,\nits small green silence\noiled with dawn."
         ),
         "next_in_sequence": "Psalm 53 - Human corruption is exposed and salvation is awaited from Zion.",
     }
@@ -149,25 +143,32 @@ def _review(verdict: str = "Pass", hard_findings=None, advisory_findings=None) -
             "theological_accuracy": 9,
             "canonical_warrant": 9,
             "blueprint_alignment": 9,
+            "verbal_economy": 9,
             "literary_quality": 9,
+            "poetic_integrity": 9,
+            "sensory_presence": 9,
+            "read_aloud_flow": 9,
         },
     }
 
 
-def test_integrated_runner_uses_four_roles_and_preserves_artistic_freedom() -> None:
+def test_integrated_runner_uses_lean_packet_and_preserves_artistic_freedom() -> None:
+    captured = {}
+
+    def compose(payload):
+        captured.update(payload)
+        return _draft()
+
     adapter = MockAgentAdapter(
         {
             "devotional_grounder": _grounding(),
             "devotional_planner": _plan(),
-            "devotional_composer": _draft(),
+            "devotional_composer": compose,
             "devotional_reviewer": _review(
-                advisory_findings=[
-                    {"code": "A1", "field": "poem", "message": "Review final cadence aloud."}
-                ]
+                advisory_findings=[{"code": "A1", "field": "poem", "message": "Keep the final vowel open."}]
             ),
         }
     )
-
     ctx = run_engine(EngineContext(chapter_ref="Psalm 52"), adapter)
 
     assert ctx.trace[-1] is State.DONE, ctx.error or ctx.failed_checks
@@ -178,15 +179,59 @@ def test_integrated_runner_uses_four_roles_and_preserves_artistic_freedom() -> N
     assert State.INTEGRATED_REVIEW in ctx.trace
     assert State.CANONICAL_CORRESPONDENCE not in ctx.trace
     assert ctx.blueprint.approved
-    assert ctx.prose["title"] == "The Tree That Remains"
+    assert ctx.prose["title"] == "Under the Olive"
     assert "INTEGRATED A1" in "\n".join(ctx.warnings)
     assert "Integrated deterministic Scripture fixture" in ctx.artifact
 
-    freedom = adapter.outputs["devotional_composer"]
-    assert freedom["title"] == "The Tree That Remains"
+    assert set(captured) == {"composition_packet", "revision", "revision_brief"}
+    packet = captured["composition_packet"]
+    assert "grounding" not in packet
+    assert "context" not in packet
+    assert packet["poem_design"]["sensory_palette"][:2] == ["razor", "root"]
+    assert "poem" not in packet["prose_movements"]
 
 
-def test_integrated_runner_allows_one_targeted_revision_without_replanning() -> None:
+def test_literary_findings_can_trigger_one_targeted_poem_revision() -> None:
+    prose_poem = (
+        "This means the destructive speaker cannot remain secure forever.\n"
+        "The psalm teaches that divine judgment will expose every false refuge.\n"
+        "We learn that truthful speech must replace manipulative speech in our lives.\n"
+        "Therefore we should trust God instead of wealth and human influence.\n"
+        "The final lesson is that steadfast love will preserve faithful people.\n"
+        "In conclusion, the believer should speak carefully and obey God."
+    )
+
+    def compose(payload):
+        if payload["revision"] == 0:
+            return _draft(poem=prose_poem)
+        codes = {item["code"] for item in payload["revision_brief"]["literary_findings"]}
+        assert {"LE04", "LE06", "LE08"}.intersection(codes)
+        return _draft()
+
+    def review(payload):
+        if payload["revision"] == 0:
+            assert payload["literary_findings"]
+            return _review("Revise")
+        return _review("Pass")
+
+    adapter = MockAgentAdapter(
+        {
+            "devotional_grounder": _grounding(),
+            "devotional_planner": _plan(),
+            "devotional_composer": compose,
+            "devotional_reviewer": review,
+        }
+    )
+    ctx = run_engine(EngineContext(chapter_ref="Psalm 52"), adapter)
+
+    assert ctx.trace[-1] is State.DONE, ctx.error or ctx.failed_checks
+    assert ctx.trace.count(State.PASSAGE_BLUEPRINT) == 1
+    assert State.TARGETED_REVISION in ctx.trace
+    assert len(ctx.draft_log) == 2
+    assert "olive leaf" in ctx.poem.lower()
+
+
+def test_integrated_runner_allows_one_truth_targeted_revision_without_replanning() -> None:
     def compose(payload):
         if payload["revision"] == 0:
             return _draft("Be careful with your speech.")
@@ -216,14 +261,13 @@ def test_integrated_runner_allows_one_targeted_revision_without_replanning() -> 
             "devotional_reviewer": review,
         }
     )
-
     ctx = run_engine(EngineContext(chapter_ref="Psalm 52"), adapter)
 
     assert ctx.trace[-1] is State.DONE, ctx.error or ctx.failed_checks
     assert ctx.trace.count(State.PASSAGE_BLUEPRINT) == 1
     assert State.TARGETED_REVISION in ctx.trace
     assert len(ctx.draft_log) == 2
-    assert "preserved" in ctx.prose["application"]
+    assert "protection" in ctx.prose["application"]
 
 
 def test_old_mock_roles_use_legacy_compatibility_path() -> None:
