@@ -22,6 +22,7 @@ CANONICAL_RELATIONSHIPS = {
     "canonical_development",
     "no_identified_link",
 }
+SOURCE_LANGUAGES = {"hebrew", "aramaic", "greek"}
 PROSE_FIELDS = (
     "title",
     "epigraph",
@@ -90,6 +91,57 @@ def adapter_supports_integrated_devotional(adapter: Any) -> bool:
         if current is None:
             break
     return True
+
+
+def _validate_lexical_insight(
+    packet: Mapping[str, Any],
+    *,
+    allow_test_fixture: bool,
+) -> list[IntegratedFinding]:
+    insight = packet.get("lexical_insight")
+    if insight in (None, "", {}, []):
+        if allow_test_fixture:
+            return []
+        return [
+            IntegratedFinding(
+                "G08",
+                "lexical_insight",
+                "One standard, source-language lexical insight is required for production devotionals.",
+                repair_target="grounding",
+            )
+        ]
+    if not isinstance(insight, Mapping):
+        return [
+            IntegratedFinding(
+                "G08",
+                "lexical_insight",
+                "Lexical insight must be a dictionary.",
+                repair_target="grounding",
+            )
+        ]
+
+    required = ("source_language", "term", "observation", "argument_role")
+    findings = [
+        IntegratedFinding(
+            "G08",
+            f"lexical_insight.{name}",
+            "Lexical insight field is required.",
+            repair_target="grounding",
+        )
+        for name in required
+        if not _text(insight.get(name))
+    ]
+    language = _text(insight.get("source_language")).lower()
+    if language and language not in SOURCE_LANGUAGES:
+        findings.append(
+            IntegratedFinding(
+                "G09",
+                "lexical_insight.source_language",
+                "Source language must be Hebrew, Aramaic, or Greek.",
+                repair_target="grounding",
+            )
+        )
+    return findings
 
 
 def validate_grounding(
@@ -195,6 +247,13 @@ def validate_grounding(
                     repair_target="grounding",
                 )
             )
+
+    findings.extend(
+        _validate_lexical_insight(
+            packet,
+            allow_test_fixture=allow_test_fixture,
+        )
+    )
     return findings
 
 

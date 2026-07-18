@@ -25,6 +25,7 @@ from .ledger import update_ledger
 from .literary import (
     LiteraryFinding,
     audit_literary_economy,
+    build_narrative_design,
     build_poem_design,
     composition_packet,
     prune_local_constraints,
@@ -63,6 +64,7 @@ class IntegratedPassageBlueprint:
     reader_transformation: dict[str, str]
     section_burdens: dict[str, str]
     art_direction: dict[str, Any]
+    narrative_design: dict[str, Any]
     poem_design: dict[str, Any]
     supporting_elements: list[str]
     local_constraints: list[str]
@@ -71,6 +73,9 @@ class IntegratedPassageBlueprint:
 
     @property
     def governing_image(self) -> str:
+        selected = _text(self.poem_design.get("selected_governing_image"))
+        if selected:
+            return selected
         images = self.poem_design.get("image_field", [])
         return _text(images[0]) if images else ""
 
@@ -110,6 +115,7 @@ def build_blueprint(ctx: Any, grounding: Mapping[str, Any], plan: Mapping[str, A
         },
         section_burdens=section_burdens,
         art_direction=dict(plan.get("art_direction", {})),
+        narrative_design=build_narrative_design(plan, grounding),
         poem_design=build_poem_design(plan, grounding),
         supporting_elements=[_text(item) for item in _list(plan.get("supporting_elements")) if _text(item)],
         local_constraints=prune_local_constraints(
@@ -128,7 +134,72 @@ def build_blueprint(ctx: Any, grounding: Mapping[str, Any], plan: Mapping[str, A
     )
 
 
-def validate_blueprint(blueprint: IntegratedPassageBlueprint) -> list[IntegratedFinding]:
+def _validate_taste_design(blueprint: IntegratedPassageBlueprint, *, required: bool) -> list[IntegratedFinding]:
+    findings: list[IntegratedFinding] = []
+    candidates = [
+        item
+        for item in _list(blueprint.poem_design.get("governing_image_candidates"))
+        if isinstance(item, Mapping)
+    ]
+    if required and len(candidates) < 3:
+        findings.append(IntegratedFinding(
+            "P09",
+            "governing_image_candidates",
+            "Production planning requires at least three warranted governing-image candidates.",
+            repair_target="blueprint",
+        ))
+    if required or candidates:
+        for index, candidate in enumerate(candidates):
+            for field_name in ("image", "warrant", "transformation"):
+                if not _text(candidate.get(field_name)):
+                    findings.append(IntegratedFinding(
+                        "P10",
+                        f"governing_image_candidates.{index}.{field_name}",
+                        "Each image candidate needs an image, textual warrant, and transformation path.",
+                        repair_target="blueprint",
+                    ))
+        names = {_text(item.get("image")) for item in candidates if _text(item.get("image"))}
+        if blueprint.governing_image and candidates and blueprint.governing_image not in names:
+            findings.append(IntegratedFinding(
+                "P11",
+                "selected_governing_image",
+                "The selected governing image must come from the candidate set.",
+                repair_target="blueprint",
+            ))
+        if required and not _text(blueprint.poem_design.get("selection_rationale")):
+            findings.append(IntegratedFinding(
+                "P12",
+                "image_selection_rationale",
+                "Image selection must state warrant, sensory grain, transformation, and ledger novelty.",
+                repair_target="blueprint",
+            ))
+
+    narrative = blueprint.narrative_design
+    try:
+        level = int(narrative.get("level", 0))
+    except (TypeError, ValueError):
+        level = 0
+    if required and level not in {1, 2, 3}:
+        findings.append(IntegratedFinding("P13", "narrative_design.level", "Narrative depth must be Level 1, 2, or 3.", repair_target="blueprint"))
+    if required and not _text(narrative.get("warrant")):
+        findings.append(IntegratedFinding("P13", "narrative_design.warrant", "Narrative depth requires an explicit textual or canonical warrant.", repair_target="blueprint"))
+    if required and level > 1:
+        for field_name in ("source_basis", "bounded_scene"):
+            if not _text(narrative.get(field_name)):
+                findings.append(IntegratedFinding(
+                    "P14",
+                    f"narrative_design.{field_name}",
+                    "Level 2 or 3 requires a source basis and a bounded scene.",
+                    repair_target="blueprint",
+                ))
+    return findings
+
+
+def validate_blueprint(
+    blueprint: IntegratedPassageBlueprint,
+    *,
+    require_taste_design: bool = False,
+) -> list[IntegratedFinding]:
     required = {
         "governing_question": blueprint.governing_question,
         "governing_subject": blueprint.governing_subject,
@@ -164,6 +235,7 @@ def validate_blueprint(blueprint: IntegratedPassageBlueprint) -> list[Integrated
         findings.append(IntegratedFinding("P07", "poem_design.sensory_palette", "Poem needs at least two passage-born sensory anchors.", repair_target="blueprint"))
     if len(blueprint.evidence_path) < 6:
         findings.append(IntegratedFinding("P08", "evidence_path", "Evidence path is incomplete.", repair_target="blueprint"))
+    findings.extend(_validate_taste_design(blueprint, required=require_taste_design))
     blueprint.approved = not findings
     return findings
 
@@ -190,7 +262,12 @@ def _materialize_context(ctx: Any, grounding: Mapping[str, Any], blueprint: Inte
     }
     ctx.correspondence = dict(grounding["canonical_relationship"])
     ctx.theological_risk_register = [dict(item) for item in _list(grounding["risks"]) if isinstance(item, Mapping)]
-    ctx.historical_linguistic = {"historical_meaning": _text(grounding["historical_meaning"]), "literary_mode": _text(grounding["literary_mode"])}
+    ctx.historical_linguistic = {
+        "historical_meaning": _text(grounding["historical_meaning"]),
+        "literary_mode": _text(grounding["literary_mode"]),
+        "lexical_insight": dict(grounding.get("lexical_insight", {})),
+        "narrative_design": dict(blueprint.narrative_design),
+    }
     ctx.commentary_grounding = {"textual_evidence": list(_list(grounding["textual_evidence"])), "unsupported_claims": list(_list(grounding.get("unsupported_claims")))}
     ctx.art_direction = dict(blueprint.art_direction)
     ctx.brief = {
@@ -219,6 +296,7 @@ def _materialize_context(ctx: Any, grounding: Mapping[str, Any], blueprint: Inte
     ctx.blueprint = blueprint
     ctx.planning_packet = {
         "passage": {"question": blueprint.governing_question, "subject": blueprint.governing_subject, "hinge": blueprint.textual_hinge, "divine_answer": blueprint.divine_answer},
+        "narrative_design": dict(blueprint.narrative_design),
         "poem_design": dict(blueprint.poem_design),
     }
 
@@ -269,12 +347,13 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
 
     config = config or EngineConfig()
     ctx.pipeline_mode = "integrated"
+    is_mock = _is_mock(adapter)
     try:
         ctx.trace.append(State.TEXT_GROUNDING)
         grounding = adapter.call("devotional_grounder", {"chapter_ref": ctx.chapter_ref, "source_text": ctx.source_text, "context": ctx})
         if not isinstance(grounding, Mapping):
             raise ValidationError("devotional_grounder output must be a dictionary")
-        findings = validate_grounding(grounding, allow_test_fixture=_is_mock(adapter), config=config)
+        findings = validate_grounding(grounding, allow_test_fixture=is_mock, config=config)
         if findings:
             raise ValidationError("; ".join(f"{item.field}: {item.message}" for item in findings))
         ctx.grounding_packet = dict(grounding)
@@ -292,14 +371,21 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
                     "canonical_relationship": grounding["canonical_relationship"],
                     "christological_fulfillment": grounding["christological_fulfillment"],
                 },
-                "planning_instruction": "Build a spare blueprint: one movement per prose section and a separate poem design of image field, sensory palette, sonic movement, and emotional turn.",
+                "series_ledger": dict(getattr(ctx, "ledger", {}) or {}),
+                "planning_instruction": (
+                    "Build a spare blueprint with one movement per prose section. Generate at least three "
+                    "governing-image candidates, each with textual warrant, sensory grain, ledger novelty, "
+                    "and a transformation path. Select one and explain the choice. Choose Narrative Level 1, "
+                    "2, or 3 by warrant, bounding any Level 2 or 3 scene. Keep the poem design separate: "
+                    "image field, sensory palette, sonic movement, and emotional turn."
+                ),
                 "context": ctx,
             },
         )
         if not isinstance(plan, Mapping):
             raise ValidationError("devotional_planner output must be a dictionary")
         blueprint = build_blueprint(ctx, grounding, plan)
-        findings = validate_blueprint(blueprint)
+        findings = validate_blueprint(blueprint, require_taste_design=not is_mock)
         ctx.blueprint_findings = findings
         if findings:
             raise ValidationError("; ".join(f"{item.field}: {item.message}" for item in findings))
@@ -336,12 +422,24 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
                 "devotional_reviewer",
                 {
                     "chapter_ref": ctx.chapter_ref,
-                    "protected": {"passage": packet["passage"], "canonical": packet["canonical"], "reader_transformation": packet["reader_transformation"], "boundaries": packet["boundaries"]},
+                    "protected": {
+                        "passage": packet["passage"],
+                        "canonical": packet["canonical"],
+                        "reader_transformation": packet["reader_transformation"],
+                        "narrative_design": packet["narrative_design"],
+                        "boundaries": packet["boundaries"],
+                    },
                     "draft": {**ctx.prose, "poem": ctx.poem},
                     "deterministic_failures": list(harness_failures),
                     "coherence_findings": [item.__dict__ for item in coherence_hard + coherence_advisory],
                     "literary_findings": [item.__dict__ for item in literary],
-                    "review_instruction": "Truth failures are hard. Test whether each sentence and line earns its place, whether prose trusts implication, and whether the poem has image, qualia, music, breath, and an emotional turn without summarizing the devotional.",
+                    "review_instruction": (
+                        "Truth failures are hard. Confirm that the lexical insight is standard and serves the "
+                        "argument, that narrative detail stays inside its warrant, and that the epigraph implies "
+                        "a true mechanism. Test whether each sentence and line earns its place. Prefer varied "
+                        "breath, plainness after image, and one decisive reversal. The poem needs image, qualia, "
+                        "music, breath, and an emotional turn without summarizing the devotional."
+                    ),
                     "revision": revision,
                 },
             )
@@ -371,7 +469,7 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
                 "hard_findings": [item.__dict__ for item in hard],
                 "literary_findings": [item.__dict__ for item in literary],
                 "advisory_findings": [item.__dict__ for item in advisory],
-                "instruction": "Repair only identified fields. Preserve Scripture, grounding, blueprint, and unaffected artistic choices. Cut before adding.",
+                "instruction": "Repair only identified fields. Preserve Scripture, grounding, blueprint, narrative warrant, and unaffected artistic choices. Cut before adding.",
             }
     except Exception as exc:
         ctx.error = f"{type(exc).__name__}: {exc}"
