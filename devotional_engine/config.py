@@ -3,8 +3,8 @@ from dataclasses import dataclass, field
 ROLE_CONFIG = {
     # Four-stage production devotional path.
     "devotional_grounder": {"temperature": 0.2},
-    "devotional_planner": {"temperature": 0.45},
-    "devotional_composer": {"temperature": 0.85},
+    "devotional_planner": {"temperature": 0.4},
+    "devotional_composer": {"temperature": 0.9},
     "devotional_reviewer": {"temperature": 0.12},
     # Legacy devotional compatibility roles.
     "source_agent": {"temperature": 0.1}, "translator": {"temperature": 0.15},
@@ -67,6 +67,15 @@ class EngineConfig:
     # when an adapter supports both contracts.
     devotional_pipeline: str = "auto"
     integrated_max_revisions: int = 1
+    # Literary targets are review signals, not universal hard limits. They make
+    # excess visible while leaving the composer free to exceed them when the
+    # passage genuinely requires it.
+    integrated_prose_target_words: int = 850
+    integrated_section_share_limit: float = 0.52
+    integrated_poem_target_lines: int = 16
+    integrated_poem_max_average_line_words: float = 7.5
+    integrated_poem_min_qualia: int = 2
+    integrated_review_min_score: float = 8.0
     # Real adapters must identify every biblical source or rendering before the
     # engine may compose. Deterministic MockAgentAdapter fixtures are labeled as
     # test-only material and remain explicitly non-publication.
