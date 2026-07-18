@@ -1,6 +1,12 @@
 from dataclasses import dataclass, field
 
 ROLE_CONFIG = {
+    # Four-stage production devotional path.
+    "devotional_grounder": {"temperature": 0.2},
+    "devotional_planner": {"temperature": 0.45},
+    "devotional_composer": {"temperature": 0.85},
+    "devotional_reviewer": {"temperature": 0.12},
+    # Legacy devotional compatibility roles.
     "source_agent": {"temperature": 0.1}, "translator": {"temperature": 0.15},
     "chapter_design_mapper": {"temperature": 0.35}, "canonist": {"temperature": 0.25},
     "theological_risk_agent": {"temperature": 0.2}, "historian_linguist": {"temperature": 0.2},
@@ -55,15 +61,19 @@ class EngineConfig:
     focus_verses_min_words: int = 35
     profiled_max_revisions: int = 1
     mode: str = "devotional"
+    # "auto" sends real adapters and four-role mocks through the integrated
+    # production path while preserving old deterministic fixtures through the
+    # legacy compatibility runner. Set explicitly to "integrated" or "legacy"
+    # when an adapter supports both contracts.
+    devotional_pipeline: str = "auto"
+    integrated_max_revisions: int = 1
     # Real adapters must identify every biblical source or rendering before the
     # engine may compose. Deterministic MockAgentAdapter fixtures are labeled as
     # test-only material and remain explicitly non-publication.
     enforce_scripture_provenance: bool = True
-    # v6.5 coherence contract. Hard checks protect the plan boundary; warnings
-    # surface repetition or theme displacement without forcing safe sameness.
+    # Coherence checks protect the approved passage center without prescribing
+    # sentence rhythm, paragraph count, metaphor count, or poem form.
     enforce_instruction_coherence: bool = True
-    # This is a local editorial option, not a global devotional law. Some Psalms
-    # intentionally use a refrain as title, epigraph, and opening threshold.
     enforce_title_opening_distinction: bool = False
     warn_cross_section_repetition: bool = True
     warn_theme_displacement: bool = True
