@@ -3,6 +3,13 @@ from enum import Enum, auto
 
 class State(Enum):
     INIT = auto()
+    # Four-stage production devotional path.
+    TEXT_GROUNDING = auto()
+    PASSAGE_BLUEPRINT = auto()
+    INTEGRATED_COMPOSITION = auto()
+    INTEGRATED_REVIEW = auto()
+    TARGETED_REVISION = auto()
+    # Legacy compatibility path retained for existing deterministic fixtures.
     SOURCE_TEXT = auto()
     RENDERING = auto()
     CHAPTER_DESIGN_MAP = auto()

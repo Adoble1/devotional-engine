@@ -26,6 +26,17 @@ from .config import EngineConfig, ROLE_CONFIG
 from .classical_hymnody import CLASSICAL_HYMNODY_PROFILE, build_hymnody_brief
 from .poetic_music import POETIC_MUSIC_PROFILE, analyze_euphony, build_poetic_music_brief, has_midline_caesura
 from .engine import apply_american_literary_style, apply_editorial_smoothing, route_after_failure
+from .integrated import (
+    INTEGRATED_ROLES,
+    IntegratedFinding,
+    IntegratedPassageBlueprint,
+    adapter_supports_integrated_devotional,
+    build_blueprint as build_integrated_blueprint,
+    run_integrated_devotional,
+    validate_blueprint as validate_integrated_blueprint,
+    validate_grounding,
+    validate_review,
+)
 from .v65 import run_engine
 from .models import EngineContext
 from .profiles import (
@@ -93,4 +104,8 @@ __all__ = [
     "run_profiled_engine", "validate_planning_packet", "validate_profiled_draft",
     "PUBLICATION_MODES", "ScriptureProvenance", "scripture_attribution",
     "validate_provenance_record", "validate_scripture_context",
+    "INTEGRATED_ROLES", "IntegratedFinding", "IntegratedPassageBlueprint",
+    "adapter_supports_integrated_devotional", "build_integrated_blueprint",
+    "run_integrated_devotional", "validate_integrated_blueprint", "validate_grounding",
+    "validate_review",
 ]
