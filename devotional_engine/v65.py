@@ -4,7 +4,7 @@ from dataclasses import replace
 
 from .coherence import CoherenceGateAdapter, audit_prose
 from .config import EngineConfig
-from .integrated import adapter_supports_integrated_devotional, run_integrated_devotional
+from .integrated_v67 import adapter_supports_integrated_devotional, run_integrated_devotional
 from .profiles import WritingMode, normalize_mode
 from .scripture import ScriptureProvenanceAdapter
 from .states import State
@@ -50,8 +50,8 @@ def _run_legacy(ctx, adapter, config):
 def run_engine(ctx, adapter, config=None):
     """Run the devotional engine.
 
-    Production adapters use the four-stage integrated path: Text Grounding,
-    Passage Blueprint, protected Composition, and Integrated Review. Existing
+    Production adapters use dense grounding, a spare passage blueprint, protected
+    composition, and one integrated truth-and-literature review. Existing
     deterministic fixtures without those four roles continue through the legacy
     compatibility runner so the refactor remains regression-safe.
     """
@@ -73,8 +73,8 @@ def run_engine(ctx, adapter, config=None):
     )
     if use_integrated:
         # Threshold phrases belonged to the legacy surface pipeline. The
-        # integrated blueprint protects meaning and movement while leaving the
-        # composer free to discover the opening.
+        # literature-first blueprint protects meaning while leaving the opening
+        # and sentence music undiscovered until composition.
         integrated_config = replace(
             resolved_config,
             threshold_min_words=0,
