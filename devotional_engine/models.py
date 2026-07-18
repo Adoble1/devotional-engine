@@ -23,6 +23,9 @@ class EngineContext:
     blueprint: object | None = None
     blueprint_findings: list = field(default_factory=list)
     alignment_findings: list = field(default_factory=list)
+    grounding_packet: dict = field(default_factory=dict)
+    integrated_review: dict = field(default_factory=dict)
+    pipeline_mode: str = ""
     prose: dict = field(default_factory=dict)
     poem: str = ""
     artifact: str = ""
