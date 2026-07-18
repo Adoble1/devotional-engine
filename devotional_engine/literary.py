@@ -20,6 +20,19 @@ EXPOSITORY_POEM_PATTERNS = (
     r"\btherefore\b",
     r"\bin conclusion\b",
 )
+REDUNDANT_INTENSIFIERS = (
+    "literally",
+    "actually",
+    "truly",
+    "really",
+    "very",
+    "deeply",
+)
+REVERSAL_PATTERNS = (
+    r"\bnot\s+[^.!?]{1,100}\.\s+(?:it|this|that)\s+is\b",
+    r"\bnot\s+because\b[^.!?]{1,140}\bbut\s+because\b",
+    r"\bnot\s+[^,.;:]{1,100},\s+but\b",
+)
 
 
 @dataclass(frozen=True)
@@ -85,6 +98,60 @@ def prune_local_constraints(
     ]
 
 
+def _image_candidates(plan: Mapping[str, Any]) -> list[dict[str, str]]:
+    candidates: list[dict[str, str]] = []
+    for item in _list(plan.get("governing_image_candidates")):
+        if isinstance(item, Mapping):
+            record = {
+                "image": _text(item.get("image")),
+                "warrant": _text(item.get("warrant")),
+                "sensory_grain": _text(item.get("sensory_grain")),
+                "transformation": _text(item.get("transformation")),
+                "ledger_novelty": _text(item.get("ledger_novelty")),
+            }
+        else:
+            record = {
+                "image": _text(item),
+                "warrant": "",
+                "sensory_grain": "",
+                "transformation": "",
+                "ledger_novelty": "",
+            }
+        if record["image"]:
+            candidates.append(record)
+    return candidates
+
+
+def build_narrative_design(
+    plan: Mapping[str, Any],
+    grounding: Mapping[str, Any],
+) -> dict[str, Any]:
+    supplied = plan.get("narrative_design")
+    supplied = dict(supplied) if isinstance(supplied, Mapping) else {}
+    level = supplied.get("level", 1)
+    try:
+        level = int(level)
+    except (TypeError, ValueError):
+        level = 0
+    return {
+        "level": level,
+        "warrant": _text(
+            supplied.get("warrant")
+            or grounding.get("literary_mode")
+            or grounding.get("historical_meaning")
+        ),
+        "scope": _text(
+            supplied.get("scope")
+            or "Dramatize only the speaker and situation established by the text."
+        ),
+        "source_basis": _text(
+            supplied.get("source_basis")
+            or grounding.get("historical_meaning")
+        ),
+        "bounded_scene": _text(supplied.get("bounded_scene")),
+    }
+
+
 def build_poem_design(plan: Mapping[str, Any], grounding: Mapping[str, Any]) -> dict[str, Any]:
     supplied = plan.get("poem_design")
     supplied = dict(supplied) if isinstance(supplied, Mapping) else {}
@@ -93,11 +160,21 @@ def build_poem_design(plan: Mapping[str, Any], grounding: Mapping[str, Any]) -> 
     transform = plan.get("reader_transformation")
     transform = dict(transform) if isinstance(transform, Mapping) else {}
 
+    candidates = _image_candidates(plan)
+    selected = _text(
+        plan.get("selected_governing_image")
+        or supplied.get("selected_governing_image")
+        or (candidates[0]["image"] if candidates else "")
+        or plan.get("governing_image")
+    )
+
     image_field = dedupe_boundaries(_list(supplied.get("image_field")))
     if not image_field:
         image_field = dedupe_boundaries(
-            [plan.get("governing_image"), *_list(plan.get("poem_arc"))]
+            [selected, plan.get("governing_image"), *_list(plan.get("poem_arc"))]
         )
+    elif selected:
+        image_field = dedupe_boundaries([selected, *image_field])
 
     sensory_palette = dedupe_boundaries(_list(supplied.get("sensory_palette")))
     if not sensory_palette:
@@ -129,6 +206,15 @@ def build_poem_design(plan: Mapping[str, Any], grounding: Mapping[str, Any]) -> 
                 "do not turn prose sentences into line breaks",
             ]
         ),
+        "form": _text(supplied.get("form")),
+        "meter": _text(supplied.get("meter")),
+        "rhyme_scheme": _text(supplied.get("rhyme_scheme")),
+        "selected_governing_image": selected,
+        "governing_image_candidates": candidates,
+        "selection_rationale": _text(
+            plan.get("image_selection_rationale")
+            or supplied.get("selection_rationale")
+        ),
     }
 
 
@@ -142,6 +228,8 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
         for risk in _list(grounding.get("risks"))
         if isinstance(risk, Mapping) and _text(risk.get("avoidance_rule"))
     ]
+    lexical = grounding.get("lexical_insight")
+    lexical = dict(lexical) if isinstance(lexical, Mapping) else {}
     return {
         "chapter_ref": ctx.chapter_ref,
         "scripture": {
@@ -154,6 +242,7 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
             "human_predicament": blueprint.human_predicament,
             "textual_hinge": blueprint.textual_hinge,
             "divine_answer": blueprint.divine_answer,
+            "lexical_insight": lexical,
         },
         "canonical": {
             "classification": _text(canonical.get("classification")),
@@ -163,7 +252,17 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
         "reader_transformation": dict(blueprint.reader_transformation),
         "prose_movements": dict(blueprint.section_burdens),
         "art_direction": dict(blueprint.art_direction),
+        "narrative_design": dict(getattr(blueprint, "narrative_design", {})),
         "poem_design": dict(blueprint.poem_design),
+        "series_continuity": {
+            "selected_image": blueprint.governing_image,
+            "selection_rationale": _text(
+                blueprint.poem_design.get("selection_rationale")
+            ),
+            "candidate_count": len(
+                _list(blueprint.poem_design.get("governing_image_candidates"))
+            ),
+        },
         "boundaries": dedupe_boundaries(
             [
                 *risk_boundaries,
@@ -180,6 +279,10 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
                 "prefer image and implication to repeated explanation",
                 "remove any sentence that only proves the engine was careful",
                 "let every paragraph and every line earn its place",
+                "use the lexical insight only where it advances the argument",
+                "make the epigraph's implied mechanism true to the passage",
+                "after a strong image, allow a plain sentence to carry weight",
+                "reserve balanced reversal for the strongest turn",
             ],
         },
         "aesthetic_freedom": {
@@ -190,10 +293,94 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
             "fixed": [
                 "Scripture provenance", "historical meaning", "governing subject",
                 "textual hinge", "divine answer", "canonical classification",
-                "reader response",
+                "reader response", "narrative warrant",
             ],
         },
     }
+
+
+def _cadence_findings(prose: Mapping[str, Any], poem: str) -> list[LiteraryFinding]:
+    findings: list[LiteraryFinding] = []
+    prose_text = "\n".join(_text(prose.get(section, "")) for section in CORE_PROSE_SECTIONS)
+    full_text = f"{prose_text}\n{poem}"
+
+    if "—" in full_text or "–" in full_text:
+        findings.append(
+            LiteraryFinding(
+                "LE09",
+                "draft",
+                "Dash punctuation is carrying sentence structure; prefer commas, colons, or separate sentences when the ear improves.",
+                repair_target="draft",
+            )
+        )
+
+    found = sorted(
+        term
+        for term in REDUNDANT_INTENSIFIERS
+        if re.search(rf"\b{re.escape(term)}\b", prose_text.lower())
+    )
+    if found:
+        findings.append(
+            LiteraryFinding(
+                "LE10",
+                "prose",
+                f"Redundant intensifier language appears: {', '.join(found)}.",
+                repair_target="prose",
+            )
+        )
+
+    reversals = sum(
+        len(re.findall(pattern, prose_text.lower(), re.S))
+        for pattern in REVERSAL_PATTERNS
+    )
+    if reversals > 1:
+        findings.append(
+            LiteraryFinding(
+                "LE11",
+                "prose",
+                f"Balanced reversal appears {reversals} times; reserve it for one decisive turn.",
+                repair_target="prose",
+            )
+        )
+
+    for section in CORE_PROSE_SECTIONS:
+        text = _text(prose.get(section, ""))
+        sentences = [
+            item.strip()
+            for item in re.split(r"(?<=[.!?])\s+", text)
+            if item.strip()
+        ]
+        lengths = [len(_words(item)) for item in sentences]
+        if len(lengths) >= 4 and max(lengths) - min(lengths) < 8:
+            findings.append(
+                LiteraryFinding(
+                    "LE12",
+                    section,
+                    "Sentence lengths are unusually even; vary breath and pressure within the section.",
+                    repair_target=section,
+                )
+            )
+
+        paragraphs = [item.strip() for item in re.split(r"\n\s*\n", text) if item.strip()]
+        openings = [
+            tuple(_normalize(item).split()[:2])
+            for item in paragraphs
+            if _normalize(item)
+        ]
+        if any(
+            openings[index] == openings[index - 1]
+            for index in range(1, len(openings))
+            if len(openings[index]) == 2
+        ):
+            findings.append(
+                LiteraryFinding(
+                    "LE13",
+                    section,
+                    "Consecutive paragraphs open with the same syntactic footprint.",
+                    repair_target=section,
+                )
+            )
+    return findings
 
 
 def audit_literary_economy(ctx: Any, blueprint: Any, config: Any) -> list[LiteraryFinding]:
@@ -292,4 +479,6 @@ def audit_literary_economy(ctx: Any, blueprint: Any, config: Any) -> list[Litera
             "The poem lacks enough passage-born sensory presence; embody the movement in concrete qualia.",
             repair_target="poem",
         ))
+
+    findings.extend(_cadence_findings(prose, poem))
     return findings
