@@ -1,10 +1,10 @@
-# Immersive Sacred Devotional Ghostwriting Engine v6.6
+# Immersive Sacred Devotional Ghostwriting Engine v6.7
 
 A provider-independent writing system built around one principle:
 
 > Blueprint preserves coherence. Script performs beauty. Harness validates alignment. Evaluator protects truth.
 
-Version 6.6 simplifies the production devotional path to four stages while preserving Scripture provenance, canonical discipline, deterministic validation, bounded repair, and human publication review.
+Version 6.7 keeps the four-stage devotional path but changes what each stage is allowed to carry. Research remains dense. The blueprint becomes spare. The composer receives only the load-bearing passage path and literary direction. The poem receives its own image-and-sound design rather than a sermon outline.
 
 ## Governing laws
 
@@ -23,10 +23,10 @@ Project- and passage-specific constraints remain local. A successful edit is not
 
 Production adapters use:
 
-1. `devotional_grounder` — one Text Grounding Packet containing source wording, provenance, historical meaning, literary mode, textual evidence, governing claim, hinge, divine action, canonical classification, Christological fulfillment, and risks.
-2. `devotional_planner` — one Passage Blueprint containing the governing question, reader transformation, section burdens, governing image, art direction, poem arc, supporting elements, and local constraints.
-3. `devotional_composer` — one protected creative pass. The composer may freely choose title, opening, paragraph shape, imagery, cadence, transitions, and poem form while the grounding and blueprint remain immutable.
-4. `devotional_reviewer` — one integrated review separating hard findings from advisory literary judgment. At most one targeted revision is permitted by default.
+1. `devotional_grounder` — source wording, provenance, historical meaning, literary mode, textual evidence, governing claim, hinge, divine action, canonical classification, Christological fulfillment, and risks.
+2. `devotional_planner` — one governing question, one reader transformation, five concise prose movements, art direction, and a separate poem design.
+3. `devotional_composer` — one protected creative pass using a lean composition packet rather than the full research context.
+4. `devotional_reviewer` — one integrated truth-and-literature review, with at most one targeted revision by default.
 
 The deterministic control path is:
 
@@ -34,22 +34,81 @@ The deterministic control path is:
 
 That path protects meaning. It does not prescribe sentence rhythm, paragraph count, metaphor count, title shape, or poem form.
 
+## Literary economy contract
+
+The composer receives only:
+
+- verified Scripture wording and provenance;
+- the governing question, subject, hinge, and divine answer;
+- the canonical classification and fulfillment;
+- the reader transformation;
+- one movement for each prose section;
+- art direction;
+- a compact set of non-duplicated boundaries;
+- literary targets for economy.
+
+The full grounding packet and legacy context object are not passed into composition. Duplicate local constraints already represented by risk boundaries are removed.
+
+Literary targets are advisory signals, not universal hard limits. The defaults surface:
+
+- devotional bodies that exceed roughly 850 words;
+- a single prose section carrying more than half the argument;
+- poems exceeding roughly 16 lines;
+- prose-like average line length;
+- lineation dominated by complete prose sentences;
+- expository poem language;
+- poem lines copied from the reflection;
+- weak passage-born sensory presence.
+
+The controlling editorial question is:
+
+> Does every sentence and every line earn its place?
+
+## Poem design
+
+The poem is not assigned a sixth prose burden. It receives:
+
+```python
+{
+    "image_field": ["razor", "olive tree"],
+    "sensory_palette": ["steel", "root", "olive leaf", "oil", "wind"],
+    "sonic_movement": "hard consonants opening into quieter breath",
+    "emotional_turn": "from sudden injury to life held underground",
+    "prohibited_exposition": [
+        "do not summarize the reflection",
+        "do not explain the theological argument",
+        "do not turn prose sentences into line breaks",
+    ],
+}
+```
+
+The poem should transform the devotional’s emotional truth through image, sound, breath, compression, and qualia. It should not restate the thesis in shorter lines.
+
+## Integrated review contract
+
+Hard findings include unsupported textual or historical claims, invalid provenance, blueprint contradiction, canonical overclaim, serious theological error, disconnected application, missing artifact fields, and deterministic harness failure.
+
+The reviewer also scores:
+
+- textual fidelity;
+- theological accuracy;
+- canonical warrant;
+- blueprint alignment;
+- verbal economy;
+- literary quality;
+- poetic integrity;
+- sensory presence;
+- read-aloud flow.
+
+A passing review must meet the configured minimum in every dimension. Literary findings remain advisory evidence, but the reviewer may use them to require one targeted revision. Repair instructions say: cut before adding.
+
 ## Compatibility
 
 `run_engine` defaults to `EngineConfig(devotional_pipeline="auto")`.
 
-- Real adapters use the integrated four-stage path.
+- Real adapters use the literature-first integrated path.
 - Mocks that provide all four integrated roles use that path.
 - Older deterministic mock fixtures automatically use the v6.5 legacy compatibility runner.
-
-Explicit selection is available:
-
-```python
-from devotional_engine import EngineConfig, EngineContext, run_engine
-
-config = EngineConfig(devotional_pipeline="integrated")
-result = run_engine(EngineContext(chapter_ref="Psalm 52"), RealAdapter(), config)
-```
 
 The legacy path remains for regression safety, not as the recommended production design.
 
@@ -62,49 +121,13 @@ Every source and rendering must identify one quotation mode:
 - `independent_rendering` — identified Hebrew or Greek source, explicit attribution, and mandatory human review.
 - `paraphrase` — identified source, explicit attribution, and mandatory human review.
 
-Example independent rendering metadata:
-
-```python
-{
-    "quotation_mode": "independent_rendering",
-    "source_text_id": "Masoretic Text / Psalm 52",
-    "attribution": "Independent rendering from the Hebrew",
-    "verified_exact_match": False,
-    "human_review_required": True,
-}
-```
-
 Missing or malformed provenance fails before planning or composition. The selected attribution is rendered beneath the focus verses. Deterministic `MockAgentAdapter` runs may use `test_fixture`, which is always labeled not for publication.
-
-## Integrated review contract
-
-Hard findings include:
-
-- unsupported textual or historical claims;
-- invalid Scripture provenance;
-- contradiction of the approved blueprint;
-- canonical overclaim;
-- serious theological error;
-- disconnected application;
-- missing required artifact fields;
-- deterministic harness failure.
-
-Advisory findings include:
-
-- mechanical cadence;
-- over-explanation;
-- weak transitions;
-- repeated language;
-- supporting material that threatens to displace the governing subject;
-- poem or prose that should be reviewed aloud.
-
-Advisories do not automatically block publication or force revision. The reviewer decides whether the whole work requires one targeted repair.
 
 ## Writing profiles
 
 ### Devotional
 
-Uses the integrated four-stage core, Scripture provenance, evidence-path validation, canonical classification, Christological fulfillment without replacement, prayer, poem, deterministic harness, and human review.
+Uses the four-stage literature-first core, Scripture provenance, evidence-path validation, canonical classification, Christological fulfillment without replacement, prayer, poem, deterministic harness, and human review.
 
 ### Fiction
 
@@ -123,35 +146,6 @@ python -m compileall -q devotional_engine examples
 ```
 
 The package otherwise uses the Python standard library.
-
-## Lean fiction or nonfiction pipeline
-
-```python
-from devotional_engine import WritingRequest, run_profiled_engine
-
-request = WritingRequest(
-    mode="fiction",
-    project_ref="Novel / Chapter 4",
-    source_material="Existing manuscript and continuity ledger",
-    plan={
-        "governing_question": "Will Mara reveal what she knows?",
-        "truth_contract": ["The bridge is raised.", "Mara knows the signal code."],
-        "local_constraints": ["Remain in Mara's point of view."],
-        "planning_maps": {
-            "truth_map": {"established": ["night", "raised bridge"]},
-            "revelation_map": {"entry": "alarm", "turn": "recognition"},
-            "reader_transformation_map": {"from": "suspicion", "to": "recognition"},
-            "art_direction": {"register": "compressed suspense"},
-            "world_state": {"bridge": "raised"},
-            "character_state": {"Mara": {"desire": "protect her brother"}},
-            "causal_scene_map": {"alarm": "crowd stops"},
-            "continuity_ledger": {"chapter_3": "Mara learned the code"},
-        },
-    },
-)
-
-result = run_profiled_engine(request, RealAdapter())
-```
 
 ## Production limits
 
