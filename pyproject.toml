@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "devotional-engine"
-version = "6.6.0"
-description = "Integrated blueprint-first writing engine with a four-stage devotional core"
+version = "6.7.0"
+description = "Literature-first Truth-Beauty writing engine with devotional, fiction, and nonfiction profiles"
 requires-python = ">=3.11"
 
 [project.optional-dependencies]
