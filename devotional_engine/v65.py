@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from dataclasses import replace
+
 from .coherence import CoherenceGateAdapter, audit_prose
 from .config import EngineConfig
 from .integrated import adapter_supports_integrated_devotional, run_integrated_devotional
@@ -70,5 +72,13 @@ def run_engine(ctx, adapter, config=None):
         requested == "auto" and adapter_supports_integrated_devotional(adapter)
     )
     if use_integrated:
-        return run_integrated_devotional(ctx, adapter, resolved_config)
+        # Threshold phrases belonged to the legacy surface pipeline. The
+        # integrated blueprint protects meaning and movement while leaving the
+        # composer free to discover the opening.
+        integrated_config = replace(
+            resolved_config,
+            threshold_min_words=0,
+            threshold_max_words=0,
+        )
+        return run_integrated_devotional(ctx, adapter, integrated_config)
     return _run_legacy(ctx, adapter, resolved_config)
