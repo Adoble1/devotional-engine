@@ -76,6 +76,13 @@ class EngineConfig:
     integrated_poem_max_average_line_words: float = 7.5
     integrated_poem_min_qualia: int = 2
     integrated_review_min_score: float = 8.0
+    # Production planning maps divine and human reality, moral relation,
+    # disorder, divine action, and restored posture before composition. The
+    # source-document register is U.S.-public-domain and pre-1950, but it may
+    # shape diction and emotional restraint only, never biblical truth.
+    enforce_ontological_overlay: bool = True
+    ontology_period_end_year: int = 1949
+    ontology_review_min_score: float = 8.0
     # Real adapters must identify every biblical source or rendering before the
     # engine may compose. Deterministic MockAgentAdapter fixtures are labeled as
     # test-only material and remain explicitly non-publication.
