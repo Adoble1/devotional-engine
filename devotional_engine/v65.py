@@ -5,6 +5,7 @@ from dataclasses import replace
 from .coherence import CoherenceGateAdapter, audit_prose
 from .config import EngineConfig
 from .integrated_v67 import adapter_supports_integrated_devotional, run_integrated_devotional
+from .ontology import OntologicalOverlayAdapter
 from .profiles import WritingMode, normalize_mode
 from .scripture import ScriptureProvenanceAdapter
 from .states import State
@@ -50,10 +51,10 @@ def _run_legacy(ctx, adapter, config):
 def run_engine(ctx, adapter, config=None):
     """Run the devotional engine.
 
-    Production adapters use dense grounding, a spare passage blueprint, protected
-    composition, and one integrated truth-and-literature review. Existing
-    deterministic fixtures without those four roles continue through the legacy
-    compatibility runner so the refactor remains regression-safe.
+    Production adapters use dense grounding, a spare passage blueprint, an
+    ontological and affective overlay, protected composition, and one integrated
+    truth-and-literature review. Existing deterministic fixtures without those
+    four roles continue through the legacy compatibility runner.
     """
 
     mode = normalize_mode(getattr(ctx, "mode", WritingMode.DEVOTIONAL.value))
@@ -80,5 +81,6 @@ def run_engine(ctx, adapter, config=None):
             threshold_min_words=0,
             threshold_max_words=0,
         )
-        return run_integrated_devotional(ctx, adapter, integrated_config)
+        overlay_adapter = OntologicalOverlayAdapter(adapter, integrated_config)
+        return run_integrated_devotional(ctx, overlay_adapter, integrated_config)
     return _run_legacy(ctx, adapter, resolved_config)

@@ -16,6 +16,7 @@ class EngineContext:
     theological_risk_register: list = field(default_factory=list)
     historical_linguistic: dict = field(default_factory=dict)
     commentary_grounding: dict = field(default_factory=dict)
+    ontological_overlay: dict = field(default_factory=dict)
     art_direction: dict = field(default_factory=dict)
     literary_style: dict = field(default_factory=dict)
     creative_divergence: dict = field(default_factory=dict)

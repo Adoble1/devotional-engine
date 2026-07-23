@@ -45,6 +45,20 @@ from .literary import (
     dedupe_boundaries,
     prune_local_constraints,
 )
+from .ontology import (
+    DEFAULT_PERIOD_END_YEAR,
+    KJV_SURFACE_FORMS,
+    ONTOLOGY_REVIEW_DIMENSIONS,
+    POSTWAR_AFFECT_JARGON,
+    SOURCE_DOCUMENTS,
+    OntologicalOverlayAdapter,
+    OntologyFinding,
+    audit_ontology_surface,
+    build_ontological_overlay,
+    composition_overlay_brief,
+    public_domain_source_catalog,
+    validate_ontological_overlay,
+)
 from .v65 import run_engine
 from .models import EngineContext
 from .profiles import (
@@ -117,5 +131,9 @@ __all__ = [
     "run_integrated_devotional", "validate_integrated_blueprint", "validate_grounding",
     "validate_review", "LiteraryFinding", "audit_literary_economy",
     "build_poem_design", "composition_packet", "dedupe_boundaries",
-    "prune_local_constraints",
+    "prune_local_constraints", "DEFAULT_PERIOD_END_YEAR", "KJV_SURFACE_FORMS",
+    "ONTOLOGY_REVIEW_DIMENSIONS", "POSTWAR_AFFECT_JARGON", "SOURCE_DOCUMENTS",
+    "OntologicalOverlayAdapter", "OntologyFinding", "audit_ontology_surface",
+    "build_ontological_overlay", "composition_overlay_brief",
+    "public_domain_source_catalog", "validate_ontological_overlay",
 ]
