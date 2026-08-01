@@ -83,6 +83,23 @@ class EngineConfig:
     enforce_ontological_overlay: bool = True
     ontology_period_end_year: int = 1949
     ontology_review_min_score: float = 8.0
+    # Navigation control turns the four-role pipeline into an explicit route.
+    # Real adapters receive the route, objective function, uncertainty policy,
+    # and checkpoint history. A final objective gate can downgrade DONE when
+    # truth, alignment, safety, or provenance falls below the hard floor.
+    enforce_navigation_control: bool = True
+    navigation_require_uncertainty_register: bool = True
+    navigation_min_objective_score: float = 0.85
+    navigation_hard_floor: float = 0.80
+    navigation_objective_weights: dict[str, float] = field(
+        default_factory=lambda: {
+            "truth": 0.35,
+            "alignment": 0.20,
+            "literary": 0.15,
+            "safety": 0.20,
+            "provenance": 0.10,
+        }
+    )
     # Real adapters must identify every biblical source or rendering before the
     # engine may compose. Deterministic MockAgentAdapter fixtures are labeled as
     # test-only material and remain explicitly non-publication.
