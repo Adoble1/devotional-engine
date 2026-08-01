@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "devotional-engine"
-version = "6.9.0"
-description = "Ontology-guided, taste-aware Truth-Beauty writing engine with devotional, fiction, and nonfiction profiles"
+version = "7.0.0"
+description = "Navigation-controlled, ontology-guided Truth-Beauty writing engine with devotional, fiction, and nonfiction profiles"
 requires-python = ">=3.11"
 
 [project.optional-dependencies]
