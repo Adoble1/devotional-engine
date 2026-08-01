@@ -1,10 +1,10 @@
-# Immersive Sacred Devotional Ghostwriting Engine v6.9
+# Immersive Sacred Devotional Ghostwriting Engine v6.9.2
 
 A provider-independent writing system built around one principle:
 
 > Blueprint preserves coherence. Ontology orders meaning. Script performs beauty. Harness validates alignment. Evaluator protects truth.
 
-Version 6.9 keeps the four-stage devotional path and adds a production-only ontological overlay. Scripture remains the sole truth source. The overlay names the beings, actions, relations, disorder, divine answer, and restored human posture already established by grounding. A separate historical-diction register supplies pre-1950 emotional vocabulary from verified U.S. public-domain documents without quoting or imitating them.
+Version 6.9.2 keeps the four-stage devotional path, the ontological overlay, and navigation control while replacing image quotas with passage-born imagery. Scripture remains the sole truth source. Imagery and poetry must emerge from the chapter's own language, actions, relations, repetitions, and movement. When the chapter does not supply a governing image, deliberate imagistic restraint is valid.
 
 ## Governing laws
 
@@ -24,7 +24,7 @@ Project- and passage-specific constraints remain local. A successful edit is not
 Production adapters use:
 
 1. `devotional_grounder` — source wording, provenance, historical meaning, literary mode, textual evidence, governing claim, hinge, divine action, canonical classification, Christological fulfillment, lexical insight, and risks.
-2. `devotional_planner` — one governing question, one reader transformation, five concise prose movements, warranted image candidates, narrative depth, art direction, poem design, and the ontological overlay.
+2. `devotional_planner` — one governing question, one reader transformation, five concise prose movements, passage-warranted imagery or explicit restraint, narrative depth, art direction, poem design, and the ontological overlay.
 3. `devotional_composer` — one protected creative pass using a lean composition packet rather than the full research context.
 4. `devotional_reviewer` — one integrated truth, ontology, and literature review, with at most one targeted revision by default.
 
@@ -63,17 +63,28 @@ The devotional uses contemporary grammar. The ontology review blocks KJV surface
 
 It also blocks conspicuously postwar therapeutic shorthand. The devotional should name fear, grief, shame, courage, mercy, weariness, hope, and bodily pressure directly, after concrete evidence has earned the emotion.
 
+## Passage-born imagery
+
+Production planning must choose one imagery mode:
+
+- `textual` — the chapter supplies a governing image or physical action. One candidate is enough. Every candidate must include an exact textual anchor and grounding evidence IDs.
+- `restrained` — the chapter does not supply a governing image strong enough to control the devotional. The planner leaves the governing image, image field, and sensory palette empty.
+
+The engine no longer requires three image candidates or two sensory anchors. It rejects invented connective scenery, objects, weather, architecture, and sensory detail added merely to make the devotional feel literary.
+
+A poem may emerge through the chapter's own image, direct address, refrain, praise, sound, parallelism, or movement. Sensory density is optional. Textual provenance is not.
+
 ## Taste and narrative planning
 
 Production planning also requires:
 
 - one standard Hebrew, Aramaic, or Greek lexical insight that serves the argument;
-- at least three governing-image candidates with textual warrant and transformation paths;
-- one selected image with a rationale for warrant, sensory grain, ledger novelty, and transformational range;
+- passage-warranted imagery or explicit imagistic restraint;
+- an image-selection rationale only when textual imagery is used;
 - Narrative Level 1, 2, or 3 chosen by warrant;
 - bounded, source-backed scenes for Narrative Levels 2 and 3.
 
-These protect judgment without imposing a universal word count, fixed section rhetoric, or one poem form.
+These protect judgment without imposing a universal word count, fixed section rhetoric, image quota, sensory quota, or one poem form.
 
 ## Literary economy contract
 
@@ -99,36 +110,55 @@ Literary targets are advisory signals, not universal hard limits. The defaults s
 - lineation dominated by complete prose sentences;
 - expository poem language;
 - poem lines copied from the reflection;
-- weak passage-born sensory presence;
+- failure to use any selected passage-born anchor when textual imagery was chosen;
 - repetitive or unnaturally even cadence.
 
-The controlling editorial question is:
+The controlling editorial questions are:
 
 > Does every sentence and every line earn its place?
 
+> Did this image come from the chapter, or did the system add it because it wanted a scene?
+
 ## Poem design
 
-The poem is not assigned a sixth prose burden. It receives:
+A textual-image design may look like:
 
 ```python
 {
-    "image_field": ["razor", "olive tree"],
-    "sensory_palette": ["steel", "root", "olive leaf", "oil", "wind"],
+    "imagery_mode": "textual",
+    "image_field": ["sharp razor", "green olive tree"],
+    "sensory_palette": ["razor", "root", "olive tree"],
     "sonic_movement": "hard consonants opening into quieter breath",
-    "emotional_turn": "from sudden injury to life held underground",
-    "prohibited_exposition": [
-        "do not summarize the reflection",
-        "do not explain the theological argument",
-        "do not turn prose sentences into line breaks",
+    "emotional_turn": "from destructive speech to enduring trust",
+    "selected_governing_image": "green olive tree",
+    "governing_image_candidates": [
+        {
+            "image": "green olive tree",
+            "textual_anchor": "But I am like a green olive tree in the house of God.",
+            "warrant_ids": ["E3"],
+            "transformation": "threatened life becomes rooted praise",
+        }
     ],
 }
 ```
 
-The poem should transform the devotional's emotional truth through image, sound, breath, compression, and qualia. It should not restate the thesis in shorter lines.
+A restrained design may look like:
+
+```python
+{
+    "imagery_mode": "restrained",
+    "image_field": [],
+    "sensory_palette": [],
+    "sonic_movement": "communal refrain widening into praise",
+    "emotional_turn": "from received mercy to shared praise",
+}
+```
+
+The poem should transform the chapter's emotional truth without importing a setting. It may use image when the chapter gives image, or work through address, refrain, praise, sound, and movement when it does not.
 
 ## Integrated review contract
 
-Hard findings include unsupported textual or historical claims, invalid provenance, unwarranted ontology, blueprint contradiction, canonical overclaim, serious theological error, disconnected application, KJV surface diction, excluded postwar jargon, missing artifact fields, and deterministic harness failure.
+Hard findings include unsupported textual or historical claims, invalid provenance, unwarranted ontology, unwarranted imagery, blueprint contradiction, canonical overclaim, serious theological error, disconnected application, KJV surface diction, excluded postwar jargon, missing artifact fields, and deterministic harness failure.
 
 The reviewer scores:
 
@@ -146,14 +176,16 @@ The reviewer scores:
 - sensory presence;
 - read-aloud flow.
 
-A passing review must meet the configured minimum in every required dimension. Literary findings remain advisory evidence, but the reviewer may use them to require one targeted revision. Repair instructions say: cut before adding.
+Sensory presence evaluates faithfulness to the selected mode. A restrained poem is not penalized for lacking a manufactured scene.
+
+A passing review must meet the configured minimum in every required dimension. Literary findings remain advisory evidence, but the reviewer may use them to require one targeted revision. Repair instructions say: remove invented imagery before adding language.
 
 ## Compatibility
 
 `run_engine` defaults to `EngineConfig(devotional_pipeline="auto")`.
 
-- Real adapters use the ontology-guided integrated path.
-- Mocks that provide all four integrated roles use that path with a non-enforcing fallback overlay.
+- Real adapters use the navigation-controlled, ontology-guided integrated path.
+- Mocks that provide all four integrated roles use that path with non-enforcing production fallbacks.
 - Older deterministic mock fixtures automatically use the v6.5 legacy compatibility runner.
 
 The legacy path remains for regression safety, not as the recommended production design.
