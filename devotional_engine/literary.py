@@ -12,6 +12,7 @@ CORE_PROSE_SECTIONS = (
     "application",
     "prayer",
 )
+IMAGE_MODES = {"textual", "restrained"}
 EXPOSITORY_POEM_PATTERNS = (
     r"\bthis (?:means|shows|teaches)\b",
     r"\bthe psalm (?:means|shows|teaches)\b",
@@ -98,13 +99,15 @@ def prune_local_constraints(
     ]
 
 
-def _image_candidates(plan: Mapping[str, Any]) -> list[dict[str, str]]:
-    candidates: list[dict[str, str]] = []
+def _image_candidates(plan: Mapping[str, Any]) -> list[dict[str, Any]]:
+    candidates: list[dict[str, Any]] = []
     for item in _list(plan.get("governing_image_candidates")):
         if isinstance(item, Mapping):
             record = {
                 "image": _text(item.get("image")),
-                "warrant": _text(item.get("warrant")),
+                "textual_anchor": _text(item.get("textual_anchor") or item.get("warrant")),
+                "warrant": _text(item.get("warrant") or item.get("textual_anchor")),
+                "warrant_ids": dedupe_boundaries(_list(item.get("warrant_ids"))),
                 "sensory_grain": _text(item.get("sensory_grain")),
                 "transformation": _text(item.get("transformation")),
                 "ledger_novelty": _text(item.get("ledger_novelty")),
@@ -112,7 +115,9 @@ def _image_candidates(plan: Mapping[str, Any]) -> list[dict[str, str]]:
         else:
             record = {
                 "image": _text(item),
+                "textual_anchor": "",
                 "warrant": "",
+                "warrant_ids": [],
                 "sensory_grain": "",
                 "transformation": "",
                 "ledger_novelty": "",
@@ -161,26 +166,39 @@ def build_poem_design(plan: Mapping[str, Any], grounding: Mapping[str, Any]) -> 
     transform = dict(transform) if isinstance(transform, Mapping) else {}
 
     candidates = _image_candidates(plan)
+    requested_mode = _text(
+        supplied.get("imagery_mode") or plan.get("imagery_mode")
+    ).lower()
+    if requested_mode not in IMAGE_MODES:
+        requested_mode = "textual" if (
+            candidates
+            or _list(supplied.get("image_field"))
+            or _text(plan.get("governing_image"))
+            or _text(plan.get("selected_governing_image"))
+        ) else "restrained"
+
     selected = _text(
         plan.get("selected_governing_image")
         or supplied.get("selected_governing_image")
         or (candidates[0]["image"] if candidates else "")
         or plan.get("governing_image")
     )
+    if requested_mode == "restrained":
+        selected = ""
 
     image_field = dedupe_boundaries(_list(supplied.get("image_field")))
-    if not image_field:
-        image_field = dedupe_boundaries(
-            [selected, plan.get("governing_image"), *_list(plan.get("poem_arc"))]
-        )
-    elif selected:
-        image_field = dedupe_boundaries([selected, *image_field])
+    if requested_mode == "textual" and not image_field and selected:
+        image_field = [selected]
+    if requested_mode == "restrained":
+        image_field = []
 
     sensory_palette = dedupe_boundaries(_list(supplied.get("sensory_palette")))
-    if not sensory_palette:
+    if requested_mode == "textual" and not sensory_palette:
         sensory_palette = dedupe_boundaries(
-            _list(art.get("image_lexicon") or grounding.get("physical_vocabulary"))
+            _list(grounding.get("physical_vocabulary"))
         )
+    if requested_mode == "restrained":
+        sensory_palette = []
 
     poem_arc = _list(plan.get("poem_arc"))
     emotional_turn = _text(
@@ -189,8 +207,19 @@ def build_poem_design(plan: Mapping[str, Any], grounding: Mapping[str, Any]) -> 
         or transform.get("new_perception")
         or transform.get("to")
     )
+    textual_anchors = dedupe_boundaries(
+        [
+            *image_field,
+            *(
+                candidate.get("textual_anchor", "")
+                for candidate in candidates
+            ),
+        ]
+    )
     return {
+        "imagery_mode": requested_mode,
         "image_field": image_field,
+        "textual_anchors": textual_anchors,
         "sensory_palette": sensory_palette,
         "sonic_movement": _text(
             supplied.get("sonic_movement")
@@ -204,6 +233,8 @@ def build_poem_design(plan: Mapping[str, Any], grounding: Mapping[str, Any]) -> 
                 "do not summarize the reflection",
                 "do not explain the theological argument",
                 "do not turn prose sentences into line breaks",
+                "do not introduce scenery, objects, or sensory details absent from the passage warrant",
+                "prefer imagistic restraint to invented concreteness",
             ]
         ),
         "form": _text(supplied.get("form")),
@@ -255,6 +286,7 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
         "narrative_design": dict(getattr(blueprint, "narrative_design", {})),
         "poem_design": dict(blueprint.poem_design),
         "series_continuity": {
+            "imagery_mode": _text(blueprint.poem_design.get("imagery_mode")),
             "selected_image": blueprint.governing_image,
             "selection_rationale": _text(
                 blueprint.poem_design.get("selection_rationale")
@@ -276,7 +308,9 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
             "principles": [
                 "one movement per section",
                 "state a necessary distinction once",
-                "prefer image and implication to repeated explanation",
+                "prefer passage-born image and implication to repeated explanation",
+                "use only images and physical details explicitly warranted by the passage",
+                "imagistic restraint is better than invented scenery",
                 "remove any sentence that only proves the engine was careful",
                 "let every paragraph and every line earn its place",
                 "use the lexical insight only where it advances the argument",
@@ -287,13 +321,14 @@ def composition_packet(ctx: Any, grounding: Mapping[str, Any], blueprint: Any, c
         },
         "aesthetic_freedom": {
             "free": [
-                "title", "opening", "paragraph shape", "imagery", "cadence",
+                "title", "opening", "paragraph shape",
+                "use or omission of passage-warranted imagery", "cadence",
                 "silence", "transitions", "poem form",
             ],
             "fixed": [
                 "Scripture provenance", "historical meaning", "governing subject",
                 "textual hinge", "divine answer", "canonical classification",
-                "reader response", "narrative warrant",
+                "reader response", "narrative warrant", "imagery warrants",
             ],
         },
     }
@@ -440,7 +475,7 @@ def audit_literary_economy(ctx: Any, blueprint: Any, config: Any) -> list[Litera
     if any(re.search(pattern, poem.lower(), re.S) for pattern in EXPOSITORY_POEM_PATTERNS):
         findings.append(LiteraryFinding(
             "LE06", "poem",
-            "The poem explains or concludes; return to image, sound, pressure, and discovery.",
+            "The poem explains or concludes; return to the passage's own image, address, sound, repetition, or movement.",
             repair_target="poem",
         ))
 
@@ -462,9 +497,11 @@ def audit_literary_economy(ctx: Any, blueprint: Any, config: Any) -> list[Litera
             repair_target="poem",
         ))
 
+    poem_design = getattr(blueprint, "poem_design", {}) or {}
+    imagery_mode = _text(poem_design.get("imagery_mode") or "textual").lower()
     palette = [
         _normalize(item)
-        for item in _list(getattr(blueprint, "poem_design", {}).get("sensory_palette"))
+        for item in _list(poem_design.get("sensory_palette"))
         if _normalize(item)
     ]
     normalized_poem = _normalize(poem)
@@ -472,11 +509,10 @@ def audit_literary_economy(ctx: Any, blueprint: Any, config: Any) -> list[Litera
         item for item in palette
         if re.search(rf"\b{re.escape(item)}\b", normalized_poem)
     }
-    minimum = max(1, int(getattr(config, "integrated_poem_min_qualia", 2)))
-    if palette and len(present) < min(minimum, len(palette)):
+    if imagery_mode == "textual" and palette and not present:
         findings.append(LiteraryFinding(
             "LE08", "poem",
-            "The poem lacks enough passage-born sensory presence; embody the movement in concrete qualia.",
+            "The poem does not use a passage-warranted image from its design; use one textual anchor or choose imagistic restraint.",
             repair_target="poem",
         ))
 
