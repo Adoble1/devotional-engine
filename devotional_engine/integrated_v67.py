@@ -23,6 +23,7 @@ from .integrated import (
 )
 from .ledger import update_ledger
 from .literary import (
+    IMAGE_MODES,
     LiteraryFinding,
     audit_literary_economy,
     build_narrative_design,
@@ -136,26 +137,62 @@ def build_blueprint(ctx: Any, grounding: Mapping[str, Any], plan: Mapping[str, A
 
 def _validate_taste_design(blueprint: IntegratedPassageBlueprint, *, required: bool) -> list[IntegratedFinding]:
     findings: list[IntegratedFinding] = []
+    poem_design = blueprint.poem_design
+    imagery_mode = _text(poem_design.get("imagery_mode") or "textual").lower()
     candidates = [
         item
-        for item in _list(blueprint.poem_design.get("governing_image_candidates"))
+        for item in _list(poem_design.get("governing_image_candidates"))
         if isinstance(item, Mapping)
     ]
-    if required and len(candidates) < 3:
+    evidence_ids = {
+        _text(item)
+        for item in blueprint.evidence_path
+        if _text(item).startswith("E")
+    }
+
+    if imagery_mode not in IMAGE_MODES:
         findings.append(IntegratedFinding(
             "P09",
-            "governing_image_candidates",
-            "Production planning requires at least three warranted governing-image candidates.",
+            "poem_design.imagery_mode",
+            "Imagery mode must be textual or restrained.",
             repair_target="blueprint",
         ))
-    if required or candidates:
-        for index, candidate in enumerate(candidates):
-            for field_name in ("image", "warrant", "transformation"):
-                if not _text(candidate.get(field_name)):
+    elif imagery_mode == "textual":
+        if required and not candidates:
+            findings.append(IntegratedFinding(
+                "P09",
+                "governing_image_candidates",
+                "Textual imagery requires at least one passage-born candidate. Do not invent candidates to meet a quota.",
+                repair_target="blueprint",
+            ))
+        if required or candidates:
+            for index, candidate in enumerate(candidates):
+                for field_name in ("image", "textual_anchor", "transformation"):
+                    if not _text(candidate.get(field_name)):
+                        findings.append(IntegratedFinding(
+                            "P10",
+                            f"governing_image_candidates.{index}.{field_name}",
+                            "Each image candidate needs an image, an exact textual anchor, and a transformation path.",
+                            repair_target="blueprint",
+                        ))
+                warrant_ids = {
+                    _text(item)
+                    for item in _list(candidate.get("warrant_ids"))
+                    if _text(item)
+                }
+                if required and not warrant_ids:
                     findings.append(IntegratedFinding(
                         "P10",
-                        f"governing_image_candidates.{index}.{field_name}",
-                        "Each image candidate needs an image, textual warrant, and transformation path.",
+                        f"governing_image_candidates.{index}.warrant_ids",
+                        "Each production image candidate must cite grounding evidence ids.",
+                        repair_target="blueprint",
+                    ))
+                unknown = sorted(warrant_ids - evidence_ids)
+                if unknown:
+                    findings.append(IntegratedFinding(
+                        "P10",
+                        f"governing_image_candidates.{index}.warrant_ids",
+                        f"Image candidate cites unknown evidence ids: {', '.join(unknown)}.",
                         repair_target="blueprint",
                     ))
         names = {_text(item.get("image")) for item in candidates if _text(item.get("image"))}
@@ -163,14 +200,22 @@ def _validate_taste_design(blueprint: IntegratedPassageBlueprint, *, required: b
             findings.append(IntegratedFinding(
                 "P11",
                 "selected_governing_image",
-                "The selected governing image must come from the candidate set.",
+                "The selected governing image must come from the passage-warranted candidate set.",
                 repair_target="blueprint",
             ))
-        if required and not _text(blueprint.poem_design.get("selection_rationale")):
+        if required and candidates and not _text(poem_design.get("selection_rationale")):
             findings.append(IntegratedFinding(
                 "P12",
                 "image_selection_rationale",
-                "Image selection must state warrant, sensory grain, transformation, and ledger novelty.",
+                "Image selection must explain textual centrality and transformation. Sensory abundance is not required.",
+                repair_target="blueprint",
+            ))
+    else:
+        if candidates or blueprint.governing_image or _list(poem_design.get("image_field")) or _list(poem_design.get("sensory_palette")):
+            findings.append(IntegratedFinding(
+                "P15",
+                "poem_design",
+                "Restrained imagery mode must not carry a governing image, invented image field, or sensory palette.",
                 repair_target="blueprint",
             ))
 
@@ -228,11 +273,18 @@ def validate_blueprint(
 
     if not blueprint.art_direction:
         findings.append(IntegratedFinding("P05", "art_direction", "Art direction is required.", repair_target="blueprint"))
-    for name in ("image_field", "sensory_palette", "sonic_movement", "emotional_turn"):
+
+    imagery_mode = _text(blueprint.poem_design.get("imagery_mode") or "textual").lower()
+    for name in ("sonic_movement", "emotional_turn"):
         if blueprint.poem_design.get(name) in (None, "", [], {}):
             findings.append(IntegratedFinding("P06", f"poem_design.{name}", "Poem design is incomplete.", repair_target="blueprint"))
-    if len(blueprint.poem_design.get("sensory_palette", [])) < 2:
-        findings.append(IntegratedFinding("P07", "poem_design.sensory_palette", "Poem needs at least two passage-born sensory anchors.", repair_target="blueprint"))
+    if imagery_mode == "textual" and not _list(blueprint.poem_design.get("image_field")):
+        findings.append(IntegratedFinding(
+            "P06",
+            "poem_design.image_field",
+            "Textual imagery mode requires at least one passage-born image. Choose restrained mode when the chapter supplies no governing image.",
+            repair_target="blueprint",
+        ))
     if len(blueprint.evidence_path) < 6:
         findings.append(IntegratedFinding("P08", "evidence_path", "Evidence path is incomplete.", repair_target="blueprint"))
     findings.extend(_validate_taste_design(blueprint, required=require_taste_design))
@@ -373,11 +425,14 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
                 },
                 "series_ledger": dict(getattr(ctx, "ledger", {}) or {}),
                 "planning_instruction": (
-                    "Build a spare blueprint with one movement per prose section. Generate at least three "
-                    "governing-image candidates, each with textual warrant, sensory grain, ledger novelty, "
-                    "and a transformation path. Select one and explain the choice. Choose Narrative Level 1, "
-                    "2, or 3 by warrant, bounding any Level 2 or 3 scene. Keep the poem design separate: "
-                    "image field, sensory palette, sonic movement, and emotional turn."
+                    "Build a spare blueprint with one movement per prose section. First choose imagery_mode: "
+                    "textual when the chapter supplies a governing image, or restrained when it does not. "
+                    "For textual mode, generate only passage-born image candidates. One candidate is enough. "
+                    "Each candidate must include an exact textual anchor, grounding evidence ids, and a "
+                    "transformation path. Do not invent connective scenery, objects, weather, architecture, "
+                    "or sensory details to satisfy a literary quota. Choose Narrative Level 1, 2, or 3 by "
+                    "warrant, bounding any Level 2 or 3 scene. The poem may emerge through the chapter's own "
+                    "image, address, repetition, praise, sound, or movement; sensory density is optional."
                 ),
                 "context": ctx,
             },
@@ -427,6 +482,7 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
                         "canonical": packet["canonical"],
                         "reader_transformation": packet["reader_transformation"],
                         "narrative_design": packet["narrative_design"],
+                        "poem_design": packet["poem_design"],
                         "boundaries": packet["boundaries"],
                     },
                     "draft": {**ctx.prose, "poem": ctx.poem},
@@ -436,9 +492,11 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
                     "review_instruction": (
                         "Truth failures are hard. Confirm that the lexical insight is standard and serves the "
                         "argument, that narrative detail stays inside its warrant, and that the epigraph implies "
-                        "a true mechanism. Test whether each sentence and line earns its place. Prefer varied "
-                        "breath, plainness after image, and one decisive reversal. The poem needs image, qualia, "
-                        "music, breath, and an emotional turn without summarizing the devotional."
+                        "a true mechanism. Reject imagery, scenery, or sensory details that cannot be traced to "
+                        "the chapter's evidence. Imagistic restraint is a valid artistic choice. The poem may "
+                        "work through direct address, refrain, praise, sound, or textual movement rather than a "
+                        "constructed scene. Test whether each sentence and line earns its place, with varied "
+                        "breath, plainness after image, and one decisive turn."
                     ),
                     "revision": revision,
                 },
@@ -469,7 +527,7 @@ def run_integrated_devotional(ctx: Any, adapter: Any, config: EngineConfig | Non
                 "hard_findings": [item.__dict__ for item in hard],
                 "literary_findings": [item.__dict__ for item in literary],
                 "advisory_findings": [item.__dict__ for item in advisory],
-                "instruction": "Repair only identified fields. Preserve Scripture, grounding, blueprint, narrative warrant, and unaffected artistic choices. Cut before adding.",
+                "instruction": "Repair only identified fields. Preserve Scripture, grounding, blueprint, narrative warrant, imagery warrants, and unaffected artistic choices. Remove invented imagery before adding language.",
             }
     except Exception as exc:
         ctx.error = f"{type(exc).__name__}: {exc}"
