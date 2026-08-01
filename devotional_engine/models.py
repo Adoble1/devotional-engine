@@ -36,6 +36,10 @@ class EngineContext:
     scores: dict = field(default_factory=dict)
     draft_log: list = field(default_factory=list)
     trace: list = field(default_factory=list)
+    navigation_state: object | None = None
+    checkpoint_log: list = field(default_factory=list)
+    uncertainty_register: list = field(default_factory=list)
+    objective_scores: dict = field(default_factory=dict)
     gate_revisions: int = 0
     checker_loops: int = 0
     eval_passes: int = 0
