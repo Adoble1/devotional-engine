@@ -45,6 +45,20 @@ from .literary import (
     dedupe_boundaries,
     prune_local_constraints,
 )
+from .navigation import (
+    DEFAULT_OBJECTIVE_WEIGHTS,
+    DEFAULT_ROUTE,
+    CheckpointStatus,
+    NavigationContractError,
+    NavigationControlAdapter,
+    NavigationState,
+    RouteCheckpoint,
+    UncertaintyRecord,
+    compute_objective_scores,
+    finalize_navigation_state,
+    fingerprint,
+    validate_uncertainty_register,
+)
 from .ontology import (
     DEFAULT_PERIOD_END_YEAR,
     KJV_SURFACE_FORMS,
@@ -131,7 +145,11 @@ __all__ = [
     "run_integrated_devotional", "validate_integrated_blueprint", "validate_grounding",
     "validate_review", "LiteraryFinding", "audit_literary_economy",
     "build_poem_design", "composition_packet", "dedupe_boundaries",
-    "prune_local_constraints", "DEFAULT_PERIOD_END_YEAR", "KJV_SURFACE_FORMS",
+    "prune_local_constraints", "DEFAULT_ROUTE", "DEFAULT_OBJECTIVE_WEIGHTS",
+    "CheckpointStatus", "NavigationContractError", "NavigationControlAdapter",
+    "NavigationState", "RouteCheckpoint", "UncertaintyRecord",
+    "compute_objective_scores", "finalize_navigation_state", "fingerprint",
+    "validate_uncertainty_register", "DEFAULT_PERIOD_END_YEAR", "KJV_SURFACE_FORMS",
     "ONTOLOGY_REVIEW_DIMENSIONS", "POSTWAR_AFFECT_JARGON", "SOURCE_DOCUMENTS",
     "OntologicalOverlayAdapter", "OntologyFinding", "audit_ontology_surface",
     "build_ontological_overlay", "composition_overlay_brief",

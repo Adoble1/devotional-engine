@@ -5,6 +5,7 @@ from dataclasses import replace
 from .coherence import CoherenceGateAdapter, audit_prose
 from .config import EngineConfig
 from .integrated_v67 import adapter_supports_integrated_devotional, run_integrated_devotional
+from .navigation import NavigationControlAdapter, finalize_navigation_state
 from .ontology import OntologicalOverlayAdapter
 from .profiles import WritingMode, normalize_mode
 from .scripture import ScriptureProvenanceAdapter
@@ -53,8 +54,10 @@ def run_engine(ctx, adapter, config=None):
 
     Production adapters use dense grounding, a spare passage blueprint, an
     ontological and affective overlay, protected composition, and one integrated
-    truth-and-literature review. Existing deterministic fixtures without those
-    four roles continue through the legacy compatibility runner.
+    truth-and-literature review. Navigation control makes that path explicit,
+    tracks checkpoint evidence, requires calibrated uncertainty from real
+    adapters, and applies a final objective gate. Existing deterministic fixtures
+    without the four production roles continue through the legacy runner.
     """
 
     mode = normalize_mode(getattr(ctx, "mode", WritingMode.DEVOTIONAL.value))
@@ -82,5 +85,17 @@ def run_engine(ctx, adapter, config=None):
             threshold_max_words=0,
         )
         overlay_adapter = OntologicalOverlayAdapter(adapter, integrated_config)
+        if bool(getattr(integrated_config, "enforce_navigation_control", True)):
+            controlled_adapter = NavigationControlAdapter(
+                overlay_adapter,
+                ctx,
+                integrated_config,
+            )
+            result = run_integrated_devotional(
+                ctx,
+                controlled_adapter,
+                integrated_config,
+            )
+            return finalize_navigation_state(result, integrated_config)
         return run_integrated_devotional(ctx, overlay_adapter, integrated_config)
     return _run_legacy(ctx, adapter, resolved_config)
