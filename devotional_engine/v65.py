@@ -8,6 +8,7 @@ from .integrated_v67 import adapter_supports_integrated_devotional, run_integrat
 from .navigation import NavigationControlAdapter, finalize_navigation_state
 from .ontology import OntologicalOverlayAdapter
 from .poetic_control import PoeticTransformationAdapter
+from .prayer_control import ChapterPrayerAdapter
 from .profiles import WritingMode, normalize_mode
 from .scripture import ScriptureProvenanceAdapter
 from .states import State
@@ -55,11 +56,11 @@ def run_engine(ctx, adapter, config=None):
 
     Production adapters use dense grounding, a spare passage blueprint, an
     ontological and affective overlay, protected composition, warranted poetic
-    transformation, and one integrated truth-and-literature review. Navigation
-    control makes that path explicit, tracks checkpoint evidence, requires
-    calibrated uncertainty from real adapters, and applies a final objective
-    gate. Existing deterministic fixtures without the four production roles
-    continue through the legacy runner.
+    transformation, chapter-shaped corporate prayer, and one integrated
+    truth-and-literature review. Navigation control makes that path explicit,
+    tracks checkpoint evidence, requires calibrated uncertainty from real
+    adapters, and applies a final objective gate. Existing deterministic fixtures
+    without the four production roles continue through the legacy runner.
     """
 
     mode = normalize_mode(getattr(ctx, "mode", WritingMode.DEVOTIONAL.value))
@@ -92,9 +93,14 @@ def run_engine(ctx, adapter, config=None):
             ctx,
             integrated_config,
         )
+        prayer_adapter = ChapterPrayerAdapter(
+            poetic_adapter,
+            ctx,
+            integrated_config,
+        )
         if bool(getattr(integrated_config, "enforce_navigation_control", True)):
             controlled_adapter = NavigationControlAdapter(
-                poetic_adapter,
+                prayer_adapter,
                 ctx,
                 integrated_config,
             )
@@ -104,5 +110,5 @@ def run_engine(ctx, adapter, config=None):
                 integrated_config,
             )
             return finalize_navigation_state(result, integrated_config)
-        return run_integrated_devotional(ctx, poetic_adapter, integrated_config)
+        return run_integrated_devotional(ctx, prayer_adapter, integrated_config)
     return _run_legacy(ctx, adapter, resolved_config)
